@@ -1,0 +1,27 @@
+# Python y entorno local
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+
+# Secretos y configuracion local
+.env
+!.env.example
+
+# Base de datos, archivos cargados y respaldos locales
+db.sqlite3
+media/datasheets/*
+!media/datasheets/.gitkeep
+backups/*
+!backups/.gitkeep
+
+# Herramientas y sistema operativo
+.vscode/
+.idea/
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+Thumbs.db
+Desktop.ini
