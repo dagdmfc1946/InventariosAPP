@@ -63,3 +63,9 @@ class ComponentSearchViewTests(TestCase):
         results = list(response.context['components'])
         self.assertEqual(results[0].reference, 'S1')
         self.assertEqual(results[1].reference, 'S2')
+
+    def test_search_excludes_inactive_components(self):
+        self.sensor_dht22.is_active = False
+        self.sensor_dht22.save(update_fields=['is_active'])
+        response = self.client.get(reverse('component_search'), {'q': 'sensor'})
+        self.assertNotContains(response, 'Sensor humedad DHT22')

@@ -39,5 +39,14 @@ class SupplierOffer(models.Model):
             models.UniqueConstraint(fields=['component', 'supplier', 'part_number'], name='unique_supplier_offer')
         ]
 
+    def clean(self):
+        errors = {}
+        if self.price < 0:
+            errors['price'] = 'El precio no puede ser negativo.'
+        if self.minimum_quantity < 1:
+            errors['minimum_quantity'] = 'La cantidad mínima debe ser mayor que cero.'
+        if errors:
+            raise ValidationError(errors)
+
     def __str__(self):
         return f'{self.supplier.name} - {self.component.reference}'
