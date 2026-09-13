@@ -2,7 +2,8 @@
 Acá se encontrará documentado el desarrollo por fases conforme se vaya avanzando con el proyecto, la idea es ir acutalizando la documentación cada vez que se haga un cambio en una fase en específico y/o se agreguen cambios.
 
 ## Estado actual
-F1 completada: entorno virtual Python 3.12, dependencias mínimas y configuración segura preparados y verificados. El siguiente paso es solicitar confirmación antes de iniciar F2.
+F1 completada: entorno virtual Python 3.12, dependencias mínimas y configuración segura preparados y verificados.
+F2 iniciada: base del proyecto Django configurada, apps modulares creadas y validadas con configuración inicial.
 
 ### Registro de cambios
 
@@ -12,6 +13,13 @@ F1 completada: entorno virtual Python 3.12, dependencias mínimas y configuraci�
    - Se confirmó `.env.example` sin secretos reales y `.gitignore` para excluir `.env`, bases de datos, archivos cargados, respaldos y entornos virtuales.
    - Se verificó la instalación de dependencias y la comprobación de Django.
    - El proyecto Django se reserva para F2.
+
+- **F2 — Base del proyecto Django — En desarrollo (2026-09-13)**
+   - Se creó el proyecto Django base con `django-admin startproject config .`.
+   - Se añadieron las apps modulares: `core`, `components`, `suppliers`, `inventory`, `documents` y `dashboard`.
+   - Se configuraron `INSTALLED_APPS`, rutas de templates, media y archivos estáticos y la gestión segura de entorno con `python-decouple`.
+   - Se definió la decisión de ubicación inicial en modo **1-1**: cada componente tendrá una sola ubicación física en el MVP, manteniendo la estructura simple y controlable.
+   - Se verificó la base del proyecto con `python manage.py check`.
 
 ---
 
