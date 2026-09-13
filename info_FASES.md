@@ -8,7 +8,8 @@ F3 completada: modelos del dominio de inventario definidos, migraciones generada
 F4 completada: administración con Django Admin configurada para los modelos principales del MVP.
 F5 completada: validación y almacenamiento seguro de datasheets PDF verificados con pruebas reales.
 F6 completada: reglas de movimientos de stock, cantidades mínimas/máximas y trazabilidad comprobadas con pruebas reales.
-F7 iniciada: buscador funcional de componentes por referencia, nombre y stock listo para validación final.
+F7 completada: buscador funcional de componentes por referencia, nombre y stock validado con pruebas de Django.
+F8 iniciada: indicadores del panel principal para stock bajo, datasheets faltantes y precios sin oferta listos para validación final.
 
 ### Registro de cambios
 
@@ -46,10 +47,15 @@ F7 iniciada: buscador funcional de componentes por referencia, nombre y stock li
    - Se aplicaron reglas de cantidad máxima, cantidad mínima y validación de stock suficiente antes de registrar salidas.
    - Se validó con pruebas reales de entrada, salida y ajuste de inventario.
 
-- **F7 — Buscador personalizado — En desarrollo (2026-09-13)**
+- **F7 — Buscador personalizado — Completada (2026-09-13)**
    - Se implementó la búsqueda por referencia, nombre, valor y categoría en una vista de componentes.
    - Se añadió ordenación por nombre o stock (ascendente/descendente) y se validó con pruebas del flujo real del buscador.
-   - Se completará la documentación final y la publicación del repo al cerrar la fase.
+   - Se documentó y publicó la funcionalidad en el repositorio.
+
+- **F8 — Dashboard — En desarrollo (2026-09-13)**
+   - Se definieron indicadores para stock bajo, componentes sin datasheet y componentes sin oferta de precio.
+   - Se añadió la vista de dashboard con listado de movimientos recientes y se validó el cálculo de KPI con pruebas reales.
+   - Se completará la publicación final del repo al cerrar la fase.
 
 ---
 
