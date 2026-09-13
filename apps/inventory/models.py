@@ -66,5 +66,41 @@ class StockMovement(models.Model):
         if self.quantity == 0:
             raise ValidationError({'quantity': 'La cantidad del movimiento debe ser distinta de cero.'})
 
+        if not self.stock_id:
+            return
+
+        if self.movement_type in {self.ENTRY, self.EXIT} and self.quantity < 0:
+            raise ValidationError({'quantity': 'Las entradas y salidas deben ser cantidades positivas.'})
+
+        if self.movement_type == self.ENTRY:
+            if self.stock.maximum_quantity and self.stock.quantity + self.quantity > self.stock.maximum_quantity:
+                raise ValidationError({'quantity': 'La entrada supera la cantidad máxima configurada.'})
+            return
+
+        if self.movement_type == self.EXIT:
+            if self.quantity > self.stock.quantity:
+                raise ValidationError({'quantity': 'No hay suficiente stock para realizar esta salida.'})
+            return
+
+        if self.movement_type == self.ADJUSTMENT:
+            new_quantity = self.stock.quantity + self.quantity
+            if new_quantity < 0:
+                raise ValidationError({'quantity': 'El ajuste no puede dejar el stock en negativo.'})
+            if self.stock.maximum_quantity and new_quantity > self.stock.maximum_quantity:
+                raise ValidationError({'quantity': 'El ajuste supera la cantidad máxima configurada.'})
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
+
+        if self.movement_type == self.ENTRY:
+            self.stock.quantity += self.quantity
+        elif self.movement_type == self.EXIT:
+            self.stock.quantity -= self.quantity
+        elif self.movement_type == self.ADJUSTMENT:
+            self.stock.quantity += self.quantity
+
+        self.stock.save(update_fields=['quantity', 'last_updated'])
+
     def __str__(self):
         return f'{self.stock.component.reference} - {self.get_movement_type_display()} ({self.quantity})'

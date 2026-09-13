@@ -6,7 +6,8 @@ F1 completada: entorno virtual Python 3.12, dependencias mínimas y configuraci�
 F2 completada: base del proyecto Django configurada, apps modulares creadas y validadas con configuración inicial.
 F3 completada: modelos del dominio de inventario definidos, migraciones generadas y comprobadas.
 F4 completada: administración con Django Admin configurada para los modelos principales del MVP.
-F5 iniciada: validación y almacenamiento de datasheets PDF definidos para el MVP.
+F5 completada: validación y almacenamiento seguro de datasheets PDF verificados con pruebas reales.
+F6 iniciada: reglas de movimientos de stock, cantidades mínimas/máximas y trazabilidad de inventario pendientes de validación final.
 
 ### Registro de cambios
 
@@ -34,10 +35,15 @@ F5 iniciada: validación y almacenamiento de datasheets PDF definidos para el MV
    - Se habilitaron `SpecificationInline` y `SupplierOfferInline` para facilitar la edición de relaciones.
    - Se validó el arranque del servidor y la administración del panel con un superusuario real.
 
-- **F5 — Gestión de datasheets — En desarrollo (2026-09-13)**
+- **F5 — Gestión de datasheets — Completada (2026-09-13)**
    - Se definió la validación del modelo `Datasheet`: extensión PDF y límite máximo de 20 MB.
    - Se reforzó la política de almacenamiento local en `media/datasheets` sin incluir archivos cargados en Git.
-   - Se prepara la comprobación con pruebas unitarias de validación y la verificación de archivos ausentes.
+   - Se validó con pruebas reales de aceptación para PDF válido, PDF inválido y archivo > 20 MB.
+
+- **F6 — Stock y trazabilidad — En desarrollo (2026-09-13)**
+   - Se definió la lógica de movimientos para entradas, salidas y ajustes de stock.
+   - Se aplicarán reglas de cantidad máxima, cantidad mínima y validación de stock suficiente antes de registrar salidas.
+   - Se completará la verificación con pruebas del flujo real de inventario.
 
 ---
 
