@@ -12,6 +12,7 @@ F7 completada: buscador funcional de componentes por referencia, nombre y stock 
 F8 completada: panel de indicadores con bajo stock, datasheets faltantes y precios sin oferta validado con pruebas reales.
 F9 completada: backup y restauración de SQLite y `media/` implementados y validados con una prueba funcional de recuperación local.
 F10 completada: suite de pruebas ampliada a 17 casos, regresión completa y revisión básica de seguridad ejecutadas.
+F11 completada: guía de instalación, arranque, alta de componentes, pruebas y operación local validada.
 
 ### Registro de cambios
 
@@ -69,6 +70,12 @@ F10 completada: suite de pruebas ampliada a 17 casos, regresión completa y revi
    - Se detectó y corrigió la aceptación de cantidades mínimas iguales a cero en `SupplierOffer`; también se bloquean precios negativos.
    - Se ejecutó la suite completa: 17 pruebas, todas correctas, y `manage.py check` sin errores.
    - `manage.py check --deploy` dejó seis advertencias esperables para el modo local: HTTPS/HSTS, cookies seguras, `DEBUG=True` y clave local de desarrollo. Deben resolverse antes de un despliegue público.
+
+- **F11 — Estabilización y documentación final — Completada (2026-09-13)**
+   - Se actualizó `README.md` con instalación, configuración local, migraciones, creación del superusuario y arranque.
+   - Se documentó el flujo de prueba para crear una categoría, registrar un componente, añadir especificaciones y consultar stock.
+   - Se añadieron las rutas principales de uso: administración, buscador y dashboard.
+   - Se validó con 17 pruebas, `manage.py check` sin errores y resolución real de las tres rutas documentadas.
 
 ---
 

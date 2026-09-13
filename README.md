@@ -4,7 +4,7 @@ Aplicacion local para Windows destinada a administrar inventario personal o prof
 
 ## Estado actual
 
-La Fase F1 de preparacion del entorno esta completada. El proyecto Django, la base de datos, las migraciones y el codigo funcional se crearan en F2.
+Las fases F1 a F10 estan completadas. La aplicacion dispone de administracion Django, buscador, dashboard, movimientos de stock, gestion de datasheets, backup local y pruebas automatizadas.
 
 ## Alcance del MVP
 
@@ -39,7 +39,7 @@ InventariosAPP/
 `-- README.md
 ```
 
-Consulte los documentos de [arquitectura](docs/ARQUITECTURA.md), [plan de desarrollo](docs/PLAN_DESARROLLO.md), [dependencias](docs/DEPENDENCIAS.md) y [flujo Git](docs/FLUJO_GIT.md).
+Consulte los documentos de [arquitectura](docs/ARQUITECTURA.md), [plan de desarrollo](docs/PLAN_DESARROLLO.md), [dependencias](docs/DEPENDENCIAS.md), [flujo Git](docs/FLUJO_GIT.md) y el registro de fases en [info_FASES.md](info_FASES.md).
 
 ## Flujo de trabajo
 
@@ -47,11 +47,45 @@ El desarrollo se realiza en `dev`. Cada fase se documenta, prueba y confirma med
 
 ## Entorno local
 
-Se requiere Python 3.12. Para preparar el entorno local en Windows:
+Se requiere Python 3.12. Desde PowerShell, situado en la carpeta del proyecto:
 
 ```powershell
 py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
+Copy-Item .env.example .env
+.\.venv\Scripts\python.exe manage.py migrate
+.\.venv\Scripts\python.exe manage.py createsuperuser
 ```
 
-El archivo `.env` local debe crearse a partir de `.env.example` y no se versiona. El proyecto Django se inicializara durante F2.
+El archivo `.env` es local y no se versiona. Cambie `SECRET_KEY` por un valor privado antes de usar la aplicacion fuera de pruebas locales.
+
+## Arranque
+
+```powershell
+.\.venv\Scripts\python.exe manage.py runserver 127.0.0.1:8000
+```
+
+Abra estas direcciones en el navegador:
+
+- Administracion: http://127.0.0.1:8000/admin/
+- Buscador: http://127.0.0.1:8000/search/
+- Dashboard: http://127.0.0.1:8000/dashboard/
+
+## Primera prueba: agregar un componente
+
+1. Entre en `/admin/` con el superusuario creado.
+2. En **Categories**, cree una categoria, por ejemplo `Sensores`.
+3. En **Components**, seleccione **Add Component**.
+4. Complete `Category`, `Reference`, `Name` y, si aplica, `Value` y `Part number`.
+5. Guarde el componente. Desde su pantalla de cambio puede añadir especificaciones en la seccion **Specifications**.
+6. Cree el registro de stock del componente desde **Stocks** y defina cantidad actual, minima y maxima.
+7. Compruebe el componente en `/search/` y los indicadores en `/dashboard/`.
+
+## Pruebas y backup
+
+```powershell
+.\.venv\Scripts\python.exe manage.py test
+.\.venv\Scripts\python.exe manage.py check
+```
+
+El backup local se puede ejecutar desde una consola Python con `backup_project` y restaurar con `restore_backup`, funciones disponibles en [backups/backup_local.py](backups/backup_local.py). Las copias deben conservarse fuera de Git.
