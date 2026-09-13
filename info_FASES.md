@@ -7,7 +7,8 @@ F2 completada: base del proyecto Django configurada, apps modulares creadas y va
 F3 completada: modelos del dominio de inventario definidos, migraciones generadas y comprobadas.
 F4 completada: administración con Django Admin configurada para los modelos principales del MVP.
 F5 completada: validación y almacenamiento seguro de datasheets PDF verificados con pruebas reales.
-F6 iniciada: reglas de movimientos de stock, cantidades mínimas/máximas y trazabilidad de inventario pendientes de validación final.
+F6 completada: reglas de movimientos de stock, cantidades mínimas/máximas y trazabilidad comprobadas con pruebas reales.
+F7 iniciada: buscador funcional de componentes por referencia, nombre y stock listo para validación final.
 
 ### Registro de cambios
 
@@ -40,10 +41,15 @@ F6 iniciada: reglas de movimientos de stock, cantidades mínimas/máximas y traz
    - Se reforzó la política de almacenamiento local en `media/datasheets` sin incluir archivos cargados en Git.
    - Se validó con pruebas reales de aceptación para PDF válido, PDF inválido y archivo > 20 MB.
 
-- **F6 — Stock y trazabilidad — En desarrollo (2026-09-13)**
+- **F6 — Stock y trazabilidad — Completada (2026-09-13)**
    - Se definió la lógica de movimientos para entradas, salidas y ajustes de stock.
-   - Se aplicarán reglas de cantidad máxima, cantidad mínima y validación de stock suficiente antes de registrar salidas.
-   - Se completará la verificación con pruebas del flujo real de inventario.
+   - Se aplicaron reglas de cantidad máxima, cantidad mínima y validación de stock suficiente antes de registrar salidas.
+   - Se validó con pruebas reales de entrada, salida y ajuste de inventario.
+
+- **F7 — Buscador personalizado — En desarrollo (2026-09-13)**
+   - Se implementó la búsqueda por referencia, nombre, valor y categoría en una vista de componentes.
+   - Se añadió ordenación por nombre o stock (ascendente/descendente) y se validó con pruebas del flujo real del buscador.
+   - Se completará la documentación final y la publicación del repo al cerrar la fase.
 
 ---
 

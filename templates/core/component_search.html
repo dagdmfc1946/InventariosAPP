@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Búsqueda de componentes</title>
+</head>
+<body>
+    <h1>Búsqueda de componentes</h1>
+
+    <form method="get" action="{% url 'component_search' %}">
+        <input type="text" name="q" value="{{ q }}" placeholder="Buscar por referencia, nombre o valor">
+        <select name="ordering">
+            <option value="name" {% if ordering == 'name' %}selected{% endif %}>Nombre</option>
+            <option value="-stock" {% if ordering == '-stock' %}selected{% endif %}>Stock ↓</option>
+            <option value="stock" {% if ordering == 'stock' %}selected{% endif %}>Stock ↑</option>
+        </select>
+        <button type="submit">Buscar</button>
+    </form>
+
+    <ul>
+        {% for component in components %}
+            <li>
+                <strong>{{ component.reference }}</strong> - {{ component.name }}
+                {% if component.stock %}
+                    <span>({{ component.stock.quantity }} unidades)</span>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>No se encontraron resultados.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
