@@ -3,7 +3,8 @@ Acá se encontrará documentado el desarrollo por fases conforme se vaya avanzan
 
 ## Estado actual
 F1 completada: entorno virtual Python 3.12, dependencias mínimas y configuración segura preparados y verificados.
-F2 iniciada: base del proyecto Django configurada, apps modulares creadas y validadas con configuración inicial.
+F2 completada: base del proyecto Django configurada, apps modulares creadas y validadas con configuración inicial.
+F3 iniciada: modelos del dominio de inventario definidos, migraciones generadas y comprobadas.
 
 ### Registro de cambios
 
@@ -14,12 +15,17 @@ F2 iniciada: base del proyecto Django configurada, apps modulares creadas y vali
    - Se verificó la instalación de dependencias y la comprobación de Django.
    - El proyecto Django se reserva para F2.
 
-- **F2 — Base del proyecto Django — En desarrollo (2026-09-13)**
+- **F2 — Base del proyecto Django — Completada (2026-09-13)**
    - Se creó el proyecto Django base con `django-admin startproject config .`.
    - Se añadieron las apps modulares: `core`, `components`, `suppliers`, `inventory`, `documents` y `dashboard`.
    - Se configuraron `INSTALLED_APPS`, rutas de templates, media y archivos estáticos y la gestión segura de entorno con `python-decouple`.
    - Se definió la decisión de ubicación inicial en modo **1-1**: cada componente tendrá una sola ubicación física en el MVP, manteniendo la estructura simple y controlable.
    - Se verificó la base del proyecto con `python manage.py check`.
+
+- **F3 — Modelo de datos y migraciones — En desarrollo (2026-09-13)**
+   - Se implementan los modelos de `Category`, `Component`, `Specification`, `Supplier`, `SupplierOffer`, `Location`, `Stock`, `StockMovement` y `Datasheet`.
+   - La relación de ubicación se mantiene en modo **1-1** para el MVP, con una ubicación por componente.
+   - Se va a generar la migración del dominio e integrarlo a SQLite con comprobación real mediante `makemigrations` y `migrate`.
 
 ---
 
