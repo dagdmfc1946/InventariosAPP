@@ -4,7 +4,8 @@ Acá se encontrará documentado el desarrollo por fases conforme se vaya avanzan
 ## Estado actual
 F1 completada: entorno virtual Python 3.12, dependencias mínimas y configuración segura preparados y verificados.
 F2 completada: base del proyecto Django configurada, apps modulares creadas y validadas con configuración inicial.
-F3 iniciada: modelos del dominio de inventario definidos, migraciones generadas y comprobadas.
+F3 completada: modelos del dominio de inventario definidos, migraciones generadas y comprobadas.
+F4 iniciada: administración con Django Admin configurada para los modelos principales del MVP.
 
 ### Registro de cambios
 
@@ -22,10 +23,15 @@ F3 iniciada: modelos del dominio de inventario definidos, migraciones generadas 
    - Se definió la decisión de ubicación inicial en modo **1-1**: cada componente tendrá una sola ubicación física en el MVP, manteniendo la estructura simple y controlable.
    - Se verificó la base del proyecto con `python manage.py check`.
 
-- **F3 — Modelo de datos y migraciones — En desarrollo (2026-09-13)**
-   - Se implementan los modelos de `Category`, `Component`, `Specification`, `Supplier`, `SupplierOffer`, `Location`, `Stock`, `StockMovement` y `Datasheet`.
+- **F3 — Modelo de datos y migraciones — Completada (2026-09-13)**
+   - Se implementaron los modelos de `Category`, `Component`, `Specification`, `Supplier`, `SupplierOffer`, `Location`, `Stock`, `StockMovement` y `Datasheet`.
    - La relación de ubicación se mantiene en modo **1-1** para el MVP, con una ubicación por componente.
-   - Se va a generar la migración del dominio e integrarlo a SQLite con comprobación real mediante `makemigrations` y `migrate`.
+   - Se generaron y aplicaron migraciones con validación real mediante `makemigrations` y `migrate`.
+
+- **F4 — Administración con Django Admin — En desarrollo (2026-09-13)**
+   - Se registraron los modelos principales en el administrador con listados, filtros, búsquedas e inlines.
+   - Se habilitaron `SpecificationInline` y `SupplierOfferInline` para facilitar la edición de relaciones.
+   - Se validará la administración con el arranque del servidor de Django y la comprobación del panel de administración.
 
 ---
 
