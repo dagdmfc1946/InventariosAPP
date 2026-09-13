@@ -15,6 +15,8 @@ media/datasheets/*
 !media/datasheets/.gitkeep
 backups/*
 !backups/.gitkeep
+!backups/*.py
+!backups/*.ps1
 
 # Herramientas y sistema operativo
 .vscode/

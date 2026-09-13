@@ -9,7 +9,8 @@ F4 completada: administración con Django Admin configurada para los modelos pri
 F5 completada: validación y almacenamiento seguro de datasheets PDF verificados con pruebas reales.
 F6 completada: reglas de movimientos de stock, cantidades mínimas/máximas y trazabilidad comprobadas con pruebas reales.
 F7 completada: buscador funcional de componentes por referencia, nombre y stock validado con pruebas de Django.
-F8 iniciada: indicadores del panel principal para stock bajo, datasheets faltantes y precios sin oferta listos para validación final.
+F8 completada: panel de indicadores con bajo stock, datasheets faltantes y precios sin oferta validado con pruebas reales.
+F9 iniciada: backup y restauración de SQLite y `media/` implementados y validados con una prueba funcional de recuperación local.
 
 ### Registro de cambios
 

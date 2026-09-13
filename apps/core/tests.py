@@ -1,8 +1,36 @@
+import shutil
+import tempfile
+from pathlib import Path
+
 from django.test import TestCase
 from django.urls import reverse
 
 from apps.components.models import Category, Component
 from apps.inventory.models import Stock
+from backups.backup_local import backup_project, restore_backup
+
+
+class BackupLocalScriptTests(TestCase):
+    def test_backup_and_restore_project_files(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            root = Path(tmp_dir)
+            backup_root = root / 'backups_out'
+            db_path = root / 'db.sqlite3'
+            media_dir = root / 'media' / 'datasheets'
+            media_dir.mkdir(parents=True)
+            db_path.write_bytes(b'data')
+            (media_dir / 'sample.pdf').write_bytes(b'pdf-content')
+
+            backup_dir = backup_project(project_root=root, output_dir=backup_root)
+            self.assertTrue((backup_dir / 'db.sqlite3').exists())
+            self.assertTrue((backup_dir / 'media' / 'datasheets' / 'sample.pdf').exists())
+
+            db_path.unlink()
+            shutil.rmtree(media_dir.parent)
+
+            restored = restore_backup(backup_dir, project_root=root)
+            self.assertTrue((restored / 'db.sqlite3').exists())
+            self.assertTrue((restored / 'media' / 'datasheets' / 'sample.pdf').exists())
 
 
 class ComponentSearchViewTests(TestCase):
