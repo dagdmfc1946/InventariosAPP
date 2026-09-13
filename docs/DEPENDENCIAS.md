@@ -8,9 +8,9 @@ Solo se permiten componentes open source o gratuitos. Antes de agregar una depen
 
 | Componente | Uso | Licencia | Estado |
 |---|---|---|---|
-| Python 3.12 o 3.11 | Runtime | PSF License | Requerido en F1 |
-| Django | Framework y ORM | BSD-3-Clause | Requerido en F1 |
-| python-decouple | Variables de entorno | MIT | Requerido en F1 |
+| Python 3.12 | Runtime | PSF License | Instalado y verificado en F1 |
+| Django 5.2.6 | Framework y ORM | BSD-3-Clause | Fijado e instalado en F1 |
+| python-decouple 3.8 | Variables de entorno | MIT | Fijado e instalado en F1 |
 | Bootstrap 5 local | Interfaz responsive | MIT | Evaluar en F2 |
 | jQuery local | Interacciones AJAX puntuales | MIT | Evaluar en F7 |
 | Pillow | Imagenes de componentes | HPND | Diferido; no es parte del MVP actual |

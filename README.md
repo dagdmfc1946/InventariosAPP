@@ -4,7 +4,7 @@ Aplicacion local para Windows destinada a administrar inventario personal o prof
 
 ## Estado actual
 
-El repositorio contiene la estructura documental inicial. Aun no se ha creado el proyecto Django, entorno virtual, base de datos, migraciones ni codigo funcional. El inicio de la fase F1 requiere autorizacion explicita.
+La Fase F1 de preparacion del entorno esta completada. El proyecto Django, la base de datos, las migraciones y el codigo funcional se crearan en F2.
 
 ## Alcance del MVP
 
@@ -45,6 +45,13 @@ Consulte los documentos de [arquitectura](docs/ARQUITECTURA.md), [plan de desarr
 
 El desarrollo se realiza en `dev`. Cada fase se documenta, prueba y confirma mediante un commit antes de integrarse de forma controlada en `main`. No se almacenan secretos, entornos virtuales, bases de datos locales, respaldos ni archivos cargados por usuarios.
 
-## Inicio futuro
+## Entorno local
 
-Cuando se autorice F1 se preparara Python, el entorno virtual, las dependencias minimas y la configuracion segura del proyecto.
+Se requiere Python 3.12. Para preparar el entorno local en Windows:
+
+```powershell
+py -3.12 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+```
+
+El archivo `.env` local debe crearse a partir de `.env.example` y no se versiona. El proyecto Django se inicializara durante F2.
