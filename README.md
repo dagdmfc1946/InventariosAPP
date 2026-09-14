@@ -59,6 +59,28 @@ Copy-Item .env.example .env
 
 El archivo `.env` es local y no se versiona. Cambie `SECRET_KEY` por un valor privado antes de usar la aplicacion fuera de pruebas locales.
 
+### Activar el entorno virtual
+
+Debe activar el entorno virtual antes de ejecutar comandos Python del proyecto:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+Cuando aparezca `(.venv)` al inicio de la consola, puede usar `python` y `manage.py` directamente. Tambien puede omitir la activacion y ejecutar siempre `\.venv\Scripts\python.exe`.
+
+### Reiniciar la prueba local desde cero
+
+Este procedimiento elimina la base local, incluyendo el superusuario, categorias, componentes, stock y registros de datasheets. Los PDFs fisicos de `media/datasheets/` no se eliminan:
+
+```powershell
+Remove-Item .\db.sqlite3 -Force
+python manage.py migrate
+python manage.py createsuperuser
+```
+
+Ejecute el ultimo comando y defina las credenciales del unico usuario administrador de esta version.
+
 ## Arranque
 
 ```powershell
@@ -70,6 +92,8 @@ Abra estas direcciones en el navegador:
 - Administracion: http://127.0.0.1:8000/admin/
 - Buscador: http://127.0.0.1:8000/search/
 - Dashboard: http://127.0.0.1:8000/dashboard/
+
+El enlace **VER EL SITIO** del administrador abre el buscador. Desde el listado de datasheets, **Abrir PDF** abre el archivo en una pestaña nueva; el navegador puede mostrarlo integrado o descargarlo según su configuracion de PDF.
 
 ## Primera prueba: agregar un componente
 
@@ -89,3 +113,15 @@ Abra estas direcciones en el navegador:
 ```
 
 El backup local se puede ejecutar desde una consola Python con `backup_project` y restaurar con `restore_backup`, funciones disponibles en [backups/backup_local.py](backups/backup_local.py). Las copias deben conservarse fuera de Git.
+
+## Cierre seguro
+
+Para detener el servidor, vuelve a la consola donde ejecutaste `runserver` y pulsa `Ctrl+C`. Espera a que Django confirme que el servidor se detuvo antes de cerrar PowerShell o Windows. Los registros guardados desde el administrador se escriben en SQLite al guardar el formulario; no cierres la ventana durante una subida de PDF o mientras aparece el mensaje de guardado.
+
+Para salir del entorno virtual al terminar:
+
+```powershell
+deactivate
+```
+
+La prueba de validacion de la primera version debe realizarse desde el navegador, usando `/admin/`, `/search/` y `/dashboard/`. El empaquetado `.exe` queda reservado para F12, despues de validar los flujos de la aplicacion Django.

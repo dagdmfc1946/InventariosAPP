@@ -13,6 +13,7 @@ F8 completada: panel de indicadores con bajo stock, datasheets faltantes y preci
 F9 completada: backup y restauración de SQLite y `media/` implementados y validados con una prueba funcional de recuperación local.
 F10 completada: suite de pruebas ampliada a 17 casos, regresión completa y revisión básica de seguridad ejecutadas.
 F11 completada: guía de instalación, arranque, alta de componentes, pruebas y operación local validada.
+F11 actualización: base local reiniciada para la prueba de validación; visualización de datasheets y enlace “VER EL SITIO” corregidos.
 
 ### Registro de cambios
 
@@ -76,6 +77,9 @@ F11 completada: guía de instalación, arranque, alta de componentes, pruebas y 
    - Se documentó el flujo de prueba para crear una categoría, registrar un componente, añadir especificaciones y consultar stock.
    - Se añadieron las rutas principales de uso: administración, buscador y dashboard.
    - Se validó con 17 pruebas, `manage.py check` sin errores y resolución real de las tres rutas documentadas.
+   - Se reinició `db.sqlite3` y se reaplicaron las migraciones para comenzar la prueba de validación con un superusuario y datos nuevos.
+   - Se documentó la activación/desactivación del entorno virtual, el cierre seguro del servidor y el reinicio controlado de la base local.
+   - Se añadió la apertura de datasheets PDF en pestaña nueva desde el administrador y la raíz `/` ahora redirige al buscador para que funcione “VER EL SITIO”.
 
 ---
 

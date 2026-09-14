@@ -57,6 +57,10 @@ class ComponentSearchViewTests(TestCase):
         self.assertContains(response, 'Sensor temperatura LM35')
         self.assertContains(response, 'Sensor humedad DHT22')
 
+    def test_site_home_redirects_to_search(self):
+        response = self.client.get('/')
+        self.assertRedirects(response, reverse('component_search'))
+
     def test_search_orders_by_stock_desc(self):
         response = self.client.get(reverse('component_search'), {'q': 'sensor', 'ordering': '-stock'})
         self.assertEqual(response.status_code, 200)

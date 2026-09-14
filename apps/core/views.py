@@ -1,7 +1,11 @@
 from django.db.models import Q
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 from apps.components.models import Component
+
+
+def site_home(request):
+    return redirect('component_search')
 
 
 def component_search(request):
