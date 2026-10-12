@@ -1,6 +1,6 @@
 # Manual de usuario — InventariosAPP
 
-Actualizado: 12/10/2026. Versión local `v2.2.0`, mejoras adicionales pendientes de revisión y publicación.
+Actualizado: 12/10/2026. Versión `v2.2.0`, mejoras adicionales aprobadas para publicar en `dev_v2`.
 Fases 1, 2 y 3 concluidas en `dev_v2`. La versión anterior sigue en `dev`.
 
 ## Datos separados para revisar v2
@@ -320,7 +320,7 @@ La configuración actual todavía no implementa estos destinos. Referencia de pr
 
 ## Estado de revisión y funcionalidades pendientes
 
-Fases 1, 2 y 3 publicadas en v2.1.1. Mejoras adicionales v2.2.0 implementadas
-localmente, pendientes de revisión y aprobación para publicar.
+Fases 1, 2 y 3 publicadas. Mejoras adicionales v2.2.0 aprobadas para publicar.
+Validación: [informe ejecutivo de las 115 pruebas](INFORME_EJECUTIVO_PRUEBAS.md).
 Fase 4 espera aprobación: recuperación y distribución local
 verificada con Waitress/PyInstaller. Durante desarrollo se mantiene runserver.

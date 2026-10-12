@@ -1,7 +1,7 @@
 # Registro de desarrollo — InventariosAPP v2
 
-Estado actual: **Fases 1, 2 y 3 publicadas; mejoras adicionales locales en revisión**.
-Versión visible local: `v2.2.0` (12/10/2026); publicada: `v2.1.1`. Fase 4 no iniciada.
+Estado actual: **Fases 1, 2 y 3 publicadas; mejoras adicionales v2.2.0 aprobadas para publicar**.
+Versión visible: `v2.2.0` (12/10/2026), publicación autorizada. Fase 4 no iniciada.
 Las entradas siguientes conservan los estados históricos de cada avance.
 
 ## 12/10/2026 — Análisis y propuesta
@@ -412,3 +412,16 @@ en `tasks/todo.md`; no marcar como implementado algo sólo propuesto. Mantener h
 - Base original mantiene SHA256 B247D32672C3D77C9DF9F377C833061D79AAFF9A7010112AB9776096616F12E2.
 - Actualizados manual, CHANGELOG y estados del plan. v2.2.0 refleja nuevas funciones compatibles.
   Cambios locales en dev_v2 para revisión; sin push ni inicio de Fase 4.
+
+
+## 12/10/2026 — Informe ejecutivo y publicación autorizada de v2.2.0
+
+- El usuario pide el informe ejecutivo de las 115 pruebas y subir los cambios.
+- Se revisa el resultado completo: 115 aprobadas, cero fallos/errores/omisiones,
+  114.092 segundos. La suite descubierta confirma el recuento por módulo (115).
+- INFORME_EJECUTIVO_PRUEBAS.md agrupa el alcance en siete áreas y distingue éxito
+  de ejecución de cobertura de código; separa comprobaciones visuales y límites de Fase 4.
+- No se repite una suite ya aprobada: desde e548970 solo cambia documentación,
+  sin modificaciones funcionales. El informe referencia ese commit de implementación.
+- Documentos de estado actualizados a publicación aprobada. Se conserva el historial.
+- Publicación normal autorizada en dev_v2; no incluye merge a dev/main ni inicio de Fase 4.

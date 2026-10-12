@@ -5,7 +5,7 @@ Convención vigente: [SemVer 2.0.0](https://semver.org/lang/es/).
 Fuente única ejecutable: `config/version.py`.
 No se atribuye una versión retrospectiva a la aplicación actual.
 
-## [v2.2.0] — 12/10/2026 — Mejoras locales, pendientes de aprobación
+## [v2.2.0] — 12/10/2026 — Publicación aprobada
 
 - Mi perfil permite cambiar el nombre de acceso con normalización y validación de
   duplicados, conservando sesión, contraseña e identidad de la cuenta; sin ampliar permisos.
@@ -17,7 +17,8 @@ No se atribuye una versión retrospectiva a la aplicación actual.
 - Nueva dependencia ReportLab 4.5.1; fuentes integradas soportan acentos, µ y Ω.
 - 115 pruebas pasan; check, dependencias y migraciones coherentes. PDF ficticio de
   90 filas/8 páginas renderizado y verificado; descarga desde navegador comprobada.
-- Sin migraciones nuevas. Datos originales intactos. Sin push ni inicio de Fase 4.
+- Sin migraciones nuevas. Datos originales intactos. Usuario autoriza publicar en dev_v2;
+  Fase 4 sin iniciar. Informe ejecutivo de las 115 pruebas incorporado al repositorio.
 
 ## [v2.1.1] — 12/10/2026 — Cierre autorizado de Fase 3
 

@@ -3,8 +3,9 @@
 ## Desarrollo v2 — rama dev_v2
 
 Fases 1, 2 y 3 concluidas en `dev_v2`, con publicación autorizada por el usuario.
-Versión publicada `v2.1.1`. Nuevas mejoras locales `v2.2.0` pendientes de revisión/push:
-nombre de acceso editable, contraseña sin detalles técnicos y catálogo exportable a PDF.
+Versión `v2.2.0` aprobada para publicar: nombre de acceso editable, contraseña sin
+detalles técnicos y catálogo exportable a PDF.
+Validación: [informe ejecutivo de las 115 pruebas](INFORME_EJECUTIVO_PRUEBAS.md).
 Fase 4 no iniciada; requiere aprobación separada.
 Esta sección prevalece para la rama v2; la documentación inferior conserva la referencia
 de instalación y comportamiento de la primera versión.

@@ -97,7 +97,8 @@ Evidencia T1–T6 en dev_Process.md. El usuario autorizó concluir y publicar Fa
 - [x] Estado de contraseña simple en Admin, manteniendo cambio seguro y campo deshabilitado.
 - [x] Tabla PDF del catálogo: mismos filtros, todas las páginas, encabezados repetidos y permisos.
 - [x] Regresión de 115 pruebas, descarga real y revisión visual de PDF multipágina.
-- [ ] Revisión y aprobación del usuario antes de push e inicio de Fase 4.
+- [x] Publicación de v2.2.0 autorizada por el usuario; informe ejecutivo de 115 pruebas incluido.
+- [ ] Aprobación independiente del usuario para iniciar Fase 4.
 
 ## Fase 4 — Estabilización y distribución
 

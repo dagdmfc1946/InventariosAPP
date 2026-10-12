@@ -1,9 +1,9 @@
 # InventariosAPP — Plan de nueva versión
 
-Fecha de análisis: 12/10/2026. Estado: **Fases 1, 2 y 3 publicadas; mejoras adicionales locales en revisión**.
+Fecha de análisis: 12/10/2026. Estado: **Fases 1, 2 y 3 publicadas; mejoras adicionales v2.2.0 aprobadas para publicar**.
 El usuario autorizó iniciar Fase 3 y unificar el encabezado de sesión en todas las vistas.
-Fase 3 publicada en v2.1.1. Perfil/contraseña/exportación PDF v2.2.0 pendientes de aprobación; Fase 4 no iniciada.
-Versión visible local: `v2.2.0`, fecha `12/10/2026`.
+Fase 3 publicada en v2.1.1. Perfil/contraseña/exportación PDF v2.2.0 aprobados para publicar; Fase 4 no iniciada.
+Versión visible: `v2.2.0`, fecha `12/10/2026`.
 Plan ampliado a **cuatro fases** por solicitud del usuario: los pendientes de usuarios,
 PDF y ubicaciones se incorporan antes de ampliar la operación diaria y distribuir.
 Actualización del 12/10/2026: el usuario autorizó crear y subir `dev_v2` con esta
@@ -432,3 +432,10 @@ Perfil con nombre de usuario editable, contraseña sin detalles técnicos en Adm
 y tabla PDF del catálogo con filtros/todas las páginas implementados localmente en v2.2.0.
 115 pruebas correctas y revisión visual de usuarios/PDF. El usuario revisará y aprobará
 estos cambios antes de publicar y autorizar Fase 4; no se modifica el máximo de cuatro fases.
+
+
+## Autorización de publicación e informe ejecutivo — 12/10/2026
+
+El usuario solicita el informe ejecutivo de las 115 pruebas y autoriza subir los cambios.
+Se incorpora INFORME_EJECUTIVO_PRUEBAS.md con resultados, alcance, límites y trazabilidad.
+Publicación de v2.2.0 autorizada únicamente en dev_v2. Fase 4 continúa sin iniciar.

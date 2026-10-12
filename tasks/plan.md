@@ -22,3 +22,8 @@ Actualización posterior: Fase 3 publicada en 4dd6142 (v2.1.1). Nuevas mejoras l
 v2.2.0: perfil con nombre de acceso, contraseña simplificada y PDF del catálogo.
 Implementadas y verificadas (115 pruebas); esperan revisión/publicación autorizada.
 Fase 4 permanece sin iniciar.
+
+
+El usuario autoriza subir v2.2.0 y solicita informe ejecutivo: incluido en
+INFORME_EJECUTIVO_PRUEBAS.md. Mejoras verificadas y publicación aprobada.
+Fase 4 sigue pendiente de autorización independiente.
