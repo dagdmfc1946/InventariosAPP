@@ -16,9 +16,21 @@ class StockAdmin(admin.ModelAdmin):
     search_fields = ('component__reference', 'component__name')
     list_filter = ('minimum_quantity',)
 
+    def get_readonly_fields(self, request, obj=None):
+        return ('quantity', 'component') if obj else ()
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
 
 @admin.register(StockMovement)
 class StockMovementAdmin(admin.ModelAdmin):
     list_display = ('stock', 'movement_type', 'quantity', 'reason', 'created_at')
     list_filter = ('movement_type',)
     search_fields = ('stock__component__reference', 'reason')
+
+    def has_change_permission(self, request, obj=None):
+        return False if obj else super().has_change_permission(request, obj)
+
+    def has_delete_permission(self, request, obj=None):
+        return False
