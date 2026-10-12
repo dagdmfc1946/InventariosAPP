@@ -1,4 +1,4 @@
-# Tareas v2 — Fase 1 publicada; Fase 2 implementada para revisión
+# Tareas v2 — Fases 1 y 2 concluidas; publicación de Fase 2 autorizada
 
 Plan: ../info_FASES.md. Evidencia de ejecución: ../dev_Process.md.
 Cada unidad se mantiene pequeña; si supera cinco archivos de implementación se divide
@@ -70,7 +70,7 @@ Evidencia T1–T6 en dev_Process.md. El usuario autorizó concluir y publicar Fa
   Aceptación: validar contenido/tamaño, controlar acceso y limpiar cargas fallidas.
   Verificar archivos válidos, inválidos y error de guardado. Archivos: documents/models.py,
   forms, views, template y tests (5).
-- [ ] Control F2: ubicaciones compartidas, ficha/PDF y permisos preservan datos; revisión del usuario.
+- [x] Control F2: ubicaciones compartidas, ficha/PDF y permisos preservan datos; usuario aprobó subir Fase 2 el 12/10/2026.
 
 ## Fase 3 — Operación diaria
 

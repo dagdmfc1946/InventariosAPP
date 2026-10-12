@@ -11,7 +11,7 @@ Por solicitud del usuario, el plan se amplía a cuatro fases:
 
 Fase 1 concluida; el usuario autorizó subir todo su código y documentación a dev_v2.
 La rama local se mantiene sincronizada con origin/dev_v2 tras esa publicación.
-El usuario autorizó iniciar Fase 2 y añadió «Mi perfil». Su implementación está local
-para revisión; código y documentación aún no publicados. Fases 3–4 no iniciadas.
+El usuario aprobó Fase 2 con «Mi perfil» y autorizó subir código y documentación.
+Versión visible v2.0.0; Fases 3–4 no iniciadas, pendientes de aprobación.
 Esta autorización no incluye merge a dev/main ni una release final.
 Destino: PC Windows local; el proyecto Linux mencionado sólo recibió orientación.

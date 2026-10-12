@@ -1,7 +1,7 @@
 # Manual de usuario — InventariosAPP
 
-Actualizado: 12/10/2026. Versión `2.0.0-dev.2`, Fase 2 implementada localmente para revisión.
-Fase 1 publicada en `dev_v2`. La versión anterior sigue en `dev`.
+Actualizado: 12/10/2026. Versión `v2.0.0`, Fases 1 y 2 aprobadas para publicar en `dev_v2`.
+Fase 3 pendiente de aprobación. La versión anterior sigue en `dev`.
 
 ## Datos separados para revisar v2
 

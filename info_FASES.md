@@ -1,9 +1,9 @@
 # InventariosAPP — Plan de nueva versión
 
-Fecha de análisis: 12/10/2026. Estado: **Fase 1 publicada; Fase 2 implementada localmente para revisión**.
-El usuario autorizó iniciar Fase 2 y añadió la edición del perfil de la sesión.
-Fase 2 no publicada; Fases 3 y 4 no iniciadas. El push espera aprobación separada.
-Versión de desarrollo: `2.0.0-dev.2`, fecha `12/10/2026`.
+Fecha de análisis: 12/10/2026. Estado: **Fases 1 y 2 concluidas; publicación de Fase 2 autorizada**.
+El usuario aprobó subir Fase 2 y simplificar la versión a `v2.x.x`.
+Fases 3 y 4 no iniciadas; su inicio requiere aprobación.
+Versión visible: `v2.0.0`, fecha `12/10/2026`.
 Plan ampliado a **cuatro fases** por solicitud del usuario: los pendientes de usuarios,
 PDF y ubicaciones se incorporan antes de ampliar la operación diaria y distribuir.
 Actualización del 12/10/2026: el usuario autorizó crear y subir `dev_v2` con esta
@@ -171,33 +171,27 @@ con el mismo caso; documentar resultados sin inventar tiempos. Prueba manual con
 disponibles con DEBUG=False, restauración probada y actualización conserva información.
 La publicación requiere tu aprobación separada; no la implica aprobar una fase.
 
-## Versionado propuesto
+## Versionado vigente
 
-Se utilizará SemVer 2.0.0: MAYOR para incompatibilidad del contrato soportado, MENOR
-para funcionalidades compatibles y PARCHE para correcciones compatibles.
+Por solicitud del usuario, desde el cierre aprobado de Fase 2 se usa `v2.x.x`,
+sin sufijos de desarrollo. La versión actual visible es **v2.0.0**.
+Se mantiene SemVer: MENOR para funcionalidades compatibles y PARCHE para correcciones.
+Ejemplos siguientes: `v2.1.0` para nuevas funciones y `v2.0.1` para una corrección.
 Fuente de la regla: [SemVer](https://semver.org/lang/es/).
 
-El número 2.1.7 y la fecha 11/10/2026 se toman como ejemplo de formato, no como prueba
-de una versión publicada. Se propone iniciar desarrollo con `2.0.0-dev.1` y fechar
-cada versión el día real de emisión; `2.0.0` será la primera entrega de esta línea v2
-si apruebas la convención. Sin historia SemVer existente, esta numeración establece
-la línea base y no afirma una incompatibilidad anterior. Si deseas exactamente 2.1.7,
-se ajustará antes de implementar; no se inventarán versiones intermedias.
-
-Fuente única implementada en `config/version.py` para la Fase 1:
+La fuente única es `config/version.py`; almacena el número sin prefijo para mantener
+el formato SemVer. El contexto compartido agrega `v` al mostrarlo en la interfaz:
 
 ```python
 """Versión del software (SemVer 2.0.0: MAYOR.MENOR.PARCHE). Fuente única; ver CHANGELOG.md."""
-__version__ = "2.0.0-dev.1"
+__version__ = "2.0.0"
 FECHA_VERSION = "12/10/2026"
 ```
 
-Tras implementar Fase 2, la fuente ejecutable se actualizó a `2.0.0-dev.2` con fecha
-12/10/2026; el ejemplo anterior conserva la referencia al inicio de Fase 1.
-
-CHANGELOG describe cada versión; la interfaz y otras partes del programa importarán
-las constantes sin mantener copias independientes. Cada fase no implica necesariamente
-un aumento de MAYOR/MENOR; el incremento depende de los cambios entregados.
+Los identificadores anteriores `2.0.0-dev.1` y `2.0.0-dev.2` se conservan únicamente
+como referencias históricas en el registro y CHANGELOG. El cambio de número no implica
+que la distribución final esté terminada: Waitress/PyInstaller permanecen en Fase 4.
+Cada fase no implica necesariamente un incremento; se decide según los cambios entregados.
 
 ## Verificación y riesgos
 

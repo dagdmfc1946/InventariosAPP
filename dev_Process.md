@@ -1,7 +1,8 @@
 # Registro de desarrollo — InventariosAPP v2
 
-Estado actual: **Fase 1 implementada localmente, pendiente de revisión del usuario**.
-Versión: `2.0.0-dev.1` (12/10/2026). Fases 2/3 no iniciadas.
+Estado actual: **Fases 1 y 2 concluidas; publicación de Fase 2 autorizada por el usuario**.
+Versión visible: `v2.0.0` (12/10/2026). Fases 3 y 4 no iniciadas.
+Las entradas siguientes conservan los estados históricos de cada avance.
 
 ## 12/10/2026 — Análisis y propuesta
 
@@ -264,3 +265,16 @@ en `tasks/todo.md`; no marcar como implementado algo sólo propuesto. Mantener h
 - Versión 2.0.0-dev.2, fecha12/10/2026. Documentación/tareas actualizadas. Fase 2
   implementada localmente, Control F2 espera revisión del usuario. Sin push ni merge;
   Fase 3 no iniciada. Datos originales y archivos preexistentes ajenos conservados.
+
+## 12/10/2026 — Aprobación de Fase 2 y simplificación de versión
+
+- El usuario aprobó subir Fase 2. Implementación en commit `5c9a6f4`.
+- Se adopta versión visible `v2.0.0`, sin sufijo dev; fuente numérica `2.0.0` en
+  config/version.py y prefijo v desde el contexto compartido. Fecha 12/10/2026.
+- Manual, plan, tareas y CHANGELOG actualizados; historia anterior conservada.
+- Se confirma uso de la colección Agent Skills: planificación, implementación
+  incremental, TDD, UI, seguridad, revisión y versionado, con lecturas y revisión
+  de origen documentadas arriba. No hubo instalación global ni ejecución de sus scripts.
+- Publicación autorizada únicamente a dev_v2, sin integrar dev/main. Fase 3 no iniciada;
+  su aprobación queda pendiente de la revisión del usuario.
+- Verificación del cambio de versión: 18 pruebas de administración/alta rápida correctas; check y git diff --check sin incidencias. Se mantiene la evidencia de 83 pruebas de Fase 2.

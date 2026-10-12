@@ -1,11 +1,20 @@
 # CHANGELOG
 
 Se registran cambios reales; las funcionalidades previstas se describen en info_FASES.md.
-Convención propuesta: [SemVer 2.0.0](https://semver.org/lang/es/).
+Convención vigente: [SemVer 2.0.0](https://semver.org/lang/es/).
 Fuente única ejecutable: `config/version.py`.
 No se atribuye una versión retrospectiva a la aplicación actual.
 
-## [Sin publicar]
+## [v2.0.0] — 12/10/2026 — Cierre aprobado de Fase 2
+
+- El usuario autorizó publicar todo el desarrollo de Fase 2 en `dev_v2`.
+- Versión simplificada a `v2.x.x`: fuente SemVer `2.0.0`, interfaz `v2.0.0`.
+  Se eliminan los sufijos de desarrollo de la versión actual; las entradas anteriores
+  conservan los identificadores usados durante su implementación.
+- Incluye los cambios de Fases 1 y 2 documentados abajo. Fase 3 pendiente de aprobación;
+  la distribución final con Waitress/PyInstaller sigue prevista en Fase 4.
+
+## [Sin publicar] — Referencia histórica de la planificación inicial
 
 ### Documentación — 12/10/2026
 
@@ -134,5 +143,7 @@ conserva en info_FASES.md y Git. No se afirma que sea versión 2.1.7.
 
 Cada entrega incluirá número, fecha real y cambios añadidos/corregidos/modificados,
 compatibilidad de datos, instrucciones de actualización y validaciones relevantes.
-El plan propone `2.0.0-dev.1` durante desarrollo y `2.0.0` al validar la entrega;
-`2.0.0-dev.1` identifica el trabajo local y `2.0.0` todavía no es una release emitida.
+La versión visible sigue `v2.x.x`, sin sufijos; el número SemVer se importa desde
+config/version.py y el prefijo v se agrega en la presentación. Correcciones incrementan
+PARCHE y nuevas funciones compatibles incrementan MENOR. Los sufijos antiguos se
+conservan como historia. Publicar una fase no completa la distribución de Fase 4.
