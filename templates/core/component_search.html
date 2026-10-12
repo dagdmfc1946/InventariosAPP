@@ -19,6 +19,7 @@
         <button class="button secondary" type="submit">Buscar</button>
     </form><p class="muted">{{ page_obj.paginator.count }} {% if page_obj.paginator.count == 1 %}componente encontrado{% else %}componentes encontrados{% endif %} · <a href="{% url 'component_search' %}">Limpiar filtros</a></p>
 
+    <div class="form-actions"><a class="button secondary" href="{% url 'component_export_pdf' %}?{{ pagination_query }}">Descargar tabla PDF</a><span class="help">Incluye todos los resultados de los filtros aplicados, no solo esta página.</span></div>
     <div class="table-wrap"><table class="component-table"><caption class="help">Resultados de búsqueda de componentes</caption><thead><tr><th scope="col">Componente</th><th scope="col">Categoría</th><th scope="col">Valor técnico</th><th scope="col" class="numeric">Existencias</th></tr></thead><tbody>
         {% for component in components %}
             <tr><td><a href="{% url 'component_detail' component.pk %}"><strong>{{ component.reference }}</strong>{{ component.name }}</a></td><td>{{ component.category.name }}</td><td>{{ component.value|default:'—' }}</td><td class="numeric">{% if component.stock %}{{ component.stock.quantity }} unidades{% else %}<span class="badge">Sin existencias registradas</span>{% endif %}</td></tr>

@@ -1,4 +1,5 @@
 from django.db.models import Q, F
+from django.db import IntegrityError, transaction
 from django.core.paginator import Paginator
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -16,9 +17,16 @@ def profile_edit(request):
     form = ProfileForm(request.POST if request.method == 'POST' else None, instance=request.user)
     if request.method == 'POST' and form.is_valid():
         profile = form.save(commit=False)
-        profile.save(update_fields=['first_name', 'last_name', 'email'])
-        messages.success(request, 'Tus datos de perfil se actualizaron.')
-        return redirect('profile_edit')
+        try:
+            with transaction.atomic():
+                profile.save(update_fields=['username', 'first_name', 'last_name', 'email'])
+        except IntegrityError:
+            form.add_error('username', 'No se pudo guardar ese nombre de usuario. Elige otro e inténtalo nuevamente.')
+        else:
+            messages.success(request, 'Tus datos de perfil se actualizaron. Usa tu nombre de usuario actualizado para iniciar sesión.')
+            return redirect('profile_edit')
+    if request.method == 'POST':
+        request.user.refresh_from_db(fields=['username', 'first_name', 'last_name', 'email'])
     return render(request, 'registration/profile.html', {'form': form})
 
 
@@ -26,15 +34,14 @@ def site_home(request):
     return redirect('component_search')
 
 
-@inventory_read_required
-def component_search(request):
-    query = request.GET.get('q', '').strip()
-    ordering = request.GET.get('ordering', 'name')
+def filtered_components(params):
+    query = params.get('q', '').strip()
+    ordering = params.get('ordering', 'name')
     if ordering not in ('name', 'stock', '-stock'):
         ordering = 'name'
-    category = request.GET.get('category', '')
-    availability = request.GET.get('availability', '')
-    attention = request.GET.get('attention', '')
+    category = params.get('category', '')
+    availability = params.get('availability', '')
+    attention = params.get('attention', '')
 
     components = Component.objects.select_related('category', 'stock').filter(is_active=True)
 
@@ -73,13 +80,33 @@ def component_search(request):
     else:
         components = components.order_by('name', 'reference', 'pk')
 
+    return components, {'selected_category': category, 'availability': availability, 'attention': attention, 'q': query, 'ordering': ordering}
+
+
+@inventory_read_required
+def component_search(request):
+    components, filters = filtered_components(request.GET)
     page = Paginator(components, 25).get_page(request.GET.get('page'))
     params = request.GET.copy()
     params.pop('page', None)
     return render(request, 'core/component_search.html', {
         'components': page, 'page_obj': page, 'pagination_query': params.urlencode(),
-        'categories': Category.objects.all(), 'selected_category': category,
-        'availability': availability, 'attention': attention,
-        'q': query,
-        'ordering': ordering,
+        'categories': Category.objects.all(), **filters,
     })
+
+
+@inventory_read_required
+@require_http_methods(['GET'])
+def component_export_pdf(request):
+    from django.http import HttpResponse
+    from django.utils import timezone
+    from .pdf_catalog import build_catalog_pdf
+
+    components, filters = filtered_components(request.GET)
+    # Materializar una consulta: filas y total corresponden a la misma lectura.
+    rows = list(components.select_related('location'))
+    response = HttpResponse(build_catalog_pdf(rows, filters), content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="componentes-{timezone.localdate():%Y-%m-%d}.pdf"'
+    response['Cache-Control'] = 'private, no-store'
+    response['X-Content-Type-Options'] = 'nosniff'
+    return response

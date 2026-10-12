@@ -16,3 +16,9 @@ Fase 3 concluida con los ajustes solicitados de formulario y cabecera; versión 
 Cierre/push de Fase 3 autorizado. Fase 4 no iniciada; espera aprobación separada.
 Esta autorización no incluye merge a dev/main ni una release final.
 Destino: PC Windows local; el proyecto Linux mencionado sólo recibió orientación.
+
+
+Actualización posterior: Fase 3 publicada en 4dd6142 (v2.1.1). Nuevas mejoras locales
+v2.2.0: perfil con nombre de acceso, contraseña simplificada y PDF del catálogo.
+Implementadas y verificadas (115 pruebas); esperan revisión/publicación autorizada.
+Fase 4 permanece sin iniciar.

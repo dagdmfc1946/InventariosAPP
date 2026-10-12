@@ -8,11 +8,12 @@ from apps.inventory.views import location_list, location_edit
 from apps.suppliers.views import supplier_list, supplier_edit, offer_edit
 from apps.documents.views import datasheet_upload, datasheet_download
 
-from .views import component_search, site_home, profile_edit
+from .views import component_search, site_home, profile_edit, component_export_pdf
 
 urlpatterns = [
     path('', site_home, name='site_home'),
     path('search/', component_search, name='component_search'),
+    path('search/export/pdf/', component_export_pdf, name='component_export_pdf'),
     path('components/new/', component_create, name='component_create'),
     path('components/<int:pk>/', component_detail, name='component_detail'),
     path('components/<int:pk>/duplicate/', component_duplicate, name='component_duplicate'),

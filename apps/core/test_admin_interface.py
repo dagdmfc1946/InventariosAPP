@@ -78,3 +78,24 @@ class AdminInterfaceTests(TestCase):
         self.assertTrue(account.is_superuser)
         self.assertTrue(account.is_staff)
         self.assertEqual(self.client.get(reverse('admin:auth_user_delete', args=[account.pk])).status_code, 403)
+
+    def test_password_status_hides_hash_details_and_preserves_password(self):
+        account = get_user_model().objects.create_user('sin_detalles', password='Local-test-9876!')
+        original_hash = account.password
+        response = self.client.get(reverse('admin:auth_user_change', args=[account.pk]))
+        self.assertContains(response, 'Contraseña configurada.')
+        self.assertContains(response, 'href="../password/"')
+        for secret in (original_hash, 'pbkdf2_sha256', 'algoritmo:', 'iteraciones:', 'función resumen:'):
+            self.assertNotContains(response, secret)
+        response = self.client.post(reverse('admin:auth_user_change', args=[account.pk]), {
+            'username': account.username, 'is_active': 'on', 'password': 'injected', '_save': 'Guardar',
+        })
+        self.assertEqual(response.status_code, 302)
+        account.refresh_from_db()
+        self.assertEqual(account.password, original_hash)
+
+    def test_password_status_for_account_without_password(self):
+        account = get_user_model().objects.create_user('sin_clave')
+        response = self.client.get(reverse('admin:auth_user_change', args=[account.pk]))
+        self.assertContains(response, 'Sin contraseña para iniciar sesión.')
+        self.assertContains(response, 'Establecer contraseña')

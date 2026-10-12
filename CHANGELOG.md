@@ -5,6 +5,20 @@ Convención vigente: [SemVer 2.0.0](https://semver.org/lang/es/).
 Fuente única ejecutable: `config/version.py`.
 No se atribuye una versión retrospectiva a la aplicación actual.
 
+## [v2.2.0] — 12/10/2026 — Mejoras locales, pendientes de aprobación
+
+- Mi perfil permite cambiar el nombre de acceso con normalización y validación de
+  duplicados, conservando sesión, contraseña e identidad de la cuenta; sin ampliar permisos.
+- Administración muestra estado de contraseña y acción de cambio sin algoritmo,
+  iteraciones, sal ni fragmentos del hash; el campo continúa deshabilitado para edición.
+- Descarga del catálogo en tabla PDF: filtros/orden compartidos con la pantalla,
+  todas las páginas, encabezados repetidos, fecha/total y respuesta privada sin caché.
+  Exportación requiere los mismos permisos del catálogo y funciona sin servicios externos.
+- Nueva dependencia ReportLab 4.5.1; fuentes integradas soportan acentos, µ y Ω.
+- 115 pruebas pasan; check, dependencias y migraciones coherentes. PDF ficticio de
+  90 filas/8 páginas renderizado y verificado; descarga desde navegador comprobada.
+- Sin migraciones nuevas. Datos originales intactos. Sin push ni inicio de Fase 4.
+
 ## [v2.1.1] — 12/10/2026 — Cierre autorizado de Fase 3
 
 - Alta simplificada: identificación y cantidad visibles; datos técnicos y límites

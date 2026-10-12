@@ -91,6 +91,14 @@ Evidencia T1–T6 en dev_Process.md. El usuario autorizó concluir y publicar Fa
   Verificar navegador y regresión. Archivos: dashboard/views.py, templates, CSS y tests (5).
 - [x] Control F3: flujo completo verificado y documentado; ajustes de usabilidad solicitados completados y publicación autorizada por el usuario el 12/10/2026.
 
+## Mejoras adicionales antes de Fase 4 — v2.2.0
+
+- [x] Nombre de acceso editable solo en la cuenta propia, con validación y sesión conservada.
+- [x] Estado de contraseña simple en Admin, manteniendo cambio seguro y campo deshabilitado.
+- [x] Tabla PDF del catálogo: mismos filtros, todas las páginas, encabezados repetidos y permisos.
+- [x] Regresión de 115 pruebas, descarga real y revisión visual de PDF multipágina.
+- [ ] Revisión y aprobación del usuario antes de push e inicio de Fase 4.
+
 ## Fase 4 — Estabilización y distribución
 
 - [ ] T16. Respaldo consistente. Depende de cierre F3.

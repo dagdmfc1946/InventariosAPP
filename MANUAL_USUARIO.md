@@ -1,6 +1,6 @@
 # Manual de usuario — InventariosAPP
 
-Actualizado: 12/10/2026. Versión `v2.1.1`, Fase 3 concluida con publicación autorizada.
+Actualizado: 12/10/2026. Versión local `v2.2.0`, mejoras adicionales pendientes de revisión y publicación.
 Fases 1, 2 y 3 concluidas en `dev_v2`. La versión anterior sigue en `dev`.
 
 ## Datos separados para revisar v2
@@ -67,10 +67,12 @@ se vuelve a la pantalla de inicio de sesión.
 
 1. Pulsar **Mi perfil** en el encabezado, junto al nombre de la sesión, o abrir
    `/accounts/profile/`. También está disponible desde Administración.
-2. Editar nombre, apellidos y correo electrónico; los campos son opcionales.
+2. Editar **Nombre de usuario** (nombre de acceso obligatorio y único), nombre, apellidos
+   y correo electrónico (opcionales). El nombre de acceso admite letras, números y
+   @/./+/-/_. No se acepta otro usuario existente, incluso con distinta capitalización.
 3. Pulsar **Guardar mi perfil**. Un correo inválido muestra el error y conserva lo escrito.
-4. La sesión permanece abierta. Esta pantalla sólo cambia tu propia cuenta; el nombre
-   de usuario, la contraseña y los permisos no se modifican desde aquí.
+4. La sesión permanece abierta. Esta pantalla sólo cambia tu propia cuenta;
+   la contraseña y los permisos se conservan.
 
 ## Ficha completa del componente
 
@@ -100,6 +102,35 @@ Cada componente tiene como máximo una ubicación. Los saldos no cambian.
 
 También funciona desde Administración → Ubicaciones. Una ubicación con componentes
 asignados está protegida contra borrado: primero retirar o reasignar esos componentes.
+
+## Nombre de acceso y contraseña
+
+Desde **Mi perfil** puedes modificar tu nombre de usuario. Al guardar se mantiene
+la sesión; la próxima vez inicia sesión con el nuevo nombre y tu contraseña habitual.
+El cambio conserva permisos, componentes y movimientos porque la cuenta mantiene su ID.
+Solo se modifica la cuenta de la sesión activa; no permite cambiar roles ni privilegios.
+
+En **Administración → Usuarios → Modificar**, el campo Contraseña muestra
+**Contraseña configurada** o **Sin contraseña para iniciar sesión**. No muestra
+algoritmos, iteraciones ni fragmentos de la contraseña almacenada. El botón
+**Cambiar contraseña** o **Establecer contraseña** abre el formulario habitual de Django.
+No se puede consultar la contraseña actual ni editarla como texto en ese campo.
+
+## Descargar componentes en una tabla PDF
+
+1. Abrir **Componentes**. Si quieres una selección, aplicar búsqueda/filtros con **Buscar**.
+2. Pulsar **Descargar tabla PDF** debajo de los filtros.
+3. Guardar el archivo `componentes-AAAA-MM-DD.pdf` cuando lo solicite el navegador.
+
+El PDF incluye todos los componentes activos que coinciden con los filtros **ya
+aplicados**, aunque ocupen varias páginas en pantalla; ignora el número de página.
+Sin filtros, incluye todo el catálogo activo. Mantiene el orden seleccionado y registra
+fecha/hora, total y filtros. Las columnas son referencia interna, nombre, categoría,
+valor técnico, parte del fabricante, ubicación y unidades. El informe refleja los datos
+al descargarlo; si cambian las existencias, vuelve a descargar para actualizarlo.
+Los encabezados se repiten en cada página. Si no hay resultados, informa del total cero.
+Solo usuarios con acceso al catálogo pueden descargarlo; se genera localmente sin
+subir datos a servicios externos ni incluir credenciales o contraseñas.
 
 ## Alta rápida de componente y stock
 
@@ -289,6 +320,7 @@ La configuración actual todavía no implementa estos destinos. Referencia de pr
 
 ## Estado de revisión y funcionalidades pendientes
 
-Fases 1, 2 y 3 concluidas; publicación de Fase 3 autorizada por el usuario.
+Fases 1, 2 y 3 publicadas en v2.1.1. Mejoras adicionales v2.2.0 implementadas
+localmente, pendientes de revisión y aprobación para publicar.
 Fase 4 espera aprobación: recuperación y distribución local
 verificada con Waitress/PyInstaller. Durante desarrollo se mantiene runserver.

@@ -1,9 +1,9 @@
 # InventariosAPP — Plan de nueva versión
 
-Fecha de análisis: 12/10/2026. Estado: **Fases 1, 2 y 3 concluidas; publicación de Fase 3 autorizada**.
+Fecha de análisis: 12/10/2026. Estado: **Fases 1, 2 y 3 publicadas; mejoras adicionales locales en revisión**.
 El usuario autorizó iniciar Fase 3 y unificar el encabezado de sesión en todas las vistas.
-El usuario autorizó subir Fase 3 tras los ajustes de usabilidad; Fase 4 no iniciada.
-Versión visible: `v2.1.1`, fecha `12/10/2026`.
+Fase 3 publicada en v2.1.1. Perfil/contraseña/exportación PDF v2.2.0 pendientes de aprobación; Fase 4 no iniciada.
+Versión visible local: `v2.2.0`, fecha `12/10/2026`.
 Plan ampliado a **cuatro fases** por solicitud del usuario: los pendientes de usuarios,
 PDF y ubicaciones se incorporan antes de ampliar la operación diaria y distribuir.
 Actualización del 12/10/2026: el usuario autorizó crear y subir `dev_v2` con esta
@@ -174,9 +174,9 @@ La publicación requiere tu aprobación separada; no la implica aprobar una fase
 ## Versionado vigente
 
 Por solicitud del usuario, desde el cierre aprobado de Fase 2 se usa `v2.x.x`,
-sin sufijos de desarrollo. La versión actual visible es **v2.1.1**, con los ajustes de usabilidad del cierre de Fase 3.
+sin sufijos de desarrollo. La versión actual visible es **v2.2.0** local, con exportación PDF y nombre de acceso editable.
 Se mantiene SemVer: MENOR para funcionalidades compatibles y PARCHE para correcciones.
-Ejemplos siguientes: `v2.2.0` para nuevas funciones y `v2.1.2` para otra corrección.
+Ejemplos siguientes: `v2.3.0` para nuevas funciones y `v2.2.1` para una corrección.
 Fuente de la regla: [SemVer](https://semver.org/lang/es/).
 
 La fuente única es `config/version.py`; almacena el número sin prefijo para mantener
@@ -184,7 +184,7 @@ el formato SemVer. El contexto compartido agrega `v` al mostrarlo en la interfaz
 
 ```python
 """Versión del software (SemVer 2.0.0: MAYOR.MENOR.PARCHE). Fuente única; ver CHANGELOG.md."""
-__version__ = "2.1.1"
+__version__ = "2.2.0"
 FECHA_VERSION = "12/10/2026"
 ```
 
@@ -424,3 +424,11 @@ F11 actualización: base local reiniciada para la prueba de validación; visuali
     Generar y probar el ejecutable `.exe` cuando el flujo local sea estable.
 
 ---
+
+
+## Mejoras adicionales previas a Fase 4 — 12/10/2026
+
+Perfil con nombre de usuario editable, contraseña sin detalles técnicos en Administración
+y tabla PDF del catálogo con filtros/todas las páginas implementados localmente en v2.2.0.
+115 pruebas correctas y revisión visual de usuarios/PDF. El usuario revisará y aprobará
+estos cambios antes de publicar y autorizar Fase 4; no se modifica el máximo de cuatro fases.

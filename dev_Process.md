@@ -1,7 +1,7 @@
 # Registro de desarrollo — InventariosAPP v2
 
-Estado actual: **Fases 1, 2 y 3 concluidas; publicación de Fase 3 autorizada**.
-Versión visible: `v2.1.1` (12/10/2026). Cierre/push de Fase 3 autorizado; Fase 4 no iniciada.
+Estado actual: **Fases 1, 2 y 3 publicadas; mejoras adicionales locales en revisión**.
+Versión visible local: `v2.2.0` (12/10/2026); publicada: `v2.1.1`. Fase 4 no iniciada.
 Las entradas siguientes conservan los estados históricos de cada avance.
 
 ## 12/10/2026 — Análisis y propuesta
@@ -380,3 +380,35 @@ en `tasks/todo.md`; no marcar como implementado algo sólo propuesto. Mantener h
 - Manual, CHANGELOG, plan, tareas y README sincronizados con v2.1.1. Se conserva el
   historial de avances. Publicación normal de toda Fase 3 en dev_v2 autorizada;
   sin merge a dev/main. Fase 4 requiere una nueva aprobación del usuario.
+
+
+## 12/10/2026 — Perfil, contraseña y exportación PDF, v2.2.0 local
+
+- Fase 3 fue publicada y comprobada en remoto/local: 4dd6142. El usuario solicita
+  estas mejoras antes de aprobar Fase 4; su implementación no autoriza publicar ni empezar F4.
+- ProfileForm incorpora UsernameField para normalización y validación de caracteres,
+  rechazo de nombres existentes sin distinguir mayúsculas; instancia fijada a request.user.
+  Se guardan únicamente username/nombre/apellidos/email, con manejo de conflicto único.
+  No cambia ID, contraseña ni privilegios. Ante error se restaura el usuario de la cabecera.
+- Widget propio de contraseña muestra estado y enlace habitual de Django; no incluye
+  valor/hash en contexto ni resumen criptográfico. Mantiene el campo disabled de UserChangeForm.
+- Consulta filtrada extraída a función común para catálogo y descarga PDF. Exportación
+  GET autenticada con permisos, todas las páginas activas, sin caché y sin archivos intermedios
+  de usuarios. ReportLab 4.5.1 incorporado al entorno virtual y requisitos; sin instalaciones globales.
+- Aplicada skill PDF para generación y verificación visual. Fuentes Vera integradas,
+  texto escapado, columnas proporcionadas, filas divisibles y cabeceras repetidas.
+  Referencia técnica: https://docs.reportlab.com/reportlab/userguide/ch7_tables/.
+- Correcciones durante verificación: plantilla del widget ubicada en templates de la app
+  para que el renderizador de formularios la encuentre; corregida codificación UTF-8 de
+  etiquetas, y prueba de enlace ajustada al destino relativo habitual de Django.
+- Regresión completa: 115 pruebas correctas en 114.092 s; check sin incidencias,
+  makemigrations --check --dry-run sin cambios y pip check sin incompatibilidades.
+  Casos nuevos: sesión/login después de renombrar, nombres inválidos/duplicados, inyección
+  de privilegios/contraseña, estado sin clave y PDF con permisos/filtros/todas las páginas/vacío.
+- QA aislada: .local/ui_review_fase3, sin modificaciones de datos reales. Navegador comprueba
+  perfil y estado de contraseña; descarga componentes-2026-10-12.pdf. Informe sintético
+  de 90 filas y nombres largos, 8 páginas: extracción confirma extremos, acentos, µ/Ω y
+  cabeceras repetidas; páginas 1 y 8 renderizadas e inspeccionadas. Evidencia en .local/evidence.
+- Base original mantiene SHA256 B247D32672C3D77C9DF9F377C833061D79AAFF9A7010112AB9776096616F12E2.
+- Actualizados manual, CHANGELOG y estados del plan. v2.2.0 refleja nuevas funciones compatibles.
+  Cambios locales en dev_v2 para revisión; sin push ni inicio de Fase 4.

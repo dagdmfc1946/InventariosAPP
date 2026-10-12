@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import GroupAdmin, UserAdmin
 from django.contrib.auth.models import Group
-from .forms import ApplicationUserCreationForm
+from .forms import ApplicationUserCreationForm, ApplicationUserChangeForm
 from .roles import configure_inventory_roles
 
 
@@ -26,6 +26,7 @@ class SpanishPermissionLabels:
 class ApplicationUserAdmin(SpanishPermissionLabels, UserAdmin):
     """Las altas desde la interfaz crean cuentas normales con contraseña usable."""
 
+    form = ApplicationUserChangeForm
     add_form = ApplicationUserCreationForm
     add_fieldsets = ((None, {'classes': ('wide',), 'fields': ('username', 'password1', 'password2', 'role')}),)
     fieldsets = (
