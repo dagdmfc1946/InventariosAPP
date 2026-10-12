@@ -204,3 +204,63 @@ en `tasks/todo.md`; no marcar como implementado algo sólo propuesto. Mantener h
   cambios pendientes en archivos versionados. Código/documentación de Fase 1 quedan
   juntos en esa rama. Datos, secretos, entornos y archivos personales preexistentes
   permanecen locales: .venv_backup/ e info_project.txt no forman parte de Fase 1.
+
+## 12/10/2026 — Fase 2 autorizada, incluida edición de perfil
+
+- El usuario autorizó iniciar Fase 2 y añadió una ventana para editar datos básicos
+  del perfil de la sesión. Se mantiene dev_v2; no autoriza publicar esta fase.
+- T7c: /accounts/profile/ con nombre/apellidos/correo, enlazado en aplicación y Admin.
+  Instancia siempre request.user, sin ID de cuenta suministrado por cliente. Guardado
+  restringido a esos tres campos. Pruebas verifican sesión conservada, correo inválido,
+  CSRF, usuario anónimo e inyección de ID/username/privilegios sin efecto.
+- Respaldo previo mediante prepare_development_copy de .local/dev_v2 a
+  .local/checkpoints/fase1_before_fase2, SQLite consistente y media copiado.
+- T7a: Component.location ahora FK opcional PROTECT; Location admite components.
+  components.0003 añade columna; inventory.0004 copia asignaciones antes de quitar
+  OneToOne antiguo. Conserva IDs y ubicaciones vacías, sin deduplicar por nombre.
+  Migración reversible sólo mientras ninguna ubicación sea compartida; caso contrario
+  exige respaldo y rechaza conversión con pérdida. Prueba de migración real con estado
+  histórico verifica vínculo y saldo17. Copia real: 2 asignaciones y 10 saldos preservados.
+- Pantalla /locations/ y editor permiten asignar varios componentes a ubicación creada;
+  selección traslada desde otra y deselección libera. Formulario Admin adaptado también;
+  cambios de asignación exigen permiso change_component. Ubicación ocupada no se elimina.
+- T7b: grupos predefinidos Lector/Operador y comando configure_inventory_roles, sin
+  asignación a cuentas existentes. Alta de usuarios elige perfil explícitamente, ambos
+  sin staff/superusuario. Búsqueda/resumen exigen sesión/consulta; permiso individual
+  add_component de Fase 1 mantiene consulta para operadores anteriores. PDF exige view_datasheet.
+  Cuentas activas/grupos/contraseña utilizable se revisan en edición administrativa;
+  no se resetean claves ni se publican datos de cuentas.
+- T7/T8: ficha enlazada desde catálogo, datos/ubicación y formset de especificaciones
+  en transacción. Duplicados no dejan guardado parcial; no toca Stock ni historial.
+  IDs del formset restringidos al componente actual. Máximo50 filas, JS opcional y
+  botón servido para agregar sin JS. Borrados exigen permiso delete_specification.
+- T9: categoría y ubicación contextuales conservan datos y filas; se crean con botón
+  específico, componente/asignación se confirman al guardar después. Errores abren el
+  panel correspondiente. Pruebas rojas iniciales por rutas inexistentes antes de implementar.
+- T11: formulario PDF en ficha, extensión/tamaño/cabecera, protección de descarga y
+  media sin servir rutas arbitrarias. Registro ausente/archivo faltante devuelve404;
+  FileResponse privado/no-store. Servicio limpia archivo escrito si falla INSERT.
+  La validación es básica de formato, sin análisis completo del contenido.
+  PDF registrado pero faltante muestra una pantalla propia en español con retorno
+  a la ficha (HTTP404), evitando mostrar la página técnica de Django en ese caso.
+  Fallos de base durante carga, incluido bloqueo SQLite, devuelven mensaje y limpian
+  la carga fallida; prueba con IntegrityError y OperationalError. No se atribuye a esa
+  causa el error intermitente anterior, que no tuvo mensaje de excepción disponible.
+- Revisión de navegador: perfil guardado con sesión vigente, especificaciones JS,
+  creación contextual de Caja de sensores sin perder campos, guardado con saldo10,
+  alta de segundo componente y asignación de ambos a ubicación existente. Base ficticia
+  .local/ui_review exclusivamente. Perfil375px sin desbordar. Capturas fase2_perfil,
+  fase2_ficha y fase2_ubicaciones en .local/evidence fuera de Git.
+  Perfil y ficha editable a375px sin desbordamiento; consola sin advertencias/errores.
+  Servidor propio de pruebas detenido, sin detener el servidor del usuario en8001.
+- Detectado banner de errores al recibir formset válido (lista de diccionarios vacíos
+  evaluada como true); corregido por total_error_count y cubierto con regresión.
+- 83 pruebas correctas. Prueba de PDF adaptada para cerrar respuestas streaming,
+  evitando bloqueo de temporales en Windows; no afecta servicio de archivos de Django.
+  Fixture de PDF del dashboard aislado también en MEDIA_ROOT temporal, para que las
+  ejecuciones siguientes no escriban archivos de prueba en la copia de desarrollo.
+  check/makemigrations --check --dry-run correctos. Hash original coincide con Fase 1:
+  B247D32672C3D77C9DF9F377C833061D79AAFF9A7010112AB9776096616F12E2.
+- Versión 2.0.0-dev.2, fecha12/10/2026. Documentación/tareas actualizadas. Fase 2
+  implementada localmente, Control F2 espera revisión del usuario. Sin push ni merge;
+  Fase 3 no iniciada. Datos originales y archivos preexistentes ajenos conservados.

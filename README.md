@@ -2,8 +2,8 @@
 
 ## Desarrollo v2 — rama dev_v2
 
-Fase 1 concluida en `dev_v2`. Versión de desarrollo `2.0.0-dev.1`.
-La Fase 2 espera nueva revisión y aprobación del usuario.
+Fase 1 publicada en `dev_v2`. Fase 2 implementada localmente para revisión.
+Versión de desarrollo `2.0.0-dev.2`. No se ha publicado el desarrollo de Fase 2.
 Esta sección prevalece para la rama v2; la documentación inferior conserva la referencia
 de instalación y comportamiento de la primera versión.
 
@@ -29,6 +29,7 @@ y luego migrate/createsuperuser. Con la copia existente no crear otro superusuar
 
 ```powershell
 .\.venv\Scripts\python.exe manage.py migrate
+.\.venv\Scripts\python.exe manage.py configure_inventory_roles
 .\.venv\Scripts\python.exe manage.py runserver 127.0.0.1:8000
 ```
 
@@ -36,6 +37,16 @@ Abrir `/components/new/` o `/search/`; usar las credenciales habituales de la co
 El nuevo login está en `/accounts/login/`. Se requieren los permisos de agregar componente,
 stock y movimiento; el superusuario los tiene. El logout se realiza con botón POST.
 No copiar los nuevos archivos sobre dev/main para probar: cambiar de rama de manera controlada.
+Fase 2 exige sesión/permisos también en búsqueda, resumen y PDF. Usuarios nuevos permiten
+seleccionar Lector u Operador; las cuentas anteriores conservan permisos y grupos, y el
+superusuario puede asignarles esos perfiles. configure_inventory_roles prepara/actualiza
+los permisos de esos dos grupos sin asignar cuentas ni conceder acceso administrativo.
+La nueva ficha se abre desde el catálogo; «Mi perfil» desde el enlace de la sesión.
+
+Antes de migrar Fase 2 se creó el respaldo local `.local/checkpoints/fase1_before_fase2`
+de la copia de desarrollo. Se conservan las asignaciones existentes de ubicaciones.
+Una ubicación ocupada no se borra. No volver al esquema antiguo sobre datos que ya
+comparten ubicaciones: usar el respaldo si se necesita recuperar Fase 1.
 El código y la documentación de Fase 1 se mantienen juntos en `dev_v2`, tanto localmente
 como en GitHub. La base, los PDF, secretos y entornos virtuales permanecen locales y
 fuera de Git. La copia `.local/dev_v2` permite revisar v2 sin alterar los datos de `dev`.

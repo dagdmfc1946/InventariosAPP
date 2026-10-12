@@ -1,8 +1,9 @@
 # InventariosAPP — Plan de nueva versión
 
-Fecha de análisis: 12/10/2026. Estado: **Fase 1 concluida; publicación en dev_v2 autorizada por el usuario**.
-La Fase 2 queda pendiente de nueva revisión y aprobación explícita.
-Versión de desarrollo: `2.0.0-dev.1`, fecha `12/10/2026`. Fases 2, 3 y 4 no iniciadas.
+Fecha de análisis: 12/10/2026. Estado: **Fase 1 publicada; Fase 2 implementada localmente para revisión**.
+El usuario autorizó iniciar Fase 2 y añadió la edición del perfil de la sesión.
+Fase 2 no publicada; Fases 3 y 4 no iniciadas. El push espera aprobación separada.
+Versión de desarrollo: `2.0.0-dev.2`, fecha `12/10/2026`.
 Plan ampliado a **cuatro fases** por solicitud del usuario: los pendientes de usuarios,
 PDF y ubicaciones se incorporan antes de ampliar la operación diaria y distribuir.
 Actualización del 12/10/2026: el usuario autorizó crear y subir `dev_v2` con esta
@@ -115,6 +116,9 @@ y registro de proceso con evidencia real. Revisión contigo al cerrar Fase 1.
 2. Definir perfiles lector/operador por grupos y permisos, administración reservada;
    auditar cuentas inactivas/contraseñas inutilizables sin divulgar ni resetear credenciales.
    Proteger búsqueda/resumen según perfil y probar sesión, 403 y cuentas existentes.
+   Añadido por el usuario al aprobar esta fase: pantalla «Mi perfil» autenticada que
+   edita nombre, apellidos y correo sólo de la cuenta de la sesión. No cambia usuario,
+   contraseña, estado ni permisos; probar CSRF, datos inválidos y manipulación de IDs.
 3. Ficha con edición de datos y selección/creación de ubicación; especificaciones en filas
    agregables/eliminables, con validación de atributo duplicado.
 4. Alta contextual de categoría sin perder lo escrito.
@@ -188,6 +192,9 @@ __version__ = "2.0.0-dev.1"
 FECHA_VERSION = "12/10/2026"
 ```
 
+Tras implementar Fase 2, la fuente ejecutable se actualizó a `2.0.0-dev.2` con fecha
+12/10/2026; el ejemplo anterior conserva la referencia al inicio de Fase 1.
+
 CHANGELOG describe cada versión; la interfaz y otras partes del programa importarán
 las constantes sin mantener copias independientes. Cada fase no implica necesariamente
 un aumento de MAYOR/MENOR; el incremento depende de los cambios entregados.
@@ -244,6 +251,21 @@ Las cifras y comprobaciones de abajo corresponden al primer cierre, antes de amp
   Fase 2 mantiene ubicación/especificaciones/PDF en flujo propio como tareas futuras.
 
 ---
+
+## Evidencia de Fase 2 — 12/10/2026
+
+- Aprobación de inicio recibida del usuario, incluyendo Mi perfil.
+- Respaldo previo de la copia en .local/checkpoints/fase1_before_fase2.
+- Migración de ubicaciones conserva identificadores/asignaciones. Comprobación en
+  copia real: 2 asignaciones y 10 saldos previos conservados; integridad SQLite ok.
+- Ficha editable, especificaciones hasta 50 filas y categoría/ubicación contextual.
+- Pantallas propias de ubicaciones y perfil; perfiles Lector/Operador sin acceso staff.
+- Catálogo/resumen requieren sesión y permisos; PDF protegidos también por media.
+- 83 pruebas correctas, check sin incidencias y migraciones coherentes. Navegador:
+  guardar perfil con sesión conservada, filas JS, ubicación contextual, ficha con
+  saldo10 y ubicación compartida entre dos componentes; perfil a375px sin desbordar.
+- SQLite operativo original intacto. Fase 2 local en dev_v2, pendiente de revisión
+  y autorización para publicar. No se inició Fase 3.
 
 # Historial de la versión anterior (conservado)
 Acá se encontrará documentado el desarrollo por fases conforme se vaya avanzando con el proyecto, la idea es ir acutalizando la documentación cada vez que se haga un cambio en una fase en específico y/o se agreguen cambios.

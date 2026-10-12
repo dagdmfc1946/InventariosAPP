@@ -24,6 +24,7 @@ class Category(models.Model):
 
 
 class Component(models.Model):
+    location = models.ForeignKey('inventory.Location', verbose_name='Ubicación', on_delete=models.PROTECT, related_name='components', null=True, blank=True)
     category = models.ForeignKey('components.Category', verbose_name='Categoría', on_delete=models.PROTECT, related_name='components')
     reference = models.CharField(verbose_name='Referencia', max_length=80, db_index=True)
     name = models.CharField(verbose_name='Nombre', max_length=200)

@@ -3,8 +3,10 @@ from django.shortcuts import render
 
 from apps.components.models import Component
 from apps.inventory.models import StockMovement
+from apps.core.access import inventory_read_required
 
 
+@inventory_read_required
 def dashboard(request):
     low_stock_count = Component.objects.filter(is_active=True).filter(
         stock__quantity__lte=F('stock__minimum_quantity')

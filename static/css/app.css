@@ -36,6 +36,17 @@ legend { font-weight: 700; font-size: 1.1rem; padding: 0; }
 label { display: block; font-size: .9rem; font-weight: 600; margin-bottom: .45rem; }
 .optional { color: var(--muted); font-size: .75rem; font-weight: 400; margin-left: .6rem; }
 input, select { width: 100%; padding: .7rem .8rem; border: 1px solid #90a4b2; border-radius: 5px; background: white; color: var(--ink); font: inherit; min-height: 44px; }
+textarea { width: 100%; padding: .7rem .8rem; border: 1px solid #90a4b2; border-radius: 5px; background: white; color: var(--ink); font: inherit; box-sizing: border-box; }
+input[type="checkbox"] { width: 22px; min-height: 22px; }
+.detail-section { margin-bottom: 1.5rem; }
+.context-panel { border: 1px solid var(--line); padding: 1rem; margin-top: 1rem; border-radius: 6px; }
+.context-panel summary { color: var(--accent); font-weight: 600; cursor: pointer; }
+.context-panel .field { margin-bottom: .75rem; }
+.spec-row { border-bottom: 1px solid var(--line); padding: 1rem 0; margin-bottom: 1rem; }
+.spec-grid { display: grid; grid-template-columns: 2fr 2fr 1fr auto; gap: 1rem; }
+.document-list { padding-left: 1.25rem; overflow-wrap: anywhere; }
+.document-list .help { display: block; }
+@media (max-width: 700px) { .spec-grid { grid-template-columns: minmax(0, 1fr); } }
 input[aria-invalid="true"], select[aria-invalid="true"] { border-color: var(--danger); }
 .help { font-size: .8rem; color: var(--muted); margin-top: .4rem; }
 .field-errors { color: var(--danger); font-size: .85rem; }

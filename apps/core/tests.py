@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 import shutil
 import tempfile
 from pathlib import Path
@@ -35,6 +36,7 @@ class BackupLocalScriptTests(TestCase):
 
 class ComponentSearchViewTests(TestCase):
     def setUp(self):
+        self.client.force_login(get_user_model().objects.create_superuser('test_admin', password='test-only'))
         category = Category.objects.create(name='Sensores', slug='sensores')
         self.sensor_lm35 = Component.objects.create(
             category=category,

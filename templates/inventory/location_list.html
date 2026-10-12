@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}Ubicaciones{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">ORGANIZACIÓN</p><h1>Ubicaciones</h1><p class="muted">Una misma ubicación puede alojar varios componentes.</p></div>{% if perms.inventory.add_location %}<a class="button" href="{% url 'location_create' %}">+ Nueva ubicación</a>{% endif %}</div>
+{% for location in locations %}<section class="panel detail-section"><div class="page-heading"><h2>{{ location }}</h2>{% if perms.inventory.change_location %}<a href="{% url 'location_edit' location.pk %}">Editar y asignar componentes</a>{% endif %}</div>
+<p class="muted">{{ location.description }}</p><ul>{% for component in location.components.all %}<li><a href="{% url 'component_detail' component.pk %}">{{ component }}</a></li>{% empty %}<li class="muted">Sin componentes asignados.</li>{% endfor %}</ul></section>{% empty %}<div class="panel empty-state">Todavía no hay ubicaciones.</div>{% endfor %}
+{% endblock %}

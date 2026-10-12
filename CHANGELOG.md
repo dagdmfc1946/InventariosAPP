@@ -21,6 +21,43 @@ No se atribuye una versión retrospectiva a la aplicación actual.
 - 18 pruebas correctas y comprobación Django sin incidencias.
 - Ningún cambio funcional, de dependencias, de esquema ni de datos operativos.
 
+## [2.0.0-dev.2] — 12/10/2026 — Fase 2 local, pendiente de revisión
+
+### Añadido
+
+- Mi perfil en /accounts/profile/: edita nombre, apellidos y correo de la cuenta
+  autenticada, conserva sesión y excluye usuario/contraseña/permisos del formulario.
+- Ficha de componente desde catálogo; edición conjunta de datos/especificaciones con
+  validación de duplicados y saldo intacto. Filas dinámicas con alternativa sin JavaScript.
+- Categorías y ubicaciones creadas/seleccionadas desde alta o edición, conservando campos.
+- Ubicaciones compartidas y pantalla para asignar varios componentes a una ya guardada.
+  Administración permite también asignación múltiple; ubicación ocupada protegida de borrado.
+- Perfiles Lector/Operador y selector en altas de usuarios. Comando configure_inventory_roles
+  prepara esos grupos sin asignar usuarios existentes ni conceder acceso administrativo.
+- Adjuntar/abrir PDF desde ficha; validación adicional de cabecera y limpieza de carga
+  si falla la inserción. No analiza el documento completo ni modifica archivos antiguos.
+
+### Seguridad y compatibilidad
+
+- Catálogo/resumen exigen sesión y permiso de consulta (se conserva acceso de operadores
+  con permiso individual de alta de Fase 1). PDF exige permiso de documento, incluida
+  la ruta directa media; archivos no registrados y faltantes devuelven 404.
+- Logout redirige a login, pues catálogo requiere sesión. Pantalla 403 en español.
+- Migraciones components.0003/inventory.0004 trasladan asignaciones al FK de componente.
+  Se conservan IDs, ubicaciones vacías y saldos. No fusiona por texto. Si ya existen
+  ubicaciones compartidas, revertir el esquema antiguo exige recuperar el respaldo.
+- Datos operativos originales intactos; respaldo previo de la copia de desarrollo.
+  Sin dependencias nuevas. Sigue runserver; distribución permanece en Fase 4.
+
+### Verificación
+
+- 83 pruebas correctas, check y coherencia de migraciones correctos. Incluye migración
+  de datos, perfil propio/CSRF, roles, IDs de especificaciones ajenas, transacciones,
+  PDF protegido, contenido falso y limpieza tras fallo de base.
+- Navegador con datos ficticios: perfil guardado, ficha con especificaciones, ubicación
+  contextual y asignación de dos componentes a ubicación existente; perfil móvil375px.
+- Pendiente revisión y aprobación antes de push. Fase 3 no iniciada.
+
 ## [2.0.0-dev.1] — 12/10/2026 — Fase 1 concluida en dev_v2
 
 ### Añadido

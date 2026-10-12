@@ -1,4 +1,4 @@
-# Tareas v2 — Fase 1 concluida; Fase 2 pendiente de aprobación
+# Tareas v2 — Fase 1 publicada; Fase 2 implementada para revisión
 
 Plan: ../info_FASES.md. Evidencia de ejecución: ../dev_Process.md.
 Cada unidad se mantiene pequeña; si supera cinco archivos de implementación se divide
@@ -47,23 +47,26 @@ Evidencia T1–T6 en dev_Process.md. El usuario autorizó concluir y publicar Fa
 
 ## Fase 2 — Ubicaciones, permisos y ficha
 
-- [ ] T7a. Migrar ubicaciones compartibles conservando asignaciones existentes.
+- [x] T7a. Migrar ubicaciones compartibles conservando asignaciones existentes.
   Aceptación: varios componentes usan una ubicación guardada y pueden agregarse desde su edición.
   No fusionar por texto automáticamente. Probar migración, reasignación y borrado con dependencias.
-- [ ] T7b. Grupos lector/operador y protección de vistas/archivos.
+- [x] T7b. Grupos lector/operador y protección de vistas/archivos.
   Aceptación: login y autorización coherentes para cuentas existentes, sin privilegios automáticos;
   usuarios activos/inactivos y contraseñas utilizables diagnosticables sin exponer secretos.
 
-- [ ] T7. Ficha y selección de ubicación compartida. Depende de T7a y T7b.
+- [x] T7c. Mi perfil, agregado al aprobar Fase 2.
+  Aceptación: editar nombre/apellidos/correo de la sesión; nunca otra cuenta ni permisos.
+  Verificar email inválido, sesión conservada, CSRF y parámetros de identidad inyectados.
+- [x] T7. Ficha y selección de ubicación compartida. Depende de T7a y T7b.
   Aceptación: ficha muestra saldo/datos y edita ubicación opcional sin cambiar cantidades.
   Verificar lectura, permisos y edición. Archivos: forms, views, urls, template, tests (5).
-- [ ] T8. Especificaciones dinámicas. Depende de T7.
+- [x] T8. Especificaciones dinámicas. Depende de T7.
   Aceptación: filas opcionales, sin atributos duplicados ni pérdida al fallar validación.
   Verificar formsets en servidor y navegador. Archivos: forms, views, template, JS, tests (5).
-- [ ] T9. Categoría contextual. Depende de T7.
+- [x] T9. Categoría contextual. Depende de T7.
   Aceptación: crear categoría conserva datos del alta y rechaza duplicados.
   Verificar con/sin JS. Archivos: forms, views, urls, template/JS, tests (5).
-- [ ] T11. PDF en ficha. Depende de T7.
+- [x] T11. PDF en ficha. Depende de T7.
   Aceptación: validar contenido/tamaño, controlar acceso y limpiar cargas fallidas.
   Verificar archivos válidos, inválidos y error de guardado. Archivos: documents/models.py,
   forms, views, template y tests (5).

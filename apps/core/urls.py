@@ -1,14 +1,24 @@
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 
-from apps.components.views import component_create
+from apps.components.views import component_create, component_detail, component_edit
+from apps.inventory.views import location_list, location_edit
+from apps.documents.views import datasheet_upload, datasheet_download
 
-from .views import component_search, site_home
+from .views import component_search, site_home, profile_edit
 
 urlpatterns = [
     path('', site_home, name='site_home'),
     path('search/', component_search, name='component_search'),
     path('components/new/', component_create, name='component_create'),
+    path('components/<int:pk>/', component_detail, name='component_detail'),
+    path('components/<int:pk>/edit/', component_edit, name='component_edit'),
+    path('locations/', location_list, name='location_list'),
+    path('locations/new/', location_edit, name='location_create'),
+    path('locations/<int:pk>/edit/', location_edit, name='location_edit'),
+    path('components/<int:pk>/datasheets/', datasheet_upload, name='datasheet_upload'),
+    path('documents/<int:pk>/download/', datasheet_download, name='datasheet_download'),
     path('accounts/login/', LoginView.as_view(template_name='registration/login.html'), name='login'),
+    path('accounts/profile/', profile_edit, name='profile_edit'),
     path('accounts/logout/', LogoutView.as_view(), name='logout'),
 ]

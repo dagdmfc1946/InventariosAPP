@@ -15,11 +15,12 @@
             <nav aria-label="Navegación principal">
                 <a href="{% url 'component_search' %}" {% if request.resolver_match.url_name == 'component_search' %}aria-current="page"{% endif %}>Componentes</a>
                 <a href="{% url 'dashboard' %}" {% if request.resolver_match.url_name == 'dashboard' %}aria-current="page"{% endif %}>Resumen</a>
+                {% if perms.inventory.view_location %}<a href="{% url 'location_list' %}">Ubicaciones</a>{% endif %}
                 {% if user.is_staff %}<a href="{% url 'admin:index' %}">Administración</a>{% endif %}
             </nav>
             <div class="session">
                 {% if user.is_authenticated %}
-                    <span>{{ user.get_username }}</span>
+                    <a href="{% url 'profile_edit' %}" title="Editar mi perfil">{{ user.get_username }} · Mi perfil</a>
                     <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="text-button" type="submit">Salir</button></form>
                 {% else %}<a href="{% url 'login' %}">Iniciar sesión</a>{% endif %}
             </div>
@@ -30,5 +31,6 @@
         {% block content %}{% endblock %}
     </main>
     <footer class="container footer"><span>Inventario de componentes electrónicos</span><span>Versión {{ software_version }} · {{ software_date }}</span></footer>
+{% block scripts %}{% endblock %}
 </body>
 </html>

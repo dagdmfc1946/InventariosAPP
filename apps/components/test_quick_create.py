@@ -6,6 +6,7 @@ from django.urls import reverse
 
 from apps.components.models import Category, Component
 from apps.inventory.models import Stock, StockMovement
+from config.version import __version__
 
 
 class QuickCreateTests(TestCase):
@@ -62,7 +63,7 @@ class QuickCreateTests(TestCase):
     def test_nonstaff_user_with_permissions_can_use_quick_create(self):
         response = self.client.get(reverse('component_create'))
         self.assertContains(response, 'Nuevo componente')
-        self.assertContains(response, '2.0.0-dev.1')
+        self.assertContains(response, __version__)
 
     def test_anonymous_redirects_to_login_and_user_without_permission_gets_403(self):
         self.client.logout()
@@ -85,7 +86,7 @@ class QuickCreateTests(TestCase):
         self.assertContains(self.client.get(reverse('login')), 'Iniciar sesión')
         response = self.client.post(reverse('login'), {'username': 'operator', 'password': 'test-only'})
         self.assertRedirects(response, reverse('component_search'))
-        self.assertRedirects(self.client.post(reverse('logout')), reverse('component_search'))
+        self.assertRedirects(self.client.post(reverse('logout')), reverse('login'))
 
     def test_service_rolls_back_component_when_stock_validation_fails(self):
         from apps.components.services import create_component_with_stock

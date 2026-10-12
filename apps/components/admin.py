@@ -21,7 +21,7 @@ class ComponentAdmin(admin.ModelAdmin):
     list_filter = ('category', 'is_active')
     search_fields = ('reference', 'name', 'part_number', 'value')
     inlines = [SpecificationInline]
-    fields = ('category', 'reference', 'name', 'value', 'part_number', 'is_active')
+    fields = ('category', 'reference', 'name', 'value', 'part_number', 'location', 'is_active')
 
 
 @admin.register(Specification)

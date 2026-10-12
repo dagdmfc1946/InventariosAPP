@@ -1,7 +1,7 @@
 # Manual de usuario — InventariosAPP
 
-Actualizado: 12/10/2026. Versión `2.0.0-dev.1`, Fase 1 concluida en `dev_v2`.
-La Fase 2 espera nueva revisión y aprobación. La versión anterior sigue en `dev`.
+Actualizado: 12/10/2026. Versión `2.0.0-dev.2`, Fase 2 implementada localmente para revisión.
+Fase 1 publicada en `dev_v2`. La versión anterior sigue en `dev`.
 
 ## Datos separados para revisar v2
 
@@ -41,10 +41,13 @@ Para crear un superusuario nuevo se mantiene el comando de terminal:
 .\.venv\Scripts\python.exe manage.py createsuperuser
 ```
 
-Después de guardar un usuario normal, se pueden asignar permisos desde su edición.
-Para el alta rápida necesita **Puede agregar** componente, existencias y movimiento.
-Los grupos permiten compartir permisos; los perfiles simplificados lector/operador se
-implementarán en Fase 2. La gestión de cuentas está reservada al superusuario.
+Al crear una cuenta se elige **Lector** (consultar inventario y PDF) u **Operador**
+(además registrar componentes, completar fichas, crear categorías/ubicaciones y cargar PDF).
+Ambos son usuarios normales. Las cuentas existentes no cambian de grupo automáticamente.
+Desde su edición, el superusuario puede asignar **Inventario - Lector** o
+**Inventario - Operador**, o mantener permisos individuales. El comando
+`manage.py configure_inventory_roles` prepara/actualiza esos perfiles sin asignar cuentas.
+La gestión de cuentas está reservada al superusuario.
 
 Los usuarios normales deben entrar por `/accounts/login/`, o **Iniciar sesión** en
 el catálogo. `/admin/login/` está reservado a cuentas con acceso administrativo:
@@ -55,6 +58,48 @@ Si falla el acceso normal, comprobar usuario exacto, contraseña y que la cuenta
 activa. Las cuentas sin contraseña utilizable requieren que el responsable les
 establezca una desde la edición de usuario. No se cambian contraseñas existentes al
 actualizar y no se almacenan contraseñas en texto plano.
+
+El catálogo, resumen y PDF requieren sesión. Un usuario sin permisos recibe una
+pantalla de acceso restringido: eso no equivale a contraseña incorrecta. Al salir,
+se vuelve a la pantalla de inicio de sesión.
+
+## Mi perfil
+
+1. Pulsar **Mi perfil** en el encabezado, junto al nombre de la sesión, o abrir
+   `/accounts/profile/`. También está disponible desde Administración.
+2. Editar nombre, apellidos y correo electrónico; los campos son opcionales.
+3. Pulsar **Guardar mi perfil**. Un correo inválido muestra el error y conserva lo escrito.
+4. La sesión permanece abierta. Esta pantalla sólo cambia tu propia cuenta; el nombre
+   de usuario, la contraseña y los permisos no se modifican desde aquí.
+
+## Ficha completa del componente
+
+1. En el catálogo, pulsar la referencia/nombre para abrir su ficha.
+2. Los operadores pueden pulsar **Editar ficha** para cambiar datos básicos y ubicación.
+3. **Crear una categoría aquí** o **Crear una ubicación aquí** crea y selecciona el
+   registro conservando los campos escritos. La categoría/ubicación queda creada en
+   ese momento; el componente y su asignación se confirman con **Guardar ficha**.
+4. Agregar especificaciones con atributo, valor y unidad opcional. **Agregar especificación**
+   añade una fila; sin JavaScript también funciona mediante el servidor. Marcar
+   **Eliminar** retira una especificación al guardar. Los atributos no se pueden repetir.
+5. Guardar ficha confirma datos y especificaciones juntos. Si hay errores, no guarda
+   parcialmente. El saldo y los movimientos no se modifican desde esta edición.
+6. En la ficha, **Adjuntar PDF** guarda una ficha técnica por separado. Acepta extensión
+   PDF, tamaño hasta 20 MB y cabecera de PDF. Es una comprobación básica de formato;
+   no analiza el contenido completo del documento. Cargas rechazadas no se guardan.
+7. **Abrir PDF** exige sesión y permiso de consulta, incluso mediante la ruta de media.
+   Si falta el archivo, se indica que no está disponible; adjuntar la copia correcta.
+
+## Ubicaciones compartidas
+
+Abrir **Ubicaciones** y crear o editar una. Indicar al menos estante, caja, cajón o
+descripción. En **Componentes en esta ubicación**, seleccionar varios componentes
+(en PC, mantener Ctrl). Guardar agrega los seleccionados a esa ubicación; los retirados
+quedan sin ubicación, y los elegidos desde otra ubicación se trasladan a ésta.
+Cada componente tiene como máximo una ubicación. Los saldos no cambian.
+
+También funciona desde Administración → Ubicaciones. Una ubicación con componentes
+asignados está protegida contra borrado: primero retirar o reasignar esos componentes.
 
 ## Alta rápida de componente y stock
 
@@ -73,11 +118,12 @@ actualizar y no se almacenan contraseñas en texto plano.
 Si no hay categorías, la pantalla explica cómo crear una desde Administración.
 Los usuarios no administradores necesitan permisos para agregar componente, stock y
 movimiento. Un usuario autenticado sin esos permisos recibe 403. No se conceden permisos
-automáticamente. El alta, login y logout usan CSRF; no requieren JavaScript.
+a las cuentas anteriores automáticamente; las nuevas reciben el perfil elegido en
+su alta. El alta, login y logout usan CSRF; no requieren JavaScript.
 
 ## Completar información mediante Administración
 
-La ficha ampliada llegará en Fase 2. Mientras tanto se puede usar el flujo administrativo:
+La ficha propia permite completar estos datos; Administración ofrece un flujo alternativo:
 Para un alta alternativa desde Admin, seguir los pasos de abajo. Si usaste el alta
 rápida, el componente y su stock ya existen: sólo completa sus datos opcionales.
 
@@ -104,9 +150,8 @@ se muestra un error en el campo **Archivo PDF**, en lugar de una pantalla de err
 Vuelve a adjuntar el archivo correcto. El fallo intermitente comunicado no pudo
 identificarse con certeza sin su mensaje; carga, re-guardado y reemplazo están probados.
 
-**Ubicaciones:** todavía hay una ubicación vinculada a un solo componente. Compartir
-una ubicación guardada con varios componentes requiere cambiar el modelo; es la
-primera tarea de Fase 2. No borrar ubicaciones para intentar resolver esa limitación.
+**Ubicaciones:** el administrador permite seleccionar varios componentes para una
+ubicación guardada, y la ficha permite seleccionar una ubicación existente.
 
 ## Stock y movimientos
 
@@ -189,7 +234,8 @@ La configuración actual todavía no implementa estos destinos. Referencia de pr
 ## Funcionalidad pendiente
 
 Fase 1 está implementada y requiere tu revisión.
-Fase 2: ubicaciones compartidas, perfiles de permisos, ficha, especificaciones y PDF.
+Fase 2 implementada, pendiente de tu validación: ubicaciones compartidas, perfiles,
+Mi perfil, ficha, especificaciones y PDF.
 Fase 3: ofertas, filtros, duplicación y acciones de inventario.
 Fase 4: recuperación y distribución verificada. Este manual se actualizará con rutas
 y capturas reales al implementar; no se presentan acciones futuras como disponibles.

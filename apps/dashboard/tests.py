@@ -1,7 +1,9 @@
+from django.contrib.auth import get_user_model
 from decimal import Decimal
+import tempfile
 
 from django.core.files.uploadedfile import SimpleUploadedFile
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
 
 from apps.components.models import Category, Component
@@ -12,6 +14,12 @@ from apps.suppliers.models import Supplier, SupplierOffer
 
 class DashboardViewTests(TestCase):
     def setUp(self):
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        settings = override_settings(MEDIA_ROOT=directory.name)
+        settings.enable()
+        self.addCleanup(settings.disable)
+        self.client.force_login(get_user_model().objects.create_superuser('test_admin', password='test-only'))
         category = Category.objects.create(name='Sensores', slug='sensores')
         self.component_low = Component.objects.create(
             category=category,

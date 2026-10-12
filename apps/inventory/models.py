@@ -5,7 +5,6 @@ from django.utils import timezone
 
 
 class Location(models.Model):
-    component = models.OneToOneField('components.Component', verbose_name='Componente', on_delete=models.CASCADE, related_name='location', null=True, blank=True)
     shelf = models.CharField(verbose_name='Estante', max_length=50, blank=True)
     box = models.CharField(verbose_name='Caja', max_length=50, blank=True)
     drawer = models.CharField(verbose_name='Cajón', max_length=50, blank=True)

@@ -30,6 +30,16 @@ class Datasheet(models.Model):
                 raise ValidationError({'file': 'No se puede leer el archivo guardado. Vuelva a adjuntar el PDF.'})
             if size > self.MAX_FILE_SIZE:
                 raise ValidationError({'file': 'La ficha técnica no puede superar los 20 MB.'})
+            if not self.file._committed:
+                # Sólo nuevas cargas: conservar compatibilidad con archivos existentes.
+                position = self.file.tell()
+                try:
+                    self.file.seek(0)
+                    signature = self.file.read(5)
+                finally:
+                    self.file.seek(position)
+                if signature != b'%PDF-':
+                    raise ValidationError({'file': 'El contenido del archivo no corresponde a un PDF.'})
 
     def __str__(self):
         return f'{self.component.reference} - {self.file.name}'

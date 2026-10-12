@@ -17,7 +17,7 @@ class AdminInterfaceTests(TestCase):
 
     def test_create_normal_user_password_and_application_login(self):
         response = self.client.post(reverse('admin:auth_user_add'), {
-            'username': 'operador', 'password1': 'Local-test-9876!',
+            'role': 'reader', 'username': 'operador', 'password1': 'Local-test-9876!',
             'password2': 'Local-test-9876!', 'usable_password': 'true',
             'is_staff': 'on', 'is_superuser': 'on', '_save': 'Guardar',
         })

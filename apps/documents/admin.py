@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
+from django.urls import reverse
 
 from .models import Datasheet
 
@@ -16,5 +17,5 @@ class DatasheetAdmin(admin.ModelAdmin):
             return '-'
         return format_html(
             '<a href="{}" target="_blank" rel="noopener">Abrir PDF</a>',
-            obj.file.url,
+            reverse('datasheet_download', args=[obj.pk]),
         )

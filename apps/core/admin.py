@@ -1,8 +1,9 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import GroupAdmin, UserAdmin
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Group
+from .forms import ApplicationUserCreationForm
+from .roles import configure_inventory_roles
 
 
 def permission_label(permission):
@@ -25,8 +26,8 @@ class SpanishPermissionLabels:
 class ApplicationUserAdmin(SpanishPermissionLabels, UserAdmin):
     """Las altas desde la interfaz crean cuentas normales con contraseña usable."""
 
-    add_form = UserCreationForm
-    add_fieldsets = ((None, {'classes': ('wide',), 'fields': ('username', 'password1', 'password2')}),)
+    add_form = ApplicationUserCreationForm
+    add_fieldsets = ((None, {'classes': ('wide',), 'fields': ('username', 'password1', 'password2', 'role')}),)
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         ('Datos personales', {'fields': ('first_name', 'last_name', 'email')}),
@@ -40,6 +41,11 @@ class ApplicationUserAdmin(SpanishPermissionLabels, UserAdmin):
 
     def has_module_permission(self, request):
         return request.user.is_superuser
+
+    def save_related(self, request, form, formsets, change):
+        super().save_related(request, form, formsets, change)
+        if not change:
+            form.instance.groups.add(configure_inventory_roles()[form.cleaned_data['role']])
 
     def has_view_permission(self, request, obj=None):
         return request.user.is_superuser
