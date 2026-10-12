@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}{{ title }} · InventariosAPP{% endblock %}
 {% block dark-mode-vars %}{% endblock %}
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" href="{% static 'css/admin.css' %}">{% endblock %}
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" href="{% static 'css/admin.css' %}"><link rel="stylesheet" href="{% static 'css/session.css' %}">{% endblock %}
 {% block branding %}
 <a class="inventory-brand" href="{% url 'component_search' %}"><span class="inventory-mark" aria-hidden="true">I</span> InventariosAPP</a>
 <nav class="inventory-nav" aria-label="Navegación principal">
@@ -13,15 +13,7 @@
 {% endblock %}
 {% block usertools %}
 {% if has_permission %}
-<div id="user-tools" aria-label="Opciones de sesión">
-    <div class="inventory-user">
-        <span class="inventory-avatar" aria-hidden="true">{{ user.get_username|slice:':1'|upper }}</span>
-        <span><span class="inventory-user-label">Sesión activa</span><strong>{{ user.get_username }}</strong></span>
-    </div>
-    <a class="inventory-session-action" href="{% url 'profile_edit' %}">Mi perfil</a>
-    {% if user.has_usable_password %}<a class="inventory-session-action" href="{% url 'admin:password_change' %}">Cambiar contraseña</a>{% endif %}
-    <form id="logout-form" method="post" action="{% url 'admin:logout' %}">{% csrf_token %}<button class="inventory-session-action inventory-signout" type="submit">Salir</button></form>
-</div>
+<div id="user-tools">{% include 'includes/session.html' %}</div>
 {% endif %}
 {% endblock %}
 {% block footer %}<span>Inventario de componentes electrónicos</span><span>Versión {{ software_version }} · {{ software_date }}</span>{% endblock %}

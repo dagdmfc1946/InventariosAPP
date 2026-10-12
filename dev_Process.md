@@ -278,3 +278,11 @@ en `tasks/todo.md`; no marcar como implementado algo sólo propuesto. Mantener h
 - Publicación autorizada únicamente a dev_v2, sin integrar dev/main. Fase 3 no iniciada;
   su aprobación queda pendiente de la revisión del usuario.
 - Verificación del cambio de versión: 18 pruebas de administración/alta rápida correctas; check y git diff --check sin incidencias. Se mantiene la evidencia de 83 pruebas de Fase 2.
+
+## 12/10/2026 — Inicio autorizado de Fase 3: interfaz compartida
+
+- Usuario autorizó Fase 3; publicación pendiente de revisión y aprobación separada.
+- Bloque de sesión común según imagen: avatar, sesión activa, Mi perfil, cambiar contraseña y salir con POST/CSRF, tanto en vistas propias como Admin.
+- Cambio de contraseña para usuarios normales conserva sesión usando vistas nativas Django. Encabezados de Componentes centrados en catálogo y Admin.
+- v2.0.1 para este ajuste; 10 pruebas de sesión/Admin correctas y check sin incidencias.
+- Consultadas incremental-implementation y frontend-ui-engineering de Agent Skills en la revisión previamente registrada. Referencia visual: imagen proporcionada por el usuario; misma paleta existente, controles adaptables y teclado.

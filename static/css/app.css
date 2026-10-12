@@ -81,3 +81,5 @@ td strong { display: block; }
     .form-grid, .stock-grid, .metrics, .search-form { grid-template-columns: minmax(0, 1fr); }
     .form-actions .button { width: 100%; text-align: center; }
 }
+
+.component-table thead th { text-align: center; }

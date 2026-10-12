@@ -1,5 +1,5 @@
 from django.urls import path
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView
 
 from apps.components.views import component_create, component_detail, component_edit
 from apps.inventory.views import location_list, location_edit
@@ -19,6 +19,8 @@ urlpatterns = [
     path('components/<int:pk>/datasheets/', datasheet_upload, name='datasheet_upload'),
     path('documents/<int:pk>/download/', datasheet_download, name='datasheet_download'),
     path('accounts/login/', LoginView.as_view(template_name='registration/login.html'), name='login'),
+    path('accounts/password/', PasswordChangeView.as_view(template_name='registration/password_change.html'), name='password_change'),
+    path('accounts/password/done/', PasswordChangeDoneView.as_view(template_name='registration/password_change_done.html'), name='password_change_done'),
     path('accounts/profile/', profile_edit, name='profile_edit'),
     path('accounts/logout/', LogoutView.as_view(), name='logout'),
 ]
