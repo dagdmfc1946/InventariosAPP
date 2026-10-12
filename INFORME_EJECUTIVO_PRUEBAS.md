@@ -122,3 +122,11 @@ Inventario de pruebas por módulo (recuento de la suite descubierta, total 115):
 | documents.tests | 3 |
 | core.test_development_copy | 2 |
 | core.tests: respaldo/restauración existente | 1 |
+
+
+## Actualización posterior
+
+Este informe conserva el resultado histórico de 115 pruebas en v2.2.0. Fase 4 añade
+10 pruebas y ejecuta 125 en v2.3.0 con Django 5.2.18. Ver
+[validación de Fase 4](INFORME_VALIDACION_FASE4.md), con el bloqueo de firma del .exe
+final y los límites pendientes de distribución.

@@ -1,9 +1,8 @@
 # InventariosAPP — Plan de nueva versión
 
-Fecha de análisis: 12/10/2026. Estado: **Fases 1, 2 y 3 publicadas; mejoras adicionales v2.2.0 aprobadas para publicar**.
-El usuario autorizó iniciar Fase 3 y unificar el encabezado de sesión en todas las vistas.
-Fase 3 publicada en v2.1.1. Perfil/contraseña/exportación PDF v2.2.0 aprobados para publicar; Fase 4 no iniciada.
-Versión visible: `v2.2.0`, fecha `12/10/2026`.
+Fecha de análisis: 12/10/2026. Estado: **Fases 1–3 publicadas; Fase 4 implementada localmente con validación final del .exe pendiente**.
+El usuario autorizó Fase 4 y pidió instalación vacía, terminal y guía de reconstrucción.
+Versión visible: `v2.3.0`, fecha `12/10/2026`.
 Plan ampliado a **cuatro fases** por solicitud del usuario: los pendientes de usuarios,
 PDF y ubicaciones se incorporan antes de ampliar la operación diaria y distribuir.
 Actualización del 12/10/2026: el usuario autorizó crear y subir `dev_v2` con esta
@@ -439,3 +438,14 @@ estos cambios antes de publicar y autorizar Fase 4; no se modifica el máximo de
 El usuario solicita el informe ejecutivo de las 115 pruebas y autoriza subir los cambios.
 Se incorpora INFORME_EJECUTIVO_PRUEBAS.md con resultados, alcance, límites y trazabilidad.
 Publicación de v2.2.0 autorizada únicamente en dev_v2. Fase 4 continúa sin iniciar.
+
+
+## Fase 4 autorizada — 12/10/2026
+
+Usuario: «ejecuta el trabajo pendiente», con .exe de base vacía y ejecución/instrucciones
+de terminal. T16–T18 y documentación implementados y verificados; 125 pruebas correctas.
+T19 genera el artefacto, pero Smart App Control bloquea el binario final por requisitos
+de firma. No se declara cierre final de distribución hasta validar el .exe y revisar.
+Se conserva el inventario real; instalación nueva vacía y actualización sin borrado.
+Guía: DISTRIBUCION_Y_DESARROLLO.md. Evidencia: INFORME_VALIDACION_FASE4.md.
+Cambios locales de dev_v2 sin push/merge ni publicación final autorizada.

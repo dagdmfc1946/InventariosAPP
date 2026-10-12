@@ -1,6 +1,6 @@
 # Manual de usuario — InventariosAPP
 
-Actualizado: 12/10/2026. Versión `v2.2.0`, mejoras adicionales aprobadas para publicar en `dev_v2`.
+Actualizado: 12/10/2026. Versión `v2.3.0`, candidato local de Fase 4 en `dev_v2`; binario pendiente de validación por bloqueo de Windows.
 Fases 1, 2 y 3 concluidas en `dev_v2`. La versión anterior sigue en `dev`.
 
 ## Datos separados para revisar v2
@@ -262,65 +262,60 @@ sólo consulta. Al actualizar otra copia v2, ejecuta `configure_inventory_roles`
 de `migrate` (en este equipo ya se hizo). El comando actualiza los grupos predefinidos
 sin asignar cuentas existentes a otro grupo ni habilitar Administración.
 
-## Respaldo
+## Respaldo y recuperación
 
-Antes de respaldar o restaurar, detener el servidor y conservar una copia independiente.
-Actualmente el respaldo se opera mediante funciones de Python, sin botón en interfaz:
+Detener la aplicación antes de respaldar/restaurar. Desde la carpeta del ejecutable:
 
 ```powershell
-.\.venv\Scripts\python.exe manage.py shell -c 'from django.conf import settings; from backups.backup_local import backup_project; print(backup_project(settings.DATA_DIR))'
+.\InventariosAPP.exe backup --output 'D:\RespaldosInventarios\copia_20261012'
+.\InventariosAPP.exe restore 'D:\RespaldosInventarios\copia_20261012'
 ```
 
-Conservar la carpeta resultante que contiene SQLite y media, fuera de Git y preferiblemente
-fuera del equipo. La restauración actual combina media con el destino: primero debe
-validarse en una copia aislada; no garantiza eliminar archivos sobrantes. Fase 4 mejorará
-y documentará recuperación consistente. No usar los datos personales como fixtures.
+El destino de copia debe ser nuevo. La copia incluye SQLite, documentos, clave local
+si existe y manifiesto de integridad. Conservarla fuera del repositorio y preferiblemente
+fuera del equipo. La restauración verifica la copia antes de reemplazar los datos:
+no mezcla documentos antiguos y conserva la carpeta previa en `.previous-*`.
+La terminal indica su ruta. El lanzador rechaza operaciones si esa carpeta está en uso.
+`runserver` no participa en este bloqueo: también debe detenerse antes del mantenimiento.
 
-## Distribuir o desplegar
+Si Windows bloquea el ejecutable, usar los mismos comandos desde fuente con
+`.\.venv\Scripts\python.exe launcher.py`, siempre con `--data-dir` explícito.
+Detalles y recuperación del estado anterior: [guía de distribución](DISTRIBUCION_Y_DESARROLLO.md).
 
-Decisión del usuario (12/10/2026): operar exclusivamente en su PC Windows y preparar
-PyInstaller al finalizar. Las referencias a servidor son explicativas, fuera del alcance.
+## Primera instalación y uso local
 
-Waitress se usa mientras la aplicación está abierta: recibe las solicitudes del
-navegador y las entrega a Django. PyInstaller se usa al construir la distribución:
-reúne el programa, Python y sus dependencias. En la distribución prevista el usuario
-abre InventariosAPP.exe, el programa inicia Waitress en 127.0.0.1 y abre el navegador;
-Waitress permite consultar y guardar mediante Django, y SQLite conserva los datos.
-No requiere servidor externo ni Internet; base y archivos permanecen fuera del ejecutable.
+El paquete v2.3.0 no incluye la base ni documentos del proyecto. Una instalación nueva
+empieza sin cuentas, categorías ni componentes. Las tablas y los perfiles se preparan
+al iniciar; crear el administrador desde terminal:
 
-Gunicorn es un servidor HTTP/WSGI que ejecuta Django; PyInstaller empaqueta Python
-y dependencias como ejecutable. No son equivalentes ni pasos obligatorios consecutivos.
-[Django documenta la integración con Gunicorn](https://docs.djangoproject.com/en/5.2/howto/deployment/wsgi/gunicorn/).
+```powershell
+.\InventariosAPP.exe init
+.\InventariosAPP.exe manage createsuperuser
+.\InventariosAPP.exe
+```
 
-| Destino | Propuesta | Cómo accede el usuario |
-|---|---|---|
-| Windows personal | Django + Waitress; paquete .exe opcional | Navegador en localhost |
-| Varios equipos | Servidor Linux + Gunicorn detrás de proxy HTTPS | Navegador a URL del servidor |
+Datos en `%LOCALAPPDATA%\InventariosAPP\data`. Conservar toda esa carpeta al actualizar;
+reconstruir o sustituir el ejecutable no vacía registros existentes.
+El .exe abre el navegador e inicia Waitress localmente; mantener su consola abierta.
+Detener con Ctrl+C antes de cerrar, respaldar o cambiar de versión.
+Para abrir tú mismo el navegador: `InventariosAPP.exe serve --no-browser`.
 
-Para tu uso local se propone Waitress, que soporta Windows, y posteriormente un paquete
-PyInstaller para distribuir sin instalar Python. El .exe iniciará el servidor
-local y abrirá el navegador; la interfaz seguirá siendo web. Debe incluir plantillas y
-estáticos, atender PDFs, cerrar correctamente y guardar SQLite/media/configuración
-en una carpeta persistente del usuario, independiente de la instalación. Inicialmente
-conviene probar distribución en carpeta antes de un único ejecutable.
-Fuentes: [Waitress](https://docs.pylonsproject.org/projects/waitress/en/stable/) y
-[PyInstaller](https://pyinstaller.org/en/stable/operating-mode.html).
+Desarrollo: Django `runserver`. Uso local final: Django con Waitress.
+PyInstaller reúne Python, dependencias y recursos en el ejecutable; la interfaz sigue
+siendo web en localhost. Gunicorn cumple el papel de servidor WSGI en el proyecto Linux,
+según la [explicación de servidores y distribución](docs/SERVIDORES_Y_DISTRIBUCION.md).
 
-Gunicorn es una buena opción para el servidor Linux; su proyecto se describe como
-servidor para UNIX. Para Windows nativo la propuesta de este proyecto es Waitress.
-No hace falta convertir Gunicorn en .exe: el despliegue compartido ejecuta Django en
-el servidor, y cada usuario abre su navegador. Fuente: [Gunicorn](https://github.com/benoitc/gunicorn).
+## Continuar desarrollo y generar otra versión
 
-Antes de distribuir se necesitan configuración DEBUG=False, clave propia por instalación,
-permisos de acceso, servicio de estáticos y media, backups y actualización probada.
-Para publicar en red se añaden dominio, HTTPS y arranque supervisado. SQLite se conserva
-para el escenario local; varias escrituras simultáneas pueden requerir PostgreSQL.
-La configuración actual todavía no implementa estos destinos. Referencia de preparación:
-[checklist de Django](https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/).
+Consultar [DISTRIBUCION_Y_DESARROLLO.md](DISTRIBUCION_Y_DESARROLLO.md) para preparar
+el entorno, probar, actualizar `config/version.py`/CHANGELOG, generar migraciones cuando
+corresponda y ejecutar `build_exe.py`. El resultado se deja en `dist/v<versión>/` con
+manuales, licencias y BUILD_INFO.json. No incorporar bases de desarrollo al paquete.
 
-## Estado de revisión y funcionalidades pendientes
+## Estado de revisión
 
-Fases 1, 2 y 3 publicadas. Mejoras adicionales v2.2.0 aprobadas para publicar.
-Validación: [informe ejecutivo de las 115 pruebas](INFORME_EJECUTIVO_PRUEBAS.md).
-Fase 4 espera aprobación: recuperación y distribución local
-verificada con Waitress/PyInstaller. Durante desarrollo se mantiene runserver.
+125 pruebas correctas y flujos locales con Waitress verificados en datos ficticios.
+El binario final se generó, pero Smart App Control de Windows impide ejecutarlo por
+sus requisitos de firma. Falta resolver la firma y validar ese binario, incluida una
+prueba en otro PC Windows x64 sin Python. La guía incluye el diagnóstico y alternativa
+por terminal desde fuente. Publicación de Fase 4 pendiente de revisión/aprobación.

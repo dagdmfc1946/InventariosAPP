@@ -2,11 +2,13 @@
 
 ## Desarrollo v2 — rama dev_v2
 
-Fases 1, 2 y 3 concluidas en `dev_v2`, con publicación autorizada por el usuario.
-Versión `v2.2.0` aprobada para publicar: nombre de acceso editable, contraseña sin
-detalles técnicos y catálogo exportable a PDF.
-Validación: [informe ejecutivo de las 115 pruebas](INFORME_EJECUTIVO_PRUEBAS.md).
-Fase 4 no iniciada; requiere aprobación separada.
+Fases 1, 2 y 3 publicadas en `dev_v2`. Fase 4 autorizada e implementada localmente
+como candidato `v2.3.0`: respaldo/restauración, Waitress y construcción con PyInstaller.
+[Guía de instalación, terminal y reconstrucción](DISTRIBUCION_Y_DESARROLLO.md).
+[Validación de Fase 4](INFORME_VALIDACION_FASE4.md): 125 pruebas correctas.
+El .exe está generado; Windows Smart App Control bloquea su arranque por firma.
+Falta completar esa validación y revisión del usuario antes de publicar Fase 4.
+
 Esta sección prevalece para la rama v2; la documentación inferior conserva la referencia
 de instalación y comportamiento de la primera versión.
 

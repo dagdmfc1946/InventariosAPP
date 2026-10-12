@@ -425,3 +425,44 @@ en `tasks/todo.md`; no marcar como implementado algo sólo propuesto. Mantener h
   sin modificaciones funcionales. El informe referencia ese commit de implementación.
 - Documentos de estado actualizados a publicación aprobada. Se conserva el historial.
 - Publicación normal autorizada en dev_v2; no incluye merge a dev/main ni inicio de Fase 4.
+
+
+## 12/10/2026 — Fase 4 autorizada: v2.3.0 candidata
+
+- El usuario autoriza el trabajo pendiente y pide .exe con base nueva vacía, terminal
+  e instrucciones para seguir desarrollando/reconstruir. No autoriza un nuevo push.
+- Lanzador único (`launcher.py`): Waitress solo 127.0.0.1, init, comandos Django,
+  backup/restore, carpeta configurable y bloqueo entre servidor/mantenimiento.
+  Fuente con runserver para desarrollo; distribución con DEBUG=False y WhiteNoise.
+- Base/media/clave fuera del ejecutable, por defecto LocalAppData/InventariosAPP/data.
+  Primera instalación vacía, administrador con createsuperuser, sin clave predeterminada.
+  init/actualizaciones preservan registros; snapshot previo si hay migraciones pendientes.
+- backup_local usa API SQLite de snapshot, integridad, manifiesto SHA256 y publicación
+  de carpeta temporal validada. Restore reemplaza base/media/clave y conserva previous;
+  ante fallo de instalación devuelve el destino original. No mezclan media sobrante.
+- Se descubrió que el hook estándar PyInstaller de Django podía incluir db.sqlite3
+  del proyecto. Se reemplaza con hook de recursos explícitos y controles tanto en spec
+  como en archivo generado. Ninguna base ni media del usuario entra en el paquete.
+- build_exe.py genera estáticos, exe con consola, metadatos SHA/versiones y avisos
+  de licencia. requirements-build separado. Django actualizado a 5.2.18 dentro de LTS
+  tras revisar las actualizaciones oficiales de seguridad; ninguna migración de app nueva.
+- Primer pase con Django 5.2.6: 125 pruebas correctas en 133.421 s. Pase final con
+  Django 5.2.18: 125 correctas en 121.355 s; pip check y migraciones coherentes.
+  Diez casos nuevos: seis recuperación y cuatro runtime. Sin tests con datos personales.
+- QA del código final: navegador con Waitress, vistas/perfil/admin, estáticos hash,
+  PDF/datasheet/permisos y movimiento con vista previa/reenvío. Saldo ficticio 10→7.
+  Backup mientras está abierto rechazado. Restore real recupera 7 desde estado ficticio
+  99 conservado en previous, sin mezclar archivos; actualización previa obtiene backup.
+- Primer exe experimental sin Python en PATH hizo init vacío/creación de cuenta ficticia.
+  El .exe final Django 5.2.18 se construye correctamente (31.713.511 bytes), pero Windows
+  lo bloquea por Smart App Control (firma NotSigned, eventos CodeIntegrity 3033/3077/3118).
+  No se cambia la seguridad del PC ni se declara validación completa del binario final.
+- Datos operativos originales intactos, hash original verificado. Carpeta dev_v2 preservada.
+- Documentación y estados actualizados; guía detallada de terminal, build, actualización,
+  recuperación y bloqueo de firma. INFORME_VALIDACION_FASE4.md distingue suite, código
+  final, artefacto y límites. T19/control F4 pendientes; sin push ni release final.
+
+- Consultado si existe certificado de firma de un proveedor reconocido; el usuario
+  responde que no dispone de certificado. No se adquiere ni se cambia Smart App Control.
+  Se entrega candidato con guía y alternativa de ejecución desde fuente; firma y QA
+  final del binario continúan pendientes. No se publica una release final.

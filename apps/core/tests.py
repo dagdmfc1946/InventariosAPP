@@ -1,5 +1,7 @@
+from contextlib import closing
 from django.contrib.auth import get_user_model
 import shutil
+import sqlite3
 import tempfile
 from pathlib import Path
 
@@ -14,12 +16,16 @@ from backups.backup_local import backup_project, restore_backup
 class BackupLocalScriptTests(TestCase):
     def test_backup_and_restore_project_files(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            root = Path(tmp_dir)
+            root = Path(tmp_dir) / 'data'
+            root.mkdir()
             backup_root = root / 'backups_out'
             db_path = root / 'db.sqlite3'
             media_dir = root / 'media' / 'datasheets'
             media_dir.mkdir(parents=True)
-            db_path.write_bytes(b'data')
+            with closing(sqlite3.connect(db_path)) as database:
+                database.execute('CREATE TABLE sample (name TEXT)')
+                database.execute("INSERT INTO sample VALUES ('test')")
+                database.commit()
             (media_dir / 'sample.pdf').write_bytes(b'pdf-content')
 
             backup_dir = backup_project(project_root=root, output_dir=backup_root)

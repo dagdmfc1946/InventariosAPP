@@ -27,3 +27,9 @@ Fase 4 permanece sin iniciar.
 El usuario autoriza subir v2.2.0 y solicita informe ejecutivo: incluido en
 INFORME_EJECUTIVO_PRUEBAS.md. Mejoras verificadas y publicación aprobada.
 Fase 4 sigue pendiente de autorización independiente.
+
+
+Actualización vigente: Fase 4 autorizada por el usuario el 12/10/2026. v2.3.0 candidata
+implementada localmente; 125 pruebas correctas y artefacto construido. La firma exigida
+por Smart App Control impide su validación final. Guía de terminal/reconstrucción y
+recuperación publicada localmente; revisión y push de Fase 4 pendientes.

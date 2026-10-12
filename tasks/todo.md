@@ -98,17 +98,17 @@ Evidencia T1–T6 en dev_Process.md. El usuario autorizó concluir y publicar Fa
 - [x] Tabla PDF del catálogo: mismos filtros, todas las páginas, encabezados repetidos y permisos.
 - [x] Regresión de 115 pruebas, descarga real y revisión visual de PDF multipágina.
 - [x] Publicación de v2.2.0 autorizada por el usuario; informe ejecutivo de 115 pruebas incluido.
-- [ ] Aprobación independiente del usuario para iniciar Fase 4.
+- [x] Usuario autoriza iniciar Fase 4 con base nueva vacía, terminal y reconstrucción.
 
 ## Fase 4 — Estabilización y distribución
 
-- [ ] T16. Respaldo consistente. Depende de cierre F3.
+- [x] T16. Respaldo consistente. Depende de cierre F3.
   Aceptación: copia íntegra verificada con base de trabajo y media; respaldo no interrumpe
   datos operativos. Verificar lectura de copia y archivos. Archivos: backup_local.py, tests (2).
-- [ ] T17. Recuperación aislada. Depende de T16.
+- [x] T17. Recuperación aislada. Depende de T16.
   Aceptación: validar copia y restaurar sin mezclar media antiguo; conservar vía de rollback.
   Verificar restauración en temporales propios. Archivos: backup_local.py, tests (2).
-- [ ] T18. Configuración de distribución. Depende de destino elegido y T17.
+- [x] T18. Configuración de distribución. Depende de destino elegido y T17.
   Aceptación: DEBUG=False, secretos externos, estáticos/PDF servidos y datos persistentes.
   Verificar configuración y check --deploy interpretado según escenario.
   Archivos: settings, entorno ejemplo, launcher, requisitos específicos y tests (5).
@@ -117,8 +117,20 @@ Evidencia T1–T6 en dev_Process.md. El usuario autorizó concluir y publicar Fa
   sin Internet y escucha exclusiva en localhost; nunca publicar automáticamente.
   Verificar arranque, parada y actualización con datos de prueba. Archivos: launcher,
   spec de empaquetado o servicio, script de build y pruebas (hasta 4).
-- [ ] T20. Cerrar documentación y revisión. Depende de T19.
+- [x] T20. Cerrar documentación y revisión. Depende de T19.
   Aceptación: manual refleja lo implementado, CHANGELOG/version coinciden y limitaciones
   constan; dependencias revisadas. Verificar regresión y checklist de distribución.
   Archivos: MANUAL_USUARIO.md, CHANGELOG.md, README.md, dev_Process.md, info_FASES.md (5).
 - [ ] Control F4: candidato revisable, aprobación explícita antes de push/merge/publicación.
+
+
+### Verificación de Fase 4 — candidato v2.3.0
+
+T16/T17: seis pruebas de recuperación; copia/restauración real en datos ficticios,
+estado anterior conservado y media sin mezclar. T18: clave persistente, DEBUG=False,
+WhiteNoise/PDF/127.0.0.1 y cuatro pruebas del runtime; rechazo de mantenimiento simultáneo.
+T19 parcialmente completada: ejecutable final construido, inspeccionado sin datos personales.
+Smart App Control bloquea su ejecución; falta firma/validación final del binario y otro PC
+Windows x64 sin Python. No marcar T19 completa con las pruebas del lanzador fuente.
+T20: guía de instalación, terminal, rebuild, actualización y límites; 125 pruebas correctas.
+Control F4 permanece pendiente: revisión del usuario y aprobación antes de publicación.

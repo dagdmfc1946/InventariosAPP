@@ -131,3 +131,13 @@ por compatible con el proyecto desconocido.
 Para decidir el otro proyecto faltan modelo de Raspberry, SO/arquitectura, dependencias,
 uso de hardware, acceso local/red y nivel de protección requerido. Esa evaluación se
 haría en su propio repositorio; aquí sólo se documentan opciones y sus límites.
+
+
+## Implementación local de Fase 4 — v2.3.0
+
+La explicación anterior se conserva como referencia. Ya existe lanzador con Waitress,
+configuración local y construcción PyInstaller para Windows. Runserver se mantiene
+para desarrollar. Base nueva vacía y datos persistentes fuera del binario.
+[Guía de instalación y reconstrucción](../DISTRIBUCION_Y_DESARROLLO.md).
+El artefacto final queda pendiente de validación por bloqueo de firma de Smart App Control;
+no se publica una versión final hasta resolverlo y revisar. El proyecto Linux no se modifica.

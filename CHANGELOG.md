@@ -5,6 +5,27 @@ Convención vigente: [SemVer 2.0.0](https://semver.org/lang/es/).
 Fuente única ejecutable: `config/version.py`.
 No se atribuye una versión retrospectiva a la aplicación actual.
 
+## [v2.3.0] — 12/10/2026 — Candidato local de Fase 4
+
+- Lanzador de terminal para iniciar Waitress en 127.0.0.1, preparar base, ejecutar
+  comandos Django, respaldar y restaurar. Datos persistentes y clave por instalación
+  fuera del ejecutable; base nueva sin cuentas ni inventario en la primera instalación.
+- Bloqueo de la carpeta mientras se ejecuta el lanzador: evita mantenimiento simultáneo.
+  Las actualizaciones conservan registros y respaldan antes de migrar una base existente.
+- Respaldos SQLite consistentes con integridad y manifiesto SHA256; restauración por
+  reemplazo completo de base/media, conserva el estado previo y revierte si falla la instalación.
+- Configuración local DEBUG=False, estáticos WhiteNoise y PDFs autenticados; runserver
+  se mantiene para desarrollo. Django actualizado de 5.2.6 a 5.2.18 dentro de la serie LTS.
+- PyInstaller 6.22.0: .exe de consola Windows x64, recursos explícitos y controles que
+  impiden incluir SQLite, media, .env o claves personales. Script de reconstrucción,
+  dependencias de build separadas, licencias y metadatos del artefacto.
+- 125 pruebas correctas (121.355 s), diez casos nuevos de recuperación y ejecución local;
+  comprobaciones reales del lanzador/Waitress, restauración y actualización en datos ficticios.
+- Ejecutable final generado; Smart App Control bloquea su ejecución por requisitos
+  de firma. Validación final del .exe y prueba en otro PC pendientes. Sin push ni release.
+- Documentación de instalación vacía, terminal, desarrollo, reconstrucción y actualización.
+  Datos originales conservados. Sin nuevas migraciones del modelo.
+
 ## [v2.2.0] — 12/10/2026 — Publicación aprobada
 
 - Mi perfil permite cambiar el nombre de acceso con normalización y validación de
