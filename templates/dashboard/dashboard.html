@@ -3,13 +3,13 @@
 {% block content %}
     <div class="page-heading"><div><p class="eyebrow">INVENTARIO</p><h1>Resumen</h1><p class="muted">Un vistazo al estado de tus componentes.</p></div></div>
     <div class="metrics">
-        <div class="panel">Existencias bajas: <span class="metric-value">{{ low_stock_count }}</span></div>
-        <div class="panel">Sin ficha técnica: <span class="metric-value">{{ missing_datasheets_count }}</span></div>
-        <div class="panel">Sin precio: <span class="metric-value">{{ missing_prices_count }}</span></div>
+        <div class="panel"><a href="{% url 'component_search' %}?attention=low">Existencias bajas</a>: <span class="metric-value">{{ low_stock_count }}</span></div>
+        <div class="panel"><a href="{% url 'component_search' %}?attention=no_pdf">Sin ficha técnica</a>: <span class="metric-value">{{ missing_datasheets_count }}</span></div>
+        <div class="panel"><a href="{% url 'component_search' %}?attention=no_offer">Sin precio</a>: <span class="metric-value">{{ missing_prices_count }}</span></div>
     </div>
     <div class="panel"><h2>Movimientos recientes</h2><ul>
         {% for movement in recent_movements %}
-            <li>{{ movement.created_at|date:'d/m/Y H:i' }} - {{ movement.stock.component.reference }} - {{ movement.get_movement_type_display }} - {{ movement.quantity }}</li>
+            <li>{{ movement.created_at|date:'d/m/Y H:i' }} - <a href="{% url 'component_detail' movement.stock.component.pk %}">{{ movement.stock.component.reference }}</a> - {{ movement.get_movement_type_display }} - {{ movement.quantity }}</li>
         {% empty %}
             <li>No hay movimientos recientes.</li>
         {% endfor %}

@@ -286,3 +286,10 @@ en `tasks/todo.md`; no marcar como implementado algo sólo propuesto. Mantener h
 - Cambio de contraseña para usuarios normales conserva sesión usando vistas nativas Django. Encabezados de Componentes centrados en catálogo y Admin.
 - v2.0.1 para este ajuste; 10 pruebas de sesión/Admin correctas y check sin incidencias.
 - Consultadas incremental-implementation y frontend-ui-engineering de Agent Skills en la revisión previamente registrada. Referencia visual: imagen proporcionada por el usuario; misma paleta existente, controles adaptables y teclado.
+
+## 12/10/2026 — Fase 3, T14: catálogo filtrado y resumen
+
+- Filtros combinables por categoría, disponibilidad y pendientes; orden estable y paginación de 25. Enlaces conservan búsqueda/filtros.
+- Resumen enlaza indicadores a los mismos filtros y movimientos a la ficha.
+- Ocho pruebas de catálogo/resumen correctas. Categorías inválidas o fuera de rango se ignoran.
+- Versión v2.1.0 por funcionalidades compatibles nuevas. Implementación local, sin push.
