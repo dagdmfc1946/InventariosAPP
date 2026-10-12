@@ -30,6 +30,32 @@ seguir la sección v2 del README; no reiniciar ni borrar la base existente para 
 Para detener: Ctrl+C en la consola y esperar a que termine. No cerrar durante guardados
 o carga de archivos. `runserver` se documenta aquí para desarrollo/prueba local.
 
+## Usuarios normales e inicio de sesión
+
+El superusuario puede entrar a **Administración → Usuarios → Añadir**, escribir un
+nombre de usuario y confirmar la contraseña. Esta pantalla crea cuentas normales
+activas, sin acceso administrativo. No ofrece crear ni promover a superusuario.
+Para crear un superusuario nuevo se mantiene el comando de terminal:
+
+```powershell
+.\.venv\Scripts\python.exe manage.py createsuperuser
+```
+
+Después de guardar un usuario normal, se pueden asignar permisos desde su edición.
+Para el alta rápida necesita **Puede agregar** componente, existencias y movimiento.
+Los grupos permiten compartir permisos; los perfiles simplificados lector/operador se
+implementarán en Fase 2. La gestión de cuentas está reservada al superusuario.
+
+Los usuarios normales deben entrar por `/accounts/login/`, o **Iniciar sesión** en
+el catálogo. `/admin/login/` está reservado a cuentas con acceso administrativo:
+no poder entrar ahí no demuestra que la contraseña sea incorrecta. La pantalla
+administrativa incluye un enlace al acceso del aplicativo.
+
+Si falla el acceso normal, comprobar usuario exacto, contraseña y que la cuenta esté
+activa. Las cuentas sin contraseña utilizable requieren que el responsable les
+establezca una desde la edición de usuario. No se cambian contraseñas existentes al
+actualizar y no se almacenan contraseñas en texto plano.
+
 ## Alta rápida de componente y stock
 
 1. Abrir `/search/` y pulsar **Nuevo componente**, o visitar `/components/new/`.
@@ -60,13 +86,27 @@ rápida, el componente y su stock ya existen: sólo completa sus datos opcionale
    valor y número de parte son opcionales. La referencia es única dentro de la categoría.
 3. Completar especificaciones (atributo, valor y unidad opcional) en las filas del componente.
 4. Guardar el componente.
-5. Abrir Stocks y crear su stock: componente, cantidad, mínimo y máximo.
+5. Abrir Existencias y crear su stock: componente, cantidad, mínimo y máximo.
    Máximo cero equivale a no configurar límite máximo en las reglas de movimientos.
 6. Si corresponde, crear una ubicación vinculada: estante, caja, cajón o descripción.
-7. Agregar datasheet vinculado: archivo .pdf de hasta 20 MB. Abrir PDF desde su listado.
+7. Agregar ficha técnica vinculada: archivo .pdf de hasta 20 MB. Abrir PDF desde su listado.
 8. Registrar proveedor y oferta si se quiere conservar precio, moneda, cantidad mínima
    de compra y fecha de consulta. El valor predeterminado de moneda actual es EUR.
 9. Buscar el componente y comprobar su saldo en el buscador y alertas del dashboard.
+
+Administración comparte colores, tipografía y navegación con el catálogo y resumen.
+Los nombres de aplicaciones, modelos, campos y permisos se muestran en español;
+los nombres/referencias/atributos que escribas en inglés se conservan.
+
+**Guardar y continuar editando** en Fichas técnicas conserva el PDF: no hace falta
+seleccionarlo otra vez al editar otros datos. Si el archivo guardado no se puede leer,
+se muestra un error en el campo **Archivo PDF**, en lugar de una pantalla de error.
+Vuelve a adjuntar el archivo correcto. El fallo intermitente comunicado no pudo
+identificarse con certeza sin su mensaje; carga, re-guardado y reemplazo están probados.
+
+**Ubicaciones:** todavía hay una ubicación vinculada a un solo componente. Compartir
+una ubicación guardada con varios componentes requiere cambiar el modelo; es la
+primera tarea de Fase 2. No borrar ubicaciones para intentar resolver esa limitación.
 
 ## Stock y movimientos
 
@@ -101,7 +141,7 @@ Actualmente el respaldo se opera mediante funciones de Python, sin botón en int
 
 Conservar la carpeta resultante que contiene SQLite y media, fuera de Git y preferiblemente
 fuera del equipo. La restauración actual combina media con el destino: primero debe
-validarse en una copia aislada; no garantiza eliminar archivos sobrantes. Fase 3 mejorará
+validarse en una copia aislada; no garantiza eliminar archivos sobrantes. Fase 4 mejorará
 y documentará recuperación consistente. No usar los datos personales como fixtures.
 
 ## Distribuir o desplegar
@@ -149,6 +189,7 @@ La configuración actual todavía no implementa estos destinos. Referencia de pr
 ## Funcionalidad pendiente
 
 Fase 1 está implementada y requiere tu revisión.
-Fase 2: ficha completa, PDF, ubicación, ofertas, filtros y acciones de inventario.
-Fase 3: recuperación y distribución verificada. Este manual se actualizará con rutas
+Fase 2: ubicaciones compartidas, perfiles de permisos, ficha, especificaciones y PDF.
+Fase 3: ofertas, filtros, duplicación y acciones de inventario.
+Fase 4: recuperación y distribución verificada. Este manual se actualizará con rutas
 y capturas reales al implementar; no se presentan acciones futuras como disponibles.

@@ -136,3 +136,49 @@ en `tasks/todo.md`; no marcar como implementado algo sólo propuesto. Mantener h
   protección adicional de archivos y distribución con DEBUG=False son tareas posteriores.
   Backups generales/restore anteriores aún requieren servidor detenido y comprobación
   en copia: el helper de aislamiento no sustituye la mejora de recuperación de Fase 3.
+
+## 12/10/2026 — Ampliación de Fase 1 solicitada en revisión
+
+- Petición del usuario: igualar Administración a catálogo/resumen, interfaz en español,
+  revisar PDF/usuarios/ubicaciones y replanificar hasta cuatro fases. No autoriza push.
+- Administración: plantilla base propia y CSS con misma paleta/tipografía/navegación,
+  versión visible. Mantiene las vistas, widgets, permisos y CSRF del Admin de Django.
+  Cabecera móvil corregida tras reproducir desbordamiento de 562px a viewport375px;
+  comprobación posterior sin desbordamiento. Formularios/listados revisados en navegador.
+- Aplicaciones/modelos/campos/permisos traducidos mediante metadatos y etiquetas de
+  formulario. Datos ingresados permanecen intactos, incluso nombres en inglés.
+  Dos plantillas nativas adaptadas para etiquetas accesibles sin traducción española
+  en Django 5.2.6: listado de aplicaciones y búsqueda administrativa.
+- Altas de usuarios mediante UserCreationForm: contraseña obligatoria/confirmada y
+  validada, hash Django y cuenta normal activa. No hay campos staff/superusuario.
+  Gestión de usuarios restringida a superusuario; no se pueden borrar superusuarios
+  desde esta pantalla. createsuperuser sigue disponible desde terminal. No se cambiaron
+  privilegios ni contraseñas de cuentas existentes.
+- Diagnóstico de login: Admin exige staff/activo; los usuarios normales usan
+  /accounts/login/. Enlace/ayuda añadidos a ambos accesos. Pruebas verifican login de
+  usuario recién creado, rechazo de cuenta inactiva y denegación de acceso administrativo.
+  Sin datos adicionales no puede afirmarse si el fallo anterior era ruta, estado o clave.
+  Referencia: https://docs.djangoproject.com/en/5.2/topics/auth/customizing/
+- PDF: carga + _continue y segundo guardado sin archivo nuevo funcionaron en pruebas.
+  Reproducción adicional: archivo persistido faltante provoca FileNotFoundError al
+  consultar tamaño en clean(). Corregido para mostrar error de campo ante OSError;
+  volver a adjuntar PDF recupera el formulario. Usuario sólo recuerda pantalla de
+  error seguida de recarga; no hay evidencia para atribuirle la misma causa.
+- Pruebas rojas antes de corregir: tres fallos de interfaz/cuentas y una excepción PDF;
+  once pruebas nuevas de integración, suite completa de 61 pruebas pasa. check correcto,
+  makemigrations --check --dry-run sin cambios. No se añadieron dependencias.
+- Migraciones españolas: components.0002, documents.0002, inventory.0003 y suppliers.0002.
+  Son de etiquetas, sin cambio de relaciones ni valores; aplicadas sólo a .local/dev_v2
+  y .local/ui_review. El SQLite operativo original se conserva.
+- Ubicaciones: OneToOneField desde Location a Component confirma la restricción actual.
+  El plan sitúa primero en Fase 2 ubicación reutilizable y migración que conserva
+  asignaciones; no se cambió esta relación durante el cierre de Fase 1.
+- Nuevo orden: F1 base/admin/cuentas; F2 ubicaciones/permisos/ficha/PDF; F3 operación
+  diaria dinámica; F4 recuperación/estabilización/Waitress/PyInstaller local.
+  info_FASES, tasks, CHANGELOG y manual actualizados. Fases 2–4 no iniciadas.
+- Cambios locales en dev_v2, pendientes de revisión del usuario; no push ni merge.
+- Captura de revisión con datos ficticios: .local/evidence/fase1_admin.jpg (fuera de Git).
+  Consola de navegador sin advertencias/errores. Cabecera móvil queda por encima de
+  sus controles sin solapamiento; ancho de documento no supera viewport375px.
+  Hash operativo comprobado de nuevo: B247D32672C3D77C9DF9F377C833061D79AAFF9A7010112AB9776096616F12E2.
+  Servidor propio de prueba detenido; no se detuvo el servidor del usuario en 8001.

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}Componentes{% endblock %}
 {% block content %}
-    <div class="page-heading"><div><p class="eyebrow">CATÁLOGO</p><h1>Componentes</h1><p class="muted">Consulta tus referencias y el stock disponible.</p></div>
+    <div class="page-heading"><div><p class="eyebrow">CATÁLOGO</p><h1>Componentes</h1><p class="muted">Consulta tus referencias y las existencias disponibles.</p></div>
         {% if perms.components.add_component and perms.inventory.add_stock and perms.inventory.add_stockmovement %}<a class="button" href="{% url 'component_create' %}">+ Nuevo componente</a>
         {% elif not user.is_authenticated %}<a class="button secondary" href="{% url 'login' %}?next={% url 'component_create' %}">Ingresar para agregar</a>{% endif %}
     </div>
@@ -10,15 +10,15 @@
         <div><label for="query">Buscar componente</label><input id="query" type="search" name="q" value="{{ q }}" placeholder="Referencia, nombre, valor o categoría"></div>
         <div><label for="ordering">Ordenar por</label><select id="ordering" name="ordering">
             <option value="name" {% if ordering == 'name' %}selected{% endif %}>Nombre</option>
-            <option value="-stock" {% if ordering == '-stock' %}selected{% endif %}>Stock ↓</option>
-            <option value="stock" {% if ordering == 'stock' %}selected{% endif %}>Stock ↑</option>
+            <option value="-stock" {% if ordering == '-stock' %}selected{% endif %}>Existencias ↓</option>
+            <option value="stock" {% if ordering == 'stock' %}selected{% endif %}>Existencias ↑</option>
         </select></div>
         <button class="button secondary" type="submit">Buscar</button>
     </form>
 
-    <div class="table-wrap"><table><caption class="help">Resultados de búsqueda de componentes</caption><thead><tr><th scope="col">Componente</th><th scope="col">Categoría</th><th scope="col">Valor</th><th scope="col" class="numeric">Stock</th></tr></thead><tbody>
+    <div class="table-wrap"><table><caption class="help">Resultados de búsqueda de componentes</caption><thead><tr><th scope="col">Componente</th><th scope="col">Categoría</th><th scope="col">Valor</th><th scope="col" class="numeric">Existencias</th></tr></thead><tbody>
         {% for component in components %}
-            <tr><td><strong>{{ component.reference }}</strong>{{ component.name }}</td><td>{{ component.category.name }}</td><td>{{ component.value|default:'—' }}</td><td class="numeric">{% if component.stock %}{{ component.stock.quantity }} unidades{% else %}<span class="badge">Sin stock registrado</span>{% endif %}</td></tr>
+            <tr><td><strong>{{ component.reference }}</strong>{{ component.name }}</td><td>{{ component.category.name }}</td><td>{{ component.value|default:'—' }}</td><td class="numeric">{% if component.stock %}{{ component.stock.quantity }} unidades{% else %}<span class="badge">Sin existencias registradas</span>{% endif %}</td></tr>
         {% empty %}
             <tr><td colspan="4" class="empty-state">No se encontraron resultados. Prueba otra búsqueda o registra un componente.</td></tr>
         {% endfor %}

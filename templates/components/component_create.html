@@ -2,7 +2,7 @@
 {% block title %}Nuevo componente{% endblock %}
 {% block content %}
 <a class="back-link" href="{% url 'component_search' %}">← Volver a componentes</a>
-<div class="page-heading"><div><p class="eyebrow">REGISTRO RÁPIDO</p><h1>Nuevo componente</h1><p class="muted">Registra sus datos y su stock en un solo paso.</p></div></div>
+<div class="page-heading"><div><p class="eyebrow">REGISTRO RÁPIDO</p><h1>Nuevo componente</h1><p class="muted">Registra sus datos y sus existencias en un solo paso.</p></div></div>
 {% if not has_categories %}
     <div class="notice" role="status">Primero necesitas una categoría.
         {% if perms.components.add_category and user.is_staff %}<a href="{% url 'admin:components_category_add' %}" target="_blank" rel="noopener">Crear categoría en otra pestaña</a>. Luego recarga esta página.
@@ -22,7 +22,7 @@
         {% endif %}{% endfor %}
         </div>
     </fieldset>
-    <fieldset><legend><span class="step-number">2</span> Stock inicial</legend><p class="muted section-help">La cantidad inicial se registra como una entrada en el historial. Con 0, sólo se crea el stock.</p>
+    <fieldset><legend><span class="step-number">2</span> Existencias iniciales</legend><p class="muted section-help">La cantidad inicial se registra como una entrada en el historial. Con 0, sólo se crea el registro de existencias.</p>
         <div class="form-grid stock-grid">
         {% for field in form %}{% if field.name == 'initial_quantity' or field.name == 'minimum_quantity' or field.name == 'maximum_quantity' %}
             <div class="field"><label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}<div class="help" id="{{ field.id_for_label }}_help">{{ field.help_text }}</div><div class="field-errors" id="{{ field.id_for_label }}_errors">{{ field.errors }}</div></div>

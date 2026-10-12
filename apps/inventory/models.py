@@ -5,13 +5,15 @@ from django.utils import timezone
 
 
 class Location(models.Model):
-    component = models.OneToOneField('components.Component', on_delete=models.CASCADE, related_name='location', null=True, blank=True)
-    shelf = models.CharField(max_length=50, blank=True)
-    box = models.CharField(max_length=50, blank=True)
-    drawer = models.CharField(max_length=50, blank=True)
-    description = models.CharField(max_length=255, blank=True)
+    component = models.OneToOneField('components.Component', verbose_name='Componente', on_delete=models.CASCADE, related_name='location', null=True, blank=True)
+    shelf = models.CharField(verbose_name='Estante', max_length=50, blank=True)
+    box = models.CharField(verbose_name='Caja', max_length=50, blank=True)
+    drawer = models.CharField(verbose_name='Cajón', max_length=50, blank=True)
+    description = models.CharField(verbose_name='Descripción', max_length=255, blank=True)
 
     class Meta:
+        verbose_name = 'Ubicación'
+        verbose_name_plural = 'Ubicaciones'
         ordering = ['shelf', 'box', 'drawer']
 
     def clean(self):
@@ -26,13 +28,15 @@ class Location(models.Model):
 
 
 class Stock(models.Model):
-    component = models.OneToOneField('components.Component', on_delete=models.CASCADE, related_name='stock')
-    quantity = models.PositiveIntegerField(default=0)
-    minimum_quantity = models.PositiveIntegerField(default=0)
-    maximum_quantity = models.PositiveIntegerField(default=0)
-    last_updated = models.DateTimeField(auto_now=True)
+    component = models.OneToOneField('components.Component', verbose_name='Componente', on_delete=models.CASCADE, related_name='stock')
+    quantity = models.PositiveIntegerField(verbose_name='Cantidad', default=0)
+    minimum_quantity = models.PositiveIntegerField(verbose_name='Cantidad mínima', default=0)
+    maximum_quantity = models.PositiveIntegerField(verbose_name='Cantidad máxima', default=0)
+    last_updated = models.DateTimeField(verbose_name='Última actualización', auto_now=True)
 
     class Meta:
+        verbose_name = 'Existencias'
+        verbose_name_plural = 'Existencias'
         ordering = ['component__reference']
 
     def clean(self):
@@ -87,15 +91,17 @@ class StockMovement(models.Model):
         (ADJUSTMENT, 'Ajuste'),
     ]
 
-    stock = models.ForeignKey('inventory.Stock', on_delete=models.PROTECT, related_name='movements')
-    movement_type = models.CharField(max_length=20, choices=MOVEMENT_TYPE_CHOICES, default=ENTRY)
-    quantity = models.IntegerField()
-    reason = models.CharField(max_length=200, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    stock = models.ForeignKey('inventory.Stock', verbose_name='Existencias', on_delete=models.PROTECT, related_name='movements')
+    movement_type = models.CharField(verbose_name='Tipo de movimiento', max_length=20, choices=MOVEMENT_TYPE_CHOICES, default=ENTRY)
+    quantity = models.IntegerField(verbose_name='Cantidad', )
+    reason = models.CharField(verbose_name='Motivo', max_length=200, blank=True)
+    created_at = models.DateTimeField(verbose_name='Fecha de registro', auto_now_add=True)
 
     objects = StockMovementQuerySet.as_manager()
 
     class Meta:
+        verbose_name = 'Movimiento'
+        verbose_name_plural = 'Movimientos'
         ordering = ['-created_at']
 
     def clean(self):

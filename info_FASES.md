@@ -1,7 +1,9 @@
 # InventariosAPP — Plan de nueva versión
 
 Fecha de análisis: 12/10/2026. Estado: **Fase 1 implementada localmente; pendiente de revisión del usuario**.
-Versión de desarrollo: `2.0.0-dev.1`, fecha `12/10/2026`. Fases 2 y 3 no iniciadas.
+Versión de desarrollo: `2.0.0-dev.1`, fecha `12/10/2026`. Fases 2, 3 y 4 no iniciadas.
+Plan ampliado a **cuatro fases** por solicitud del usuario: los pendientes de usuarios,
+PDF y ubicaciones se incorporan antes de ampliar la operación diaria y distribuir.
 Actualización del 12/10/2026: el usuario autorizó crear y subir `dev_v2` con esta
 documentación antes de iniciar Fase 1. Destino confirmado: su PC Windows, uso local,
 con empaquetado PyInstaller al finalizar. Posteriormente autorizó iniciar Fase 1.
@@ -14,11 +16,12 @@ original al final para no perder trazabilidad.
 Reducir el trabajo necesario para registrar componentes y mantener su inventario,
 partiendo del aplicativo funcional existente. No se reconstruirá desde cero.
 La aprobación de este plan autorizará crear `dev_v2` desde el estado actual e iniciar
-únicamente Fase 1. Fases 2 y 3 quedan propuestas para revisión posterior.
+únicamente Fase 1. Fases 2, 3 y 4 quedan propuestas para revisión posterior.
 Ningún push, integración en `dev`/`main` ni publicación se hará sin aprobación explícita.
 
 Supuestos: uso principal local en Windows, un administrador, Django con plantillas,
-SQLite y una ubicación por componente. Se propone mantener herramientas gratuitas,
+SQLite y una ubicación por componente, compartible entre varios componentes en Fase 2.
+Se propone mantener herramientas gratuitas,
 sin SPA ni servicios externos obligatorios. Uso en red o varios usuarios simultáneos
 requiere revisar despliegue, permisos y concurrencia antes de habilitarlo.
 
@@ -55,7 +58,7 @@ para ordenar tareas con aceptación y verificación. La
 orienta la incorporación gradual en proyectos existentes. Sus documentos son guía
 técnica; tus instrucciones sobre rama, archivos y aprobación tienen prioridad.
 Se consultó también spec-driven-development como referencia; sus convenciones de
-archivos y etapas no sustituyen el plan de tres fases solicitado.
+archivos y etapas no sustituyen el plan solicitado, ampliado ahora a cuatro fases.
 
 No se instaló globalmente el paquete ni se ejecutaron sus scripts. Durante el desarrollo
 se leerán las skills aplicables de implementación incremental, pruebas, UI, seguridad,
@@ -86,28 +89,53 @@ reproducir el proceso. Índice técnico: `tasks/plan.md`; tareas: `tasks/todo.md
 5. Añadir plantilla compartida, navegación, mensajes en español, botón Nuevo componente
    y opciones Guardar / Guardar y agregar otro. Conservar Django Admin como herramienta
    de mantenimiento. Definir autorización con permisos Django en las nuevas vistas.
+6. Ampliación solicitada al revisar: igualar diseño de Administración con catálogo/resumen;
+   traducir aplicaciones, modelos, campos y permisos sin traducir valores ingresados.
+   Crear cuentas normales con contraseña mediante Administración, sin habilitar opciones
+   de promoción administrativa. Superusuarios nuevos sólo mediante `createsuperuser`.
+   Aclarar login de usuarios y validar carga/edición de PDF con guardar y continuar.
 
 **Aceptación:** alta con un solo envío; stock disponible inmediatamente; datos inválidos
 no dejan registros parciales; re-guardar un movimiento no duplica saldo; salidas
 insuficientes se rechazan; los flujos antiguos siguen funcionando. Actualizar manual
 y registro de proceso con evidencia real. Revisión contigo al cerrar Fase 1.
 
-## Fase 2 — Ficha completa y operación diaria dinámica
+## Fase 2 — Ubicaciones compartidas, permisos y ficha completa
 
 **Dependencia:** Fase 1 validada.
 
 **Resultado:** completar y consultar un componente sin recorrer varios modelos de Admin.
 
-1. Ficha con edición de datos y ubicación opcional; especificaciones en filas
+1. Separar ubicación de componente: cada componente podrá seleccionar una ubicación,
+   y varios componentes podrán usar la misma. Migración aditiva en copia, conservar
+   cada asignación existente y su identificación; no fusionar registros por texto sin
+   revisión. Editar una ubicación existente permitirá asignar componentes adicionales.
+   Probar migración con ubicaciones vacías/asignadas y confirmar que saldos/PDF no cambian.
+2. Definir perfiles lector/operador por grupos y permisos, administración reservada;
+   auditar cuentas inactivas/contraseñas inutilizables sin divulgar ni resetear credenciales.
+   Proteger búsqueda/resumen según perfil y probar sesión, 403 y cuentas existentes.
+3. Ficha con edición de datos y selección/creación de ubicación; especificaciones en filas
    agregables/eliminables, con validación de atributo duplicado.
-2. Alta contextual de categoría sin perder lo escrito, y duplicación de datos técnicos
-   de un componente. Duplicar nunca copia stock, movimientos ni adjuntos automáticamente.
-3. Adjuntar PDF desde la ficha con límite de 20 MB, validación adicional de contenido
-   y manejo de archivos fallidos sin huérfanos. Integrar ofertas de proveedores como
-   sección opcional reutilizando modelos actuales.
-4. Acciones Entrada, Salida y Ajuste desde la ficha; ajuste se presenta como diferencia
+4. Alta contextual de categoría sin perder lo escrito.
+5. Adjuntar PDF desde la ficha con límite de 20 MB, validación adicional de contenido,
+   acceso autorizado y manejo de archivos fallidos sin huérfanos. Reprobar guardar y
+   continuar con carga/reemplazo y conservar archivo existente sin volver a adjuntarlo.
+   Si reaparece el fallo intermitente informado, registrar excepción y pasos concretos.
+
+**Aceptación:** varios componentes comparten una ubicación y las asignaciones anteriores
+se conservan; usuario normal activo entra al aplicativo con sus permisos; ficha permite
+completar especificaciones/categoría/PDF sin perder campos ante errores. Cuentas
+superusuario no se crean desde la interfaz. Revisar con el usuario antes de Fase 3.
+
+## Fase 3 — Operación diaria dinámica
+
+**Dependencia:** Fase 2 validada.
+
+1. Acciones Entrada, Salida y Ajuste desde la ficha; ajuste se presenta como diferencia
    con signo, con vista previa del saldo y motivo obligatorio. Mostrar historial.
-5. Catálogo con filtros separados por categoría, disponibilidad y bajo stock, paginación
+2. Duplicación de datos técnicos con nueva referencia, sin copiar saldos/historial/PDF.
+   Ofertas y proveedores como sección opcional, reutilizando reglas existentes.
+3. Catálogo con filtros separados por categoría, disponibilidad y bajo stock, paginación
    de 25 registros y enlaces a ficha. Dashboard con indicadores que llevan al filtro
    correspondiente. Interfaz adaptable a móvil y teclado, con estados vacíos claros.
 
@@ -116,9 +144,9 @@ mantener filtros al paginar; conservar saldos de componentes existentes; validar
 y permisos en servidor aunque falle JavaScript. Medir pasos del flujo anterior y nuevo
 con el mismo caso; documentar resultados sin inventar tiempos. Prueba manual contigo.
 
-## Fase 3 — Estabilización y distribución
+## Fase 4 — Estabilización y distribución local
 
-**Dependencia:** Fase 2 validada. Destino elegido: PC Windows local.
+**Dependencia:** Fase 3 validada. Destino elegido: PC Windows local.
 
 1. Ejecutar regresión funcional y revisión de permisos, CSRF, PDF y configuración.
    Revisar actualizaciones de seguridad de dependencias con fuentes oficiales y probar
@@ -189,6 +217,12 @@ Fuera del alcance inicial: múltiples almacenes, lector de códigos, compras/con
 importación masiva y sincronización cloud. Se pueden planear después de validar este flujo.
 
 ## Evidencia de Fase 1 — 12/10/2026
+
+Ampliación del cierre: Administración comparte diseño/navegación, etiquetas españolas
+y altas de usuarios normales; acceso propio aclarado y validación de PDF faltante
+corregida. **61 pruebas pasan**. Caso intermitente informado sin causa confirmada.
+Ubicaciones compartidas se priorizan en Fase 2 con migración preservando asignaciones.
+Las cifras y comprobaciones de abajo corresponden al primer cierre, antes de ampliar.
 
 - Rama `dev_v2`; documentación de servidores publicada en commit `a1a1ba0`.
 - Datos de trabajo aislados en `.local/dev_v2` mediante snapshot SQLite y copia de media.

@@ -1,0 +1,19 @@
+{% extends "admin/base.html" %}
+{% load static %}
+{% block title %}{{ title }} · InventariosAPP{% endblock %}
+{% block dark-mode-vars %}{% endblock %}
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" href="{% static 'css/admin.css' %}">{% endblock %}
+{% block branding %}
+<a class="inventory-brand" href="{% url 'component_search' %}"><span class="inventory-mark" aria-hidden="true">I</span> InventariosAPP</a>
+<nav class="inventory-nav" aria-label="Navegación principal">
+    <a href="{% url 'component_search' %}">Componentes</a>
+    <a href="{% url 'dashboard' %}">Resumen</a>
+    <a href="{% url 'admin:index' %}" aria-current="page">Administración</a>
+</nav>
+{% endblock %}
+{% block welcome-msg %}<strong>{{ user.get_username }}</strong>{% endblock %}
+{% block userlinks %}
+    {% if user.has_usable_password %}<a href="{% url 'admin:password_change' %}">Cambiar contraseña</a> /{% endif %}
+    <form id="logout-form" method="post" action="{% url 'admin:logout' %}">{% csrf_token %}<button type="submit">Salir</button></form>
+{% endblock %}
+{% block footer %}<span>Inventario de componentes electrónicos</span><span>Versión {{ software_version }} · {{ software_date }}</span>{% endblock %}

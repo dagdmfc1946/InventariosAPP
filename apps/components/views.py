@@ -34,7 +34,7 @@ def component_create(request):
             # También controla envíos concurrentes: el servicio revierte toda la operación.
             form.add_error(None, 'No se pudo registrar. Comprueba que la referencia no exista en esta categoría.')
         else:
-            messages.success(request, f'{component.reference} · {component.name} guardado con su stock inicial.')
+            messages.success(request, f'{component.reference} · {component.name} guardado con sus existencias iniciales.')
             if 'save_another' in request.POST:
                 return redirect('component_create')
             return redirect('component_search')

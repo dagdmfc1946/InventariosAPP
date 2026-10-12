@@ -57,6 +57,27 @@ No se atribuye una versión retrospectiva a la aplicación actual.
 - Pendiente aprobación funcional del usuario y autorización para subir desarrollo.
   No representa una release final ni se creó tag.
 
+### Ampliación del cierre de Fase 1 — 12/10/2026
+
+- Administración con paleta, tipografía, navegación y pie de versión coherentes con
+  catálogo/resumen. Conserva formularios y widgets nativos Django.
+- Etiquetas españolas de aplicaciones, modelos, campos y permisos. Catálogo/resumen
+  usan «existencias» y «ficha técnica». Datos ingresados no se traducen.
+- Alta administrativa de usuarios normales con contraseña obligatoria; opciones de
+  promoción a staff/superusuario retiradas. Gestión de usuarios sólo para superusuario;
+  crear superusuarios se mantiene mediante createsuperuser desde terminal.
+- Acceso administrativo aclara el enlace de login para usuarios del aplicativo.
+- Validación de PDF faltante/inaccesible muestra error de campo y permite reemplazo.
+  Guardar/continuar y re-guardar sin nuevo archivo tienen pruebas de regresión.
+  La causa del error intermitente informado sigue sin confirmarse.
+- Migraciones de etiquetas en components/documents/inventory/suppliers, sin renombrar
+  campos técnicos ni traducir datos. Aplicadas exclusivamente a las copias de desarrollo.
+- Plan ampliado a cuatro fases: ubicaciones compartidas/permisos/ficha en Fase 2,
+  operación diaria en Fase 3 y distribución Windows en Fase 4.
+- Suite ampliada: 61 pruebas correctas, check sin incidencias y migraciones coherentes.
+  Revisión visual de administrador/listados/formulario de usuario, cabecera a 375 px;
+  consola sin advertencias/errores y hash del SQLite operativo sin cambios.
+
 ## Referencia anterior sin etiqueta SemVer comprobada
 
 Commit analizado: `842afd1`, rama `dev`. Incluye Admin, búsqueda, dashboard, modelos

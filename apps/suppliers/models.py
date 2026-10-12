@@ -3,15 +3,17 @@ from django.db import models
 
 
 class Supplier(models.Model):
-    name = models.CharField(max_length=200, unique=True)
-    contact = models.CharField(max_length=120, blank=True)
-    phone = models.CharField(max_length=40, blank=True)
-    email = models.EmailField(blank=True)
-    website = models.URLField(blank=True)
-    notes = models.TextField(blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    name = models.CharField(verbose_name='Nombre', max_length=200, unique=True)
+    contact = models.CharField(verbose_name='Contacto', max_length=120, blank=True)
+    phone = models.CharField(verbose_name='Teléfono', max_length=40, blank=True)
+    email = models.EmailField(verbose_name='Correo electrónico', blank=True)
+    website = models.URLField(verbose_name='Sitio web', blank=True)
+    notes = models.TextField(verbose_name='Notas', blank=True)
+    created_at = models.DateTimeField(verbose_name='Fecha de creación', auto_now_add=True)
 
     class Meta:
+        verbose_name = 'Proveedor'
+        verbose_name_plural = 'Proveedores'
         ordering = ['name']
 
     def clean(self):
@@ -23,17 +25,19 @@ class Supplier(models.Model):
 
 
 class SupplierOffer(models.Model):
-    component = models.ForeignKey('components.Component', on_delete=models.CASCADE, related_name='supplier_offers')
-    supplier = models.ForeignKey('suppliers.Supplier', on_delete=models.PROTECT, related_name='offers')
-    part_number = models.CharField(max_length=120, blank=True)
-    price = models.DecimalField(max_digits=12, decimal_places=4, default=0)
-    currency = models.CharField(max_length=10, default='EUR')
-    minimum_quantity = models.PositiveIntegerField(default=1)
-    url = models.URLField(blank=True)
-    date_consulted = models.DateField(blank=True, null=True)
-    notes = models.TextField(blank=True)
+    component = models.ForeignKey('components.Component', verbose_name='Componente', on_delete=models.CASCADE, related_name='supplier_offers')
+    supplier = models.ForeignKey('suppliers.Supplier', verbose_name='Proveedor', on_delete=models.PROTECT, related_name='offers')
+    part_number = models.CharField(verbose_name='Número de parte', max_length=120, blank=True)
+    price = models.DecimalField(verbose_name='Precio', max_digits=12, decimal_places=4, default=0)
+    currency = models.CharField(verbose_name='Moneda', max_length=10, default='EUR')
+    minimum_quantity = models.PositiveIntegerField(verbose_name='Cantidad mínima de compra', default=1)
+    url = models.URLField(verbose_name='Enlace', blank=True)
+    date_consulted = models.DateField(verbose_name='Fecha de consulta', blank=True, null=True)
+    notes = models.TextField(verbose_name='Notas', blank=True)
 
     class Meta:
+        verbose_name = 'Oferta de proveedor'
+        verbose_name_plural = 'Ofertas de proveedores'
         ordering = ['supplier__name', '-date_consulted']
         constraints = [
             models.UniqueConstraint(fields=['component', 'supplier', 'part_number'], name='unique_supplier_offer')

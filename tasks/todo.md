@@ -35,11 +35,24 @@ Evidencia T1–T6 en dev_Process.md. El control de F1 espera revisión del usuar
   Archivos: components/views.py, urls raíz, plantilla base, plantilla alta y tests (5).
   Se ejecutó en unidades: servicio/formulario; vista y rutas; plantillas compartidas/CSS;
   integración visual de búsqueda/resumen. Sin dependencia JavaScript ni frameworks adicionales.
+- [x] T6a. Estilo común del administrador y etiquetas en español, incluidos permisos.
+  Sin traducir valores ingresados. Migraciones de metadatos conservan datos y nombres técnicos.
+- [x] T6b. Crear usuarios normales con contraseña usable; bloquear promoción desde formulario.
+  Verificar login propio, rechazo de cuentas inactivas y administración de cuentas restringida.
+- [x] T6c. Guardar PDF y continuar, volver a guardar sin archivo nuevo y recuperar PDF faltante.
+  Error intermitente original sin causa confirmada; caso de archivo faltante reproducido/corregido.
 - [ ] Control F1: suite y check pasan; alta visible en búsqueda/Admin; revisión del usuario.
 
-## Fase 2
+## Fase 2 — Ubicaciones, permisos y ficha
 
-- [ ] T7. Ficha y edición de ubicación. Depende de cierre F1.
+- [ ] T7a. Migrar ubicaciones compartibles conservando asignaciones existentes.
+  Aceptación: varios componentes usan una ubicación guardada y pueden agregarse desde su edición.
+  No fusionar por texto automáticamente. Probar migración, reasignación y borrado con dependencias.
+- [ ] T7b. Grupos lector/operador y protección de vistas/archivos.
+  Aceptación: login y autorización coherentes para cuentas existentes, sin privilegios automáticos;
+  usuarios activos/inactivos y contraseñas utilizables diagnosticables sin exponer secretos.
+
+- [ ] T7. Ficha y selección de ubicación compartida. Depende de T7a y T7b.
   Aceptación: ficha muestra saldo/datos y edita ubicación opcional sin cambiar cantidades.
   Verificar lectura, permisos y edición. Archivos: forms, views, urls, template, tests (5).
 - [ ] T8. Especificaciones dinámicas. Depende de T7.
@@ -48,13 +61,17 @@ Evidencia T1–T6 en dev_Process.md. El control de F1 espera revisión del usuar
 - [ ] T9. Categoría contextual. Depende de T7.
   Aceptación: crear categoría conserva datos del alta y rechaza duplicados.
   Verificar con/sin JS. Archivos: forms, views, urls, template/JS, tests (5).
-- [ ] T10. Duplicación técnica. Depende de T8.
-  Aceptación: copia datos técnicos, exige nueva referencia y no copia saldo/historial/PDF.
-  Verificar integración. Archivos: servicio, views, urls, template, tests (5).
 - [ ] T11. PDF en ficha. Depende de T7.
   Aceptación: validar contenido/tamaño, controlar acceso y limpiar cargas fallidas.
   Verificar archivos válidos, inválidos y error de guardado. Archivos: documents/models.py,
   forms, views, template y tests (5).
+- [ ] Control F2: ubicaciones compartidas, ficha/PDF y permisos preservan datos; revisión del usuario.
+
+## Fase 3 — Operación diaria
+
+- [ ] T10. Duplicación técnica. Depende de T8.
+  Aceptación: copia datos técnicos, exige nueva referencia y no copia saldo/historial/PDF.
+  Verificar integración. Archivos: servicio, views, urls, template, tests (5).
 - [ ] T12. Ofertas opcionales. Depende de T7.
   Aceptación: gestionar oferta y proveedor respetando validación existente.
   Verificar precio, moneda y duplicados. Archivos: forms, views, urls, template, tests (5).
@@ -67,11 +84,11 @@ Evidencia T1–T6 en dev_Process.md. El control de F1 espera revisión del usuar
 - [ ] T15. Dashboard y acabado de interfaz. Depende de T13 y T14.
   Aceptación: indicadores enlazan filtros, teclado/móvil utilizables y permisos coherentes.
   Verificar navegador y regresión. Archivos: dashboard/views.py, templates, CSS y tests (5).
-- [ ] Control F2: ejecutar flujo completo y comparar pasos; revisión del usuario.
+- [ ] Control F3: flujo completo, comparación de pasos y revisión del usuario.
 
-## Fase 3
+## Fase 4 — Estabilización y distribución
 
-- [ ] T16. Respaldo consistente. Depende de cierre F2.
+- [ ] T16. Respaldo consistente. Depende de cierre F3.
   Aceptación: copia íntegra verificada con base de trabajo y media; respaldo no interrumpe
   datos operativos. Verificar lectura de copia y archivos. Archivos: backup_local.py, tests (2).
 - [ ] T17. Recuperación aislada. Depende de T16.
@@ -90,4 +107,4 @@ Evidencia T1–T6 en dev_Process.md. El control de F1 espera revisión del usuar
   Aceptación: manual refleja lo implementado, CHANGELOG/version coinciden y limitaciones
   constan; dependencias revisadas. Verificar regresión y checklist de distribución.
   Archivos: MANUAL_USUARIO.md, CHANGELOG.md, README.md, dev_Process.md, info_FASES.md (5).
-- [ ] Control F3: candidato revisable, aprobación explícita antes de push/merge/publicación.
+- [ ] Control F4: candidato revisable, aprobación explícita antes de push/merge/publicación.

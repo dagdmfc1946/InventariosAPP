@@ -1,16 +1,15 @@
 # Índice del plan v2
 
-El plan autorizado por el usuario como formato documental está en
-[info_FASES.md](../info_FASES.md). Contiene diagnóstico, supuestos, tres fases,
-aceptación, riesgos y versionado. Este índice conserva la convención de la skill sin
-duplicar el contenido. Tareas verificables: [todo.md](todo.md).
+Plan vigente: [info_FASES.md](../info_FASES.md). Tareas: [todo.md](todo.md).
+Evidencia: [dev_Process.md](../dev_Process.md).
 
-Estado: propuesta pendiente de aprobación. Aprobar el plan habilita `dev_v2` y Fase 1;
-las siguientes fases se revisan al cierre. Push/publicación requieren aprobación separada.
-Actualización: dev_v2 creada por autorización expresa para subir sólo documentación.
-Fase 1 no iniciada; destino confirmado Windows local con PyInstaller al finalizar.
+Por solicitud del usuario, el plan se amplía a cuatro fases:
+1. Integridad, alta rápida, administración en español y cuentas normales.
+2. Ubicaciones compartidas, permisos y ficha completa con PDF.
+3. Operación diaria dinámica, filtros, movimientos y proveedores.
+4. Estabilización, recuperación y distribución local con Waitress/PyInstaller.
 
-Dependencias: integridad de stock → alta mínima → ficha/acciones → distribución.
-Fase 1 implementada localmente, pendiente de revisión; Fases 2/3 no iniciadas.
-El documento de servidores está publicado; el desarrollo funcional no se subirá
-sin autorización adicional. No se desplegará en servidor.
+Fase 1 implementada localmente, pendiente de revisión. Fases 2–4 no iniciadas.
+La documentación inicial está publicada; desarrollo y documentación nueva siguen
+locales en dev_v2. Push, merge y publicación requieren aprobación explícita.
+Destino: PC Windows local; el proyecto Linux mencionado sólo recibió orientación.

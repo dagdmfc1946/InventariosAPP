@@ -5,9 +5,9 @@ from .models import Component
 
 class ComponentQuickCreateForm(forms.ModelForm):
     initial_quantity = forms.IntegerField(label='Cantidad inicial', min_value=0, initial=0)
-    minimum_quantity = forms.IntegerField(label='Stock mínimo', min_value=0, initial=0)
+    minimum_quantity = forms.IntegerField(label='Cantidad mínima', min_value=0, initial=0)
     maximum_quantity = forms.IntegerField(
-        label='Stock máximo', min_value=0, initial=0,
+        label='Cantidad máxima', min_value=0, initial=0,
         help_text='Deja 0 si no necesitas un límite máximo.',
     )
 
