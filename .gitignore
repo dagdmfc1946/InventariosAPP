@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *.pyo
 .venv/
+.local/
 venv/
 
 # Secretos y configuracion local
