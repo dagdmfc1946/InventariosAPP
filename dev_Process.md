@@ -1,7 +1,7 @@
 # Registro de desarrollo — InventariosAPP v2
 
-Estado actual: **Fases 1 y 2 concluidas; publicación de Fase 2 autorizada por el usuario**.
-Versión visible: `v2.0.0` (12/10/2026). Fases 3 y 4 no iniciadas.
+Estado actual: **Fases 1 y 2 publicadas; Fase 3 implementada localmente para revisión**.
+Versión visible: `v2.1.0` (12/10/2026). Fase 3 sin publicar; Fase 4 no iniciada.
 Las entradas siguientes conservan los estados históricos de cada avance.
 
 ## 12/10/2026 — Análisis y propuesta
@@ -307,3 +307,48 @@ en `tasks/todo.md`; no marcar como implementado algo sólo propuesto. Mantener h
 - Copia categoría, valor, número de parte y especificaciones con referencia nueva. Stock cero, sin ubicación, historial, PDF ni ofertas.
 - Guardado atómico y permisos para alta/especificaciones. Tres pruebas correctas: copia selectiva, rollback y rechazo sin permisos.
 - Se corrigió la prueba del saldo original para consultar la base en vez de una relación cacheada; el saldo original se conserva.
+
+## 12/10/2026 — Fase 3, T12/T15: ofertas, revisión y cierre local
+
+- Proveedores: consulta/búsqueda/alta/edición propias. Ofertas desde la ficha con
+  componente fijado por servidor y rechazo de precio negativo, compra mínima cero,
+  URL inválida, duplicados y edición desde otro componente.
+- Proveedor contextual conserva importe, moneda y parte; guarda independientemente
+  del guardado posterior de oferta. Grupos Operador ampliados mediante comando en
+  la copia local, sin cambiar membresías ni privilegios administrativos.
+- Contexto de ficha compartido con errores de PDF para conservar historial y ofertas;
+  historial completo en páginas de 25, permisos de consulta comprobados.
+- Consultadas security-and-hardening y code-review-and-quality de Agent Skills en
+  revisión 1be8e34187e34647bb83adc3a1323b26ae6f6abe. Límites de confianza: POST,
+  IDs, token, permisos y URLs; validación de servidor, CSRF, autoescape y transacciones.
+  La skill de revisión pide otro modelo: revisor independiente, sólo lectura de código,
+  sin consultar datos reales ni publicar. Identificó required en proveedor contextual
+  bloqueando Guardar oferta en navegador; corregido con use_required_attribute=False
+  sólo para presentación, validación de nombre obligatoria conservada en servidor.
+  Revisión final sin bloqueantes; desempate por pk y permiso condicional de Duplicar
+  también corregidos. No se afirma una auditoría completa de distribución (Fase 4).
+- Mutación controlada: invertir el rechazo de saldo obsoleto hizo fallar su prueba;
+  archivo restaurado antes de regresión final. La prueba detecta pérdida de ese control.
+- Regresión final: 108 pruebas correctas; check sin incidencias y migraciones coherentes.
+  Incluye token vencido/otra sesión, ID de operación inmutable, salida grande reenviada,
+  creación de stock ausente, paginación de historial y proveedor contextual opcional.
+- Navegador en .local/ui_review_fase3 con datos ficticios: salida3 desde saldo10,
+  vista previa7 sin guardar y confirmación con saldo7/historial; oferta con proveedor
+  existente y contextual conserva importe8000/parte; copia técnica con saldo0,
+  especificaciones y sin ubicación/ofertas/historial. Filtros categoría/disponibilidad
+  muestran un resultado correcto. Logout devuelve login; Tab desde Mi perfil llega
+  a Cambiar contraseña. Encabezados centrados verificados también en Admin.
+- Ficha comprobada a320/768/1024/1440px sin desbordamiento del documento; catálogo
+  a375px conserva botones de sesión. Consola del catálogo sin errores/advertencias.
+  Capturas fase3_catalogo.png y fase3_catalogo_movil.png en .local/evidence, fuera de Git.
+- Comparación estructural del mismo caso (categoría existente, componente nuevo,
+  stock cero y entrada10 con historial): formularios separados de Admin requieren
+  tres guardados (componente, stock, movimiento); alta rápida requiere un guardado
+  que crea los tres registros. No se midieron tiempos. Para operación posterior,
+  Fase 2 requería Administración; Fase 3 abre el movimiento desde su propia ficha,
+  selecciona el componente en servidor y permite vista previa sin JavaScript.
+- Comparación de snapshot previo con copia de desarrollo: 10 saldos y 10 movimientos
+  anteriores conservados; integridad SQLite ok. SHA-256 de db.sqlite3 operativo:
+  B247D32672C3D77C9DF9F377C833061D79AAFF9A7010112AB9776096616F12E2, sin cambios.
+- Manual, CHANGELOG, README, plan y tareas actualizados para v2.1.0. Control F3 queda
+  pendiente de revisión/aprobación del usuario; ningún push, merge ni inicio de Fase 4.

@@ -1,4 +1,4 @@
-# Tareas v2 — Fases 1 y 2 concluidas; publicación de Fase 2 autorizada
+# Tareas v2 — Fases 1 y 2 publicadas; Fase 3 local para revisión
 
 Plan: ../info_FASES.md. Evidencia de ejecución: ../dev_Process.md.
 Cada unidad se mantiene pequeña; si supera cinco archivos de implementación se divide
@@ -74,22 +74,22 @@ Evidencia T1–T6 en dev_Process.md. El usuario autorizó concluir y publicar Fa
 
 ## Fase 3 — Operación diaria
 
-- [ ] T10. Duplicación técnica. Depende de T8.
+- [x] T10. Duplicación técnica. Depende de T8.
   Aceptación: copia datos técnicos, exige nueva referencia y no copia saldo/historial/PDF.
   Verificar integración. Archivos: servicio, views, urls, template, tests (5).
-- [ ] T12. Ofertas opcionales. Depende de T7.
+- [x] T12. Ofertas opcionales. Depende de T7.
   Aceptación: gestionar oferta y proveedor respetando validación existente.
   Verificar precio, moneda y duplicados. Archivos: forms, views, urls, template, tests (5).
-- [ ] T13. Operar movimientos en ficha. Depende de T3 y T7.
+- [x] T13. Operar movimientos en ficha. Depende de T3 y T7.
   Aceptación: entrada/salida/ajuste con motivo y saldo esperado; permisos y doble envío
   controlados. Verificar integración y navegador. Archivos: forms, views, urls, template, tests (5).
-- [ ] T14. Catálogo filtrado. Depende de T7.
+- [x] T14. Catálogo filtrado. Depende de T7.
   Aceptación: filtros independientes y páginas de 25 preservan parámetros.
   Verificar navegación y consulta. Archivos: core/views.py, template, tests (3).
-- [ ] T15. Dashboard y acabado de interfaz. Depende de T13 y T14.
+- [x] T15. Dashboard y acabado de interfaz. Depende de T13 y T14.
   Aceptación: indicadores enlazan filtros, teclado/móvil utilizables y permisos coherentes.
   Verificar navegador y regresión. Archivos: dashboard/views.py, templates, CSS y tests (5).
-- [ ] Control F3: flujo completo, comparación de pasos y revisión del usuario.
+- [ ] Control F3: flujo completo y comparación documentados; revisión del usuario y autorización de publicación pendientes.
 
 ## Fase 4 — Estabilización y distribución
 

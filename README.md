@@ -2,13 +2,16 @@
 
 ## Desarrollo v2 — rama dev_v2
 
-Fases 1 y 2 aprobadas para publicar en `dev_v2`. Versión visible `v2.0.0`.
-Fases 3 y 4 pendientes de aprobación. La distribución final aún está pendiente.
+Fases 1 y 2 publicadas en `dev_v2`. Fase 3 implementada localmente para revisión.
+Versión visible `v2.1.0`. No se ha subido Fase 3; Fase 4 no iniciada.
 Esta sección prevalece para la rama v2; la documentación inferior conserva la referencia
 de instalación y comportamiento de la primera versión.
 
 El nuevo flujo permite crear componente y stock en una sola pantalla; los movimientos
-son atómicos e inmutables. Admin sigue disponible para datos opcionales.
+son atómicos e inmutables. La ficha incorpora entrada/salida/ajuste con vista previa,
+historial paginado, duplicación técnica y ofertas con proveedor contextual. El catálogo
+combina filtros y páginas de 25; el resumen enlaza pendientes. La sesión muestra las
+mismas acciones en todas las vistas. Admin sigue disponible para mantenimiento.
 
 ### Datos de trabajo y arranque
 

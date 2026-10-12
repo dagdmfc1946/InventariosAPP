@@ -5,6 +5,32 @@ Convención vigente: [SemVer 2.0.0](https://semver.org/lang/es/).
 Fuente única ejecutable: `config/version.py`.
 No se atribuye una versión retrospectiva a la aplicación actual.
 
+## [v2.1.0] — 12/10/2026 — Fase 3 local, pendiente de revisión
+
+- Entrada/salida/ajuste desde ficha con motivo obligatorio y vista previa sin escritura.
+  Token firmado por usuario/componente, identificador único y rechazo de saldo obsoleto.
+  Reenviar una operación no aplica nuevamente el movimiento. Historial completo paginado.
+- Duplicación técnica con referencia nueva, stock cero y especificaciones; sin copiar
+  ubicación, saldo, movimientos, PDF ni ofertas. Guardado transaccional.
+- Proveedores y ofertas con edición, validación de precio/cantidad/duplicados y proveedor
+  contextual que conserva datos. Permisos Operador ampliados sin acceso administrativo.
+- Catálogo con categoría, disponibilidad, pendientes y páginas de 25 que conservan
+  filtros; orden estable con desempate por ID. Resumen enlaza indicadores y fichas.
+- Migración aditiva inventory.0005 para request_id nullable/único. Aplicada a la copia
+  de desarrollo tras respaldo; no cambia saldos ni movimientos anteriores.
+- No hay dependencias nuevas. Mantiene runserver; Waitress/PyInstaller pendientes en Fase 4.
+- 108 pruebas correctas; check y migraciones coherentes. Navegador verifica sesión,
+  tabla centrada, movimientos, oferta contextual, duplicación y adaptación móvil.
+- Implementación local en dev_v2; push y cierre de fase pendientes de aprobación.
+
+## [v2.0.1] — 12/10/2026 — Ajuste local de interfaz
+
+- Bloque compartido de sesión según imagen en todas las vistas: avatar, usuario,
+  Mi perfil, Cambiar contraseña y Salir con POST/CSRF. Nueva pantalla de cambio de
+  contraseña para usuarios normales; conserva sesión y validaciones Django.
+- Encabezados de la tabla de Componentes centrados en catálogo y Administración.
+- Diez pruebas de sesión/Admin correctas y check sin incidencias.
+
 ## [v2.0.0] — 12/10/2026 — Cierre aprobado de Fase 2
 
 - El usuario autorizó publicar todo el desarrollo de Fase 2 en `dev_v2`.

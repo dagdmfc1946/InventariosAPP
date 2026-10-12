@@ -1,7 +1,7 @@
 # Manual de usuario — InventariosAPP
 
-Actualizado: 12/10/2026. Versión `v2.0.0`, Fases 1 y 2 aprobadas para publicar en `dev_v2`.
-Fase 3 pendiente de aprobación. La versión anterior sigue en `dev`.
+Actualizado: 12/10/2026. Versión `v2.1.0`, Fase 3 implementada localmente para revisión.
+Fases 1 y 2 publicadas en `dev_v2`; Fase 3 sin publicar. La versión anterior sigue en `dev`.
 
 ## Datos separados para revisar v2
 
@@ -160,7 +160,19 @@ ubicación guardada, y la ficha permite seleccionar una ubicación existente.
 - Ajuste: diferencia positiva o negativa que cambia el saldo, sin dejarlo negativo.
 - Cantidad cero no está permitida como movimiento.
 
-Registrar entradas, salidas y ajustes desde Administración. Los movimientos ya guardados
+Desde la ficha abre **Entrada, salida o ajuste**. Selecciona tipo, cantidad y motivo
+obligatorio. **Ver saldo previsto** muestra el resultado sin guardar; **Registrar
+movimiento** lo confirma y vuelve a la ficha. Para ajuste escribe la diferencia con
+signo: si hay 10 y el conteo real es 8, usa −2. El historial completo se consulta por
+páginas de 25 en la ficha según permisos.
+
+El formulario vence en una hora. Si otro movimiento cambió el saldo, recarga la ficha
+y revisa la cantidad antes de confirmar. Reenviar el mismo formulario no vuelve a aplicar
+el movimiento; abrir un formulario nuevo sí representa otra operación. Si aparece un
+fallo de base, revisa el historial antes de reintentar. Si el componente no tiene stock,
+el primer movimiento crea un registro desde cero (requiere permiso de agregar stock).
+
+Administración conserva la alternativa de registrar movimientos. Los movimientos ya guardados
 son de consulta: no se pueden editar/eliminar, y guardar el mismo objeto otra vez no
 cambia el saldo. Para corregir un error, registrar un movimiento compensatorio y motivo.
 La cantidad y el componente de un stock existente son de sólo lectura en Admin;
@@ -171,9 +183,45 @@ el flujo antiguo de Admin no genera historial automáticamente; el alta rápida 
 ## Consulta
 
 Buscar por referencia, nombre, valor, número de parte o texto de categoría y ordenar
-por nombre o cantidad. Sólo aparecen componentes activos. La búsqueda actual no
-tiene paginación. El dashboard muestra bajo stock, ausencia de datasheet, ausencia de
-oferta y diez movimientos recientes. Las pantallas comparten navegación y pie de versión.
+por nombre o cantidad. Sólo aparecen componentes activos. Combina categoría,
+disponibilidad (con/sin existencias) y pendientes (bajo stock, sin PDF o sin oferta).
+Pulsa Buscar; Anterior/Siguiente conserva filtros en páginas de 25. Limpiar filtros
+restablece la consulta. Existencias bajas incluye el saldo igual al mínimo; componentes
+sin registro de stock se incluyen en Sin existencias.
+
+Resumen enlaza cada indicador al catálogo filtrado y cada movimiento a su ficha.
+Todas las vistas comparten avatar, Sesión activa, Mi perfil, Cambiar contraseña y Salir
+cuando hay sesión; Cambiar contraseña aparece si la cuenta tiene contraseña usable.
+Usa la contraseña actual y confirma la nueva; guardar conserva tu sesión.
+
+## Duplicar datos técnicos
+
+Desde una ficha pulsa **Duplicar**, escribe una referencia nueva y confirma **Crear
+copia técnica**. Copia categoría, nombre (editable), valor, número de parte y especificaciones.
+La copia queda activa, sin ubicación y con existencias cero; sus límites son cero,
+lo que significa sin máximo. No copia movimientos, PDF ni ofertas. Revisa la ficha,
+asigna ubicación y registra una entrada cuando corresponda. Para copiar especificaciones
+necesitas permiso de agregarlas; el componente original conserva sus datos y saldo.
+
+## Proveedores y ofertas
+
+El menú **Proveedores** permite consultar, buscar, crear y editar según permisos.
+En la ficha usa **Agregar oferta** para elegir proveedor, número de parte, precio,
+moneda, cantidad mínima de compra y los datos opcionales de consulta. Precio admite
+cero, nunca negativos; compra mínima debe ser al menos uno. Moneda se convierte a
+mayúsculas sin convertir importes. No se mezclan ni comparan precios de monedas distintas.
+
+Si falta un proveedor, despliega **Crear proveedor sin perder la oferta** y pulsa
+**Crear y seleccionar proveedor**. Se conservan los datos escritos; luego guarda la
+oferta. El proveedor se guarda independientemente y permanece si cancelas la oferta.
+La misma combinación componente/proveedor/número de parte no puede repetirse.
+Usa **Editar** en la fila de una oferta para actualizarla. Registrar una cotización
+no realiza compras ni modifica existencias.
+
+El grupo Operador incorpora permisos de alta/edición de proveedores y ofertas; Lector
+sólo consulta. Al actualizar otra copia v2, ejecuta `configure_inventory_roles` después
+de `migrate` (en este equipo ya se hizo). El comando actualiza los grupos predefinidos
+sin asignar cuentas existentes a otro grupo ni habilitar Administración.
 
 ## Respaldo
 
@@ -231,11 +279,8 @@ para el escenario local; varias escrituras simultáneas pueden requerir PostgreS
 La configuración actual todavía no implementa estos destinos. Referencia de preparación:
 [checklist de Django](https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/).
 
-## Funcionalidad pendiente
+## Estado de revisión y funcionalidades pendientes
 
-Fase 1 está implementada y requiere tu revisión.
-Fase 2 implementada, pendiente de tu validación: ubicaciones compartidas, perfiles,
-Mi perfil, ficha, especificaciones y PDF.
-Fase 3: ofertas, filtros, duplicación y acciones de inventario.
-Fase 4: recuperación y distribución verificada. Este manual se actualizará con rutas
-y capturas reales al implementar; no se presentan acciones futuras como disponibles.
+Fases 1 y 2 publicadas. Fase 3 implementada localmente para revisión del usuario,
+sin push hasta aprobación. Fase 4 aún pendiente: recuperación y distribución local
+verificada con Waitress/PyInstaller. Durante desarrollo se mantiene runserver.
