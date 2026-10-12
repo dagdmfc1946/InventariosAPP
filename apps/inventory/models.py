@@ -81,6 +81,7 @@ class StockMovementQuerySet(models.QuerySet):
 
 
 class StockMovement(models.Model):
+    request_id = models.UUIDField(verbose_name='Identificador de operación', null=True, blank=True, unique=True, editable=False)
     ENTRY = 'entry'
     EXIT = 'exit'
     ADJUSTMENT = 'adjustment'
@@ -140,7 +141,7 @@ class StockMovement(models.Model):
         original = type(self).objects.using(database).filter(pk=self.pk).first()
         if original is None:
             raise ValidationError('No se puede reconstruir un movimiento eliminado.')
-        fields = ('stock_id', 'movement_type', 'quantity', 'reason', 'created_at')
+        fields = ('stock_id', 'movement_type', 'quantity', 'reason', 'created_at', 'request_id')
         if any(getattr(self, field) != getattr(original, field) for field in fields):
             raise ValidationError('Los movimientos registrados son inmutables. Registre una corrección.')
 

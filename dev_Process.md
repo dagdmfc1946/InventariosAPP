@@ -293,3 +293,11 @@ en `tasks/todo.md`; no marcar como implementado algo sólo propuesto. Mantener h
 - Resumen enlaza indicadores a los mismos filtros y movimientos a la ficha.
 - Ocho pruebas de catálogo/resumen correctas. Categorías inválidas o fuera de rango se ignoran.
 - Versión v2.1.0 por funcionalidades compatibles nuevas. Implementación local, sin push.
+
+## 12/10/2026 — Fase 3, T13: movimientos desde ficha
+
+- Entrada/salida/ajuste con motivo obligatorio, vista previa en servidor y verificación del saldo antes de confirmar.
+- Token firmado por sesión/componente con identificador único persistente evita aplicar nuevamente un envío repetido; historial permanece inmutable.
+- Migración aditiva inventory.0005 aplicada sólo a la copia de desarrollo, tras snapshot .local/checkpoints/fase2_before_fase3. Movimientos previos conservan identificador nulo.
+- 26 pruebas de flujo/integridad correctas; ajuste de validación de vista previa y repetición verificado con seis pruebas del flujo. Salidas insuficientes, límites, permisos, CSRF y rollback cubiertos.
+- Sin push ni cambios en base operativa original.

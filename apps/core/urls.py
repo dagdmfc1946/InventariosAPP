@@ -1,7 +1,9 @@
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView
 
+from apps.components.views_duplicate import component_duplicate
 from apps.components.views import component_create, component_detail, component_edit
+from apps.inventory.views_movement import component_movement
 from apps.inventory.views import location_list, location_edit
 from apps.documents.views import datasheet_upload, datasheet_download
 
@@ -12,7 +14,9 @@ urlpatterns = [
     path('search/', component_search, name='component_search'),
     path('components/new/', component_create, name='component_create'),
     path('components/<int:pk>/', component_detail, name='component_detail'),
+    path('components/<int:pk>/duplicate/', component_duplicate, name='component_duplicate'),
     path('components/<int:pk>/edit/', component_edit, name='component_edit'),
+    path('components/<int:pk>/movements/new/', component_movement, name='component_movement'),
     path('locations/', location_list, name='location_list'),
     path('locations/new/', location_edit, name='location_create'),
     path('locations/<int:pk>/edit/', location_edit, name='location_edit'),

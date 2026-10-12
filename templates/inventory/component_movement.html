@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Movimiento · {{ component.reference }}{% endblock %}
+{% block content %}
+<a class="back-link" href="{% url 'component_detail' component.pk %}">← Volver a la ficha</a>
+<div class="page-heading"><div><p class="eyebrow">EXISTENCIAS</p><h1>Registrar movimiento</h1><p class="muted">{{ component.reference }} · {{ component.name }}</p></div></div>
+<form class="panel create-form" method="post">{% csrf_token %}{{ form.token }}
+<p>Saldo actual: <strong>{{ form.balance }} unidades</strong></p>
+<div class="field-errors" role="alert">{{ form.non_field_errors }}</div>
+{% for field in form.visible_fields %}<div class="field"><label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}<div class="field-errors" role="alert">{{ field.errors }}</div>{% if field.help_text %}<p class="help">{{ field.help_text }}</p>{% endif %}</div>{% endfor %}
+{% if preview %}<div class="notice" role="status">Saldo previsto: <strong>{{ form.expected_balance }} unidades</strong>. Aún no se ha registrado el movimiento.</div>{% endif %}
+<p class="help">El historial es permanente. Para corregir un movimiento, registra otro con el motivo de la corrección.</p>
+<div class="form-actions"><button class="button secondary" name="action" value="preview" type="submit">Ver saldo previsto</button><button class="button" name="action" value="register" type="submit">Registrar movimiento</button></div>
+</form>
+{% endblock %}

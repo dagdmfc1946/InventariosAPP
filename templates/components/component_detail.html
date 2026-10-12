@@ -3,7 +3,7 @@
 {% block content %}
 <a class="back-link" href="{% url 'component_search' %}">← Volver a componentes</a>
 <div class="page-heading"><div><p class="eyebrow">FICHA DEL COMPONENTE</p><h1>{{ component.name }}</h1><p class="muted">{{ component.reference }} · {{ component.category }}</p></div>
-{% if perms.components.change_component %}<a class="button" href="{% url 'component_edit' component.pk %}">Editar ficha</a>{% endif %}</div>
+<div class="form-actions">{% if perms.components.add_component and perms.inventory.add_stock and perms.components.add_specification %}<a class="button secondary" href="{% url 'component_duplicate' component.pk %}">Duplicar</a>{% endif %}{% if perms.components.change_component %}<a class="button" href="{% url 'component_edit' component.pk %}">Editar ficha</a>{% endif %}</div></div>
 <div class="metrics">
     <div class="panel"><span class="muted">Existencias</span><strong class="metric-value">{% if component.stock %}{{ component.stock.quantity }}{% else %}—{% endif %}</strong><span class="help">{% if component.stock %}unidades · mínimo {{ component.stock.minimum_quantity }} · máximo {% if component.stock.maximum_quantity %}{{ component.stock.maximum_quantity }}{% else %}sin límite{% endif %}{% else %}Sin registro de existencias{% endif %}</span></div>
     <div class="panel"><h2>Ubicación</h2><p>{{ component.location|default:'Sin asignar' }}</p>{% if perms.inventory.view_location %}<a href="{% url 'location_list' %}">Consultar ubicaciones</a>{% endif %}</div>
@@ -16,4 +16,5 @@
     {% if perms.documents.view_datasheet %}<ul class="document-list">{% for sheet in component.datasheets.all %}<li><a href="{% url 'datasheet_download' sheet.pk %}" target="_blank" rel="noopener">Abrir PDF · {{ sheet.file.name }}</a><span class="help">{{ sheet.uploaded_at|date:'d/m/Y H:i' }}</span></li>{% empty %}<li class="muted">Todavía no hay PDF adjuntos.</li>{% endfor %}</ul>{% else %}<p class="muted">Necesitas permiso para consultar los documentos.</p>{% endif %}
     {% if perms.documents.add_datasheet %}<form method="post" enctype="multipart/form-data" action="{% url 'datasheet_upload' component.pk %}">{% csrf_token %}<div class="field"><label for="{{ upload_form.file.id_for_label }}">Adjuntar ficha técnica</label>{{ upload_form.file }}<div class="field-errors" role="alert">{{ upload_form.file.errors }}{{ upload_form.non_field_errors }}</div><p class="help">Archivo PDF de hasta 20 MB. La carga se guarda por separado de los datos de la ficha.</p></div><button class="button secondary" type="submit">Adjuntar PDF</button></form>{% endif %}
 </section>
+{% include 'components/movement_history.html' %}
 {% endblock %}
