@@ -1,25 +1,17 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard</title>
-</head>
-<body>
-    <h1>Dashboard</h1>
-
-    <ul>
-        <li>Stock bajo: {{ low_stock_count }}</li>
-        <li>Sin datasheet: {{ missing_datasheets_count }}</li>
-        <li>Sin precio: {{ missing_prices_count }}</li>
-    </ul>
-
-    <h2>Movimientos recientes</h2>
-    <ul>
+{% extends 'base.html' %}
+{% block title %}Resumen{% endblock %}
+{% block content %}
+    <div class="page-heading"><div><p class="eyebrow">INVENTARIO</p><h1>Resumen</h1><p class="muted">Un vistazo al estado de tus componentes.</p></div></div>
+    <div class="metrics">
+        <div class="panel">Stock bajo: <span class="metric-value">{{ low_stock_count }}</span></div>
+        <div class="panel">Sin datasheet: <span class="metric-value">{{ missing_datasheets_count }}</span></div>
+        <div class="panel">Sin precio: <span class="metric-value">{{ missing_prices_count }}</span></div>
+    </div>
+    <div class="panel"><h2>Movimientos recientes</h2><ul>
         {% for movement in recent_movements %}
             <li>{{ movement.created_at|date:'d/m/Y H:i' }} - {{ movement.stock.component.reference }} - {{ movement.get_movement_type_display }} - {{ movement.quantity }}</li>
         {% empty %}
             <li>No hay movimientos recientes.</li>
         {% endfor %}
-    </ul>
-</body>
-</html>
+    </ul></div>
+{% endblock %}

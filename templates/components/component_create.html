@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Nuevo componente{% endblock %}
+{% block content %}
+<a class="back-link" href="{% url 'component_search' %}">← Volver a componentes</a>
+<div class="page-heading"><div><p class="eyebrow">REGISTRO RÁPIDO</p><h1>Nuevo componente</h1><p class="muted">Registra sus datos y su stock en un solo paso.</p></div></div>
+{% if not has_categories %}
+    <div class="notice" role="status">Primero necesitas una categoría.
+        {% if perms.components.add_category and user.is_staff %}<a href="{% url 'admin:components_category_add' %}" target="_blank" rel="noopener">Crear categoría en otra pestaña</a>. Luego recarga esta página.
+        {% else %}Solicita una categoría al administrador.{% endif %}
+    </div>
+{% endif %}
+<form method="post" class="panel create-form" novalidate>
+    {% csrf_token %}
+    {% if form.errors %}<div class="notice error" role="alert"><strong>Revisa los campos indicados.</strong>{{ form.non_field_errors }}</div>{% endif %}
+    <fieldset><legend><span class="step-number">1</span> Datos del componente</legend><p class="muted section-help">Categoría, referencia y nombre son obligatorios.</p>
+        <div class="form-grid">
+        {% for field in form %}{% if field.name != 'initial_quantity' and field.name != 'minimum_quantity' and field.name != 'maximum_quantity' %}
+            <div class="field {% if field.name == 'name' %}full-width{% endif %}">
+                <label for="{{ field.id_for_label }}">{{ field.label }}{% if not field.field.required %}<span class="optional">Opcional</span>{% endif %}</label>
+                {{ field }}<div class="help" id="{{ field.id_for_label }}_help">{{ field.help_text }}</div><div class="field-errors" id="{{ field.id_for_label }}_errors">{{ field.errors }}</div>
+            </div>
+        {% endif %}{% endfor %}
+        </div>
+    </fieldset>
+    <fieldset><legend><span class="step-number">2</span> Stock inicial</legend><p class="muted section-help">La cantidad inicial se registra como una entrada en el historial. Con 0, sólo se crea el stock.</p>
+        <div class="form-grid stock-grid">
+        {% for field in form %}{% if field.name == 'initial_quantity' or field.name == 'minimum_quantity' or field.name == 'maximum_quantity' %}
+            <div class="field"><label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}<div class="help" id="{{ field.id_for_label }}_help">{{ field.help_text }}</div><div class="field-errors" id="{{ field.id_for_label }}_errors">{{ field.errors }}</div></div>
+        {% endif %}{% endfor %}
+        </div>
+    </fieldset>
+    <div class="form-actions"><button type="submit" class="button" {% if not has_categories %}disabled{% endif %}>Guardar componente</button><button type="submit" name="save_another" value="1" class="button secondary" {% if not has_categories %}disabled{% endif %}>Guardar y agregar otro</button><a href="{% url 'component_search' %}">Cancelar</a></div>
+    <p class="help">Las especificaciones, ubicación y documentos pueden completarse desde Administración.</p>
+</form>
+{% endblock %}
