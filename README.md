@@ -2,8 +2,8 @@
 
 ## Desarrollo v2 — rama dev_v2
 
-Fases 1 y 2 publicadas en `dev_v2`. Fase 3 implementada localmente para revisión.
-Versión visible `v2.1.0`. No se ha subido Fase 3; Fase 4 no iniciada.
+Fases 1, 2 y 3 concluidas en `dev_v2`, con publicación autorizada por el usuario.
+Versión visible `v2.1.1`. Fase 4 no iniciada; requiere aprobación separada.
 Esta sección prevalece para la rama v2; la documentación inferior conserva la referencia
 de instalación y comportamiento de la primera versión.
 

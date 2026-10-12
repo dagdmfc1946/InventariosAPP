@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}{{ title }} · InventariosAPP{% endblock %}
 {% block dark-mode-vars %}{% endblock %}
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" href="{% static 'css/admin.css' %}"><link rel="stylesheet" href="{% static 'css/session.css' %}">{% endblock %}
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" href="{% static 'css/admin.css' %}"><link rel="stylesheet" href="{% static 'css/session.css' %}"><link rel="stylesheet" href="{% static 'css/header.css' %}">{% endblock %}
 {% block branding %}
 <a class="inventory-brand" href="{% url 'component_search' %}"><span class="inventory-mark" aria-hidden="true">I</span> InventariosAPP</a>
 <nav class="inventory-nav" aria-label="Navegación principal">

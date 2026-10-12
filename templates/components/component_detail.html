@@ -7,7 +7,7 @@
 <div class="metrics">
     <div class="panel"><span class="muted">Existencias</span><strong class="metric-value">{% if component.stock %}{{ component.stock.quantity }}{% else %}—{% endif %}</strong><span class="help">{% if component.stock %}unidades · mínimo {{ component.stock.minimum_quantity }} · máximo {% if component.stock.maximum_quantity %}{{ component.stock.maximum_quantity }}{% else %}sin límite{% endif %}{% else %}Sin registro de existencias{% endif %}</span></div>
     <div class="panel"><h2>Ubicación</h2><p>{{ component.location|default:'Sin asignar' }}</p>{% if perms.inventory.view_location %}<a href="{% url 'location_list' %}">Consultar ubicaciones</a>{% endif %}</div>
-    <div class="panel"><h2>Datos básicos</h2><p>Valor: {{ component.value|default:'—' }}</p><p>Número de parte: {{ component.part_number|default:'—' }}</p><span class="badge">{% if component.is_active %}Activo{% else %}Inactivo{% endif %}</span></div>
+    <div class="panel"><h2>Datos básicos</h2><p>Valor técnico: {{ component.value|default:'—' }}</p><p>Parte del fabricante: {{ component.part_number|default:'—' }}</p><span class="badge">{% if component.is_active %}Activo{% else %}Inactivo{% endif %}</span></div>
 </div>
 <section class="panel detail-section"><h2>Especificaciones</h2>
     {% if component.specifications.all %}<div class="table-wrap"><table><thead><tr><th>Atributo</th><th>Valor</th><th>Unidad</th></tr></thead><tbody>{% for specification in component.specifications.all %}<tr><td>{{ specification.attribute }}</td><td>{{ specification.value }}</td><td>{{ specification.unit|default:'—' }}</td></tr>{% endfor %}</tbody></table></div>{% else %}<p class="muted">Todavía no hay especificaciones.</p>{% endif %}

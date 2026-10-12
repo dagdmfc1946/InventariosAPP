@@ -5,7 +5,7 @@
 <div class="page-heading"><div><p class="eyebrow">EDITAR COMPONENTE</p><h1>{{ component.reference }}</h1><p class="muted">Completa datos, ubicación y especificaciones. El saldo se conserva.</p></div></div>
 <form method="post" class="panel create-form" novalidate>{% csrf_token %}
     {% if form.errors or formset.total_error_count %}<div class="notice error" role="alert">Revisa los campos y las especificaciones indicadas. {{ form.non_field_errors }}{{ formset.non_form_errors }}</div>{% endif %}
-    <fieldset><legend>Datos básicos</legend><div class="form-grid">{% for field in form %}<div class="field {% if field.name == 'name' %}full-width{% endif %}"><label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}<div class="field-errors">{{ field.errors }}</div></div>{% endfor %}</div>
+    <fieldset><legend>Datos básicos</legend><div class="form-grid">{% for field in form %}<div class="field {% if field.name == 'name' %}full-width{% endif %}"><label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{% if field.help_text %}<p class="help">{{ field.help_text }}</p>{% endif %}<div class="field-errors">{{ field.errors }}</div></div>{% endfor %}</div>
     {% include 'components/category_context.html' %}
     {% include 'components/location_context.html' %}</fieldset>
     <fieldset><legend>Especificaciones</legend><p class="help">Cada atributo debe ser único. Puedes agregar filas o marcar las que quieras eliminar. Máximo 50 filas.</p>

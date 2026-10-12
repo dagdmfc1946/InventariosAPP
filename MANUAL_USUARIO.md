@@ -1,7 +1,7 @@
 # Manual de usuario — InventariosAPP
 
-Actualizado: 12/10/2026. Versión `v2.1.0`, Fase 3 implementada localmente para revisión.
-Fases 1 y 2 publicadas en `dev_v2`; Fase 3 sin publicar. La versión anterior sigue en `dev`.
+Actualizado: 12/10/2026. Versión `v2.1.1`, Fase 3 concluida con publicación autorizada.
+Fases 1, 2 y 3 concluidas en `dev_v2`. La versión anterior sigue en `dev`.
 
 ## Datos separados para revisar v2
 
@@ -105,17 +105,25 @@ asignados está protegida contra borrado: primero retirar o reasignar esos compo
 
 1. Abrir `/search/` y pulsar **Nuevo componente**, o visitar `/components/new/`.
 2. Iniciar sesión si se solicita. El superusuario existente puede usar la nueva pantalla.
-3. Elegir categoría existente y completar referencia y nombre; valor y número de parte
-   son opcionales. Una referencia no se puede repetir dentro de la categoría.
-4. Indicar cantidad inicial, mínimo y máximo. No se admiten negativos; el mínimo y
-   la cantidad inicial no pueden superar el máximo si éste es distinto de cero.
+3. Elegir categoría y completar **Referencia interna** (tu código, por ejemplo RES-001)
+   y **Nombre del componente**. La referencia no se puede repetir dentro de la categoría.
+   La **Ubicación** es opcional y puede asignarse después.
+4. Indicar la **Cantidad inicial**. En **Datos técnicos opcionales**, completar
+   **Valor técnico** (por ejemplo 10 kΩ, 100 µF o 5 V; no es un precio) y **Número de
+   parte del fabricante** (por ejemplo LM358N) si se conocen. Para otros atributos
+   usar las especificaciones de la ficha; los precios corresponden a ofertas de proveedores.
+   En **Avisos y límite de existencias**, configurar **Mínimo de aviso** y **Máximo
+   permitido** si se necesitan. El mínimo avisa cuando el saldo es igual o inferior;
+   con mínimo 0 avisa al agotarse. Máximo 0 permite guardar sin límite superior.
+   No se admiten negativos; el mínimo y la cantidad inicial no pueden superar un
+   máximo distinto de cero. Los desplegables conservan los valores y se abren al tener errores.
 5. Pulsar **Guardar componente** para volver al catálogo, o **Guardar y agregar otro**
    para continuar con un formulario limpio. El componente y su stock se guardan juntos.
 6. Si falla la validación, revisar los mensajes; no se crean registros parciales.
    Si hay cantidad inicial positiva, aparece una entrada en el historial. Con cero,
    se crea stock sin movimiento de cantidad cero.
 
-Si no hay categorías, la pantalla explica cómo crear una desde Administración.
+Si no hay categorías, el usuario con permiso puede usar **Crear una categoría aquí**.
 Los usuarios no administradores necesitan permisos para agregar componente, stock y
 movimiento. Un usuario autenticado sin esos permisos recibe 403. No se conceden permisos
 a las cuentas anteriores automáticamente; las nuevas reciben el perfil elegido en
@@ -281,6 +289,6 @@ La configuración actual todavía no implementa estos destinos. Referencia de pr
 
 ## Estado de revisión y funcionalidades pendientes
 
-Fases 1 y 2 publicadas. Fase 3 implementada localmente para revisión del usuario,
-sin push hasta aprobación. Fase 4 aún pendiente: recuperación y distribución local
+Fases 1, 2 y 3 concluidas; publicación de Fase 3 autorizada por el usuario.
+Fase 4 espera aprobación: recuperación y distribución local
 verificada con Waitress/PyInstaller. Durante desarrollo se mantiene runserver.

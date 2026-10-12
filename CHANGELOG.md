@@ -5,6 +5,20 @@ Convención vigente: [SemVer 2.0.0](https://semver.org/lang/es/).
 Fuente única ejecutable: `config/version.py`.
 No se atribuye una versión retrospectiva a la aplicación actual.
 
+## [v2.1.1] — 12/10/2026 — Cierre autorizado de Fase 3
+
+- Alta simplificada: identificación y cantidad visibles; datos técnicos y límites
+  opcionales desplegables, con apertura cuando hay valores o errores.
+- «Valor técnico» con ejemplos y aclaración de que no es precio; referencia interna
+  diferenciada del número de parte del fabricante. Se conservan campos y datos existentes.
+- Cabecera con marca/sesión alineadas en una fila y navegación en otra, compartida
+  por vistas propias y Administración; adaptación para pantallas pequeñas.
+- Migración components.0004 cambia únicamente nombres de campos; aplicada a copias
+  de desarrollo/pruebas. Base original intacta.
+- 108 pruebas correctas, check sin incidencias y sin migraciones pendientes; alta
+  con datos ficticios y revisión visual en escritorio/móvil verificadas.
+- Usuario autoriza subir toda Fase 3 a dev_v2. Fase 4 no iniciada.
+
 ## [v2.1.0] — 12/10/2026 — Fase 3 local, pendiente de revisión
 
 - Entrada/salida/ajuste desde ficha con motivo obligatorio y vista previa sin escritura.

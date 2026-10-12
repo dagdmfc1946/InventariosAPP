@@ -25,10 +25,25 @@ class CategoryContextForm(forms.Form):
         return data
 
 
+COMPONENT_LABELS = {
+    'reference': 'Referencia interna', 'name': 'Nombre del componente',
+    'value': 'Valor técnico', 'part_number': 'Número de parte del fabricante',
+}
+COMPONENT_HELP = {
+    'reference': 'Tu código para identificarlo; debe ser único dentro de la categoría.',
+    'name': 'Un nombre reconocible, por ejemplo Resistencia o Sensor de temperatura LM35.',
+    'value': 'Dato técnico, por ejemplo 10 kΩ, 100 µF o 5 V. No es el precio; usa especificaciones para otros atributos.',
+    'part_number': 'Código del fabricante, por ejemplo LM358N. Puedes dejarlo vacío si no lo conoces.',
+    'location': 'Lugar donde lo guardas. Puedes asignarlo después desde la ficha.',
+}
+
+
 class ComponentEditForm(forms.ModelForm):
     class Meta:
         model = Component
         fields = ('category', 'reference', 'name', 'value', 'part_number', 'location', 'is_active')
+        labels = COMPONENT_LABELS
+        help_texts = COMPONENT_HELP
 
 
 SpecificationFormSet = inlineformset_factory(
@@ -39,24 +54,25 @@ SpecificationFormSet = inlineformset_factory(
 
 class ComponentQuickCreateForm(forms.ModelForm):
     initial_quantity = forms.IntegerField(label='Cantidad inicial', min_value=0, initial=0)
-    minimum_quantity = forms.IntegerField(label='Cantidad mínima', min_value=0, initial=0)
+    minimum_quantity = forms.IntegerField(label='Mínimo de aviso', min_value=0, initial=0,
+        help_text='El resumen avisa cuando el saldo es igual o inferior a este número. Con 0, avisa al agotarse.')
     maximum_quantity = forms.IntegerField(
-        label='Cantidad máxima', min_value=0, initial=0,
+        label='Máximo permitido', min_value=0, initial=0,
         help_text='Deja 0 si no necesitas un límite máximo.',
     )
 
     class Meta:
         model = Component
         fields = ['category', 'reference', 'name', 'value', 'part_number', 'location']
-        labels = {
-            'category': 'Categoría', 'reference': 'Referencia', 'name': 'Nombre',
-            'value': 'Valor', 'part_number': 'Número de parte',
-        }
-        help_texts = {'reference': 'Debe ser única dentro de la categoría.'}
+        labels = COMPONENT_LABELS
+        help_texts = COMPONENT_HELP
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['category'].empty_label = 'Selecciona una categoría'
+        self.fields['location'].empty_label = 'Sin asignar — completar después'
+        self.fields['value'].widget.attrs['placeholder'] = 'Ej.: 10 kΩ / 100 µF / 5 V'
+        self.fields['part_number'].widget.attrs['placeholder'] = 'Ej.: LM358N'
         for name, field in self.fields.items():
             field.widget.attrs['aria-describedby'] = f'id_{name}_help id_{name}_errors'
 

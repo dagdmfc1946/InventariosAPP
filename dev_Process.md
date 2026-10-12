@@ -1,7 +1,7 @@
 # Registro de desarrollo — InventariosAPP v2
 
-Estado actual: **Fases 1 y 2 publicadas; Fase 3 implementada localmente para revisión**.
-Versión visible: `v2.1.0` (12/10/2026). Fase 3 sin publicar; Fase 4 no iniciada.
+Estado actual: **Fases 1, 2 y 3 concluidas; publicación de Fase 3 autorizada**.
+Versión visible: `v2.1.1` (12/10/2026). Cierre/push de Fase 3 autorizado; Fase 4 no iniciada.
 Las entradas siguientes conservan los estados históricos de cada avance.
 
 ## 12/10/2026 — Análisis y propuesta
@@ -352,3 +352,31 @@ en `tasks/todo.md`; no marcar como implementado algo sólo propuesto. Mantener h
   B247D32672C3D77C9DF9F377C833061D79AAFF9A7010112AB9776096616F12E2, sin cambios.
 - Manual, CHANGELOG, README, plan y tareas actualizados para v2.1.0. Control F3 queda
   pendiente de revisión/aprobación del usuario; ningún push, merge ni inicio de Fase 4.
+
+
+## 12/10/2026 — Usabilidad y cierre autorizado de Fase 3, v2.1.1
+
+- El usuario solicita aclarar las opciones del alta, corregir la asimetría superior,
+  subir los cambios y esperar su aprobación para iniciar Fase 4.
+- Se mantiene categoría/referencia/nombre porque identifican el componente. La ubicación
+  sigue opcional. «Valor» pasa a «Valor técnico»: describe resistencia, capacitancia o
+  tensión; no dinero. El número de parte se identifica como código del fabricante.
+  Se conservan ambos campos opcionales para compatibilidad y búsqueda; sin eliminar datos
+  ni agregar campos redundantes. Atributos adicionales van en especificaciones; precios,
+  en ofertas existentes. Datos técnicos y límites quedan desplegables con ayudas.
+- Cabecera compartida: marca y sesión alineadas; navegación en una fila completa debajo.
+  En móvil se apilan de forma explícita. Estilos incluidos también en Administración.
+- Migración components.0004 de metadatos aplicada exclusivamente a .local/dev_v2 y
+  .local/ui_review_fase3. La revisión automática rechazó el primer comando porque no
+  expresaba el destino antes de migrar; no se ejecutó. La versión corregida fija ambos
+  destinos explícitamente y fue aprobada. No queda bloqueo.
+- SHA256 de db.sqlite3 original sigue siendo
+  B247D32672C3D77C9DF9F377C833061D79AAFF9A7010112AB9776096616F12E2.
+- Regresión: 108 pruebas correctas (92.669 s); check sin incidencias y makemigrations
+  --check --dry-run sin cambios. Alta visual ficticia RES-PRUEBA conserva 10 kΩ y 2 unidades.
+  Catálogo sin desbordamiento horizontal a 320, 768 y 1024 px; Administración revisada
+  en escritorio y 320 px. Evidencia local: .local/evidence/fase3_usabilidad_catalogo.png
+  y fase3_usabilidad_formulario.png (capturas ficticias, no versionadas).
+- Manual, CHANGELOG, plan, tareas y README sincronizados con v2.1.1. Se conserva el
+  historial de avances. Publicación normal de toda Fase 3 en dev_v2 autorizada;
+  sin merge a dev/main. Fase 4 requiere una nueva aprobación del usuario.

@@ -1,9 +1,9 @@
 # InventariosAPP — Plan de nueva versión
 
-Fecha de análisis: 12/10/2026. Estado: **Fases 1 y 2 publicadas; Fase 3 implementada localmente para revisión**.
+Fecha de análisis: 12/10/2026. Estado: **Fases 1, 2 y 3 concluidas; publicación de Fase 3 autorizada**.
 El usuario autorizó iniciar Fase 3 y unificar el encabezado de sesión en todas las vistas.
-Publicación de Fase 3 pendiente de aprobación; Fase 4 no iniciada.
-Versión visible: `v2.1.0`, fecha `12/10/2026`.
+El usuario autorizó subir Fase 3 tras los ajustes de usabilidad; Fase 4 no iniciada.
+Versión visible: `v2.1.1`, fecha `12/10/2026`.
 Plan ampliado a **cuatro fases** por solicitud del usuario: los pendientes de usuarios,
 PDF y ubicaciones se incorporan antes de ampliar la operación diaria y distribuir.
 Actualización del 12/10/2026: el usuario autorizó crear y subir `dev_v2` con esta
@@ -174,9 +174,9 @@ La publicación requiere tu aprobación separada; no la implica aprobar una fase
 ## Versionado vigente
 
 Por solicitud del usuario, desde el cierre aprobado de Fase 2 se usa `v2.x.x`,
-sin sufijos de desarrollo. La versión actual visible es **v2.1.0**, por las funcionalidades de Fase 3.
+sin sufijos de desarrollo. La versión actual visible es **v2.1.1**, con los ajustes de usabilidad del cierre de Fase 3.
 Se mantiene SemVer: MENOR para funcionalidades compatibles y PARCHE para correcciones.
-Ejemplos siguientes: `v2.2.0` para nuevas funciones y `v2.1.1` para una corrección.
+Ejemplos siguientes: `v2.2.0` para nuevas funciones y `v2.1.2` para otra corrección.
 Fuente de la regla: [SemVer](https://semver.org/lang/es/).
 
 La fuente única es `config/version.py`; almacena el número sin prefijo para mantener
@@ -184,7 +184,7 @@ el formato SemVer. El contexto compartido agrega `v` al mostrarlo en la interfaz
 
 ```python
 """Versión del software (SemVer 2.0.0: MAYOR.MENOR.PARCHE). Fuente única; ver CHANGELOG.md."""
-__version__ = "2.1.0"
+__version__ = "2.1.1"
 FECHA_VERSION = "12/10/2026"
 ```
 
@@ -266,7 +266,7 @@ Acá se encontrará documentado el desarrollo por fases conforme se vaya avanzan
 
 ## Evidencia de Fase 3 — 12/10/2026
 
-- Usuario autorizó implementación; aprobación de cierre/push pendiente.
+- Usuario autorizó implementación y publicación tras aclarar el alta y equilibrar la cabecera.
 - Sesión común en vistas propias y Admin, cambio de contraseña para usuarios normales;
   encabezados de Componentes centrados en catálogo y Administración.
 - Movimientos con motivo, vista previa y token firmado ligado a usuario/componente,
@@ -276,7 +276,7 @@ Acá se encontrará documentado el desarrollo por fases conforme se vaya avanzan
 - Duplicación técnica con referencia nueva y stock cero; sin ubicación, movimientos,
   PDF u ofertas. Proveedores/ofertas y creación contextual conservando campos.
 - Catálogo filtrado/paginado y resumen enlazado. Evidencia de pruebas y navegador
-  en dev_Process.md; Control F3 conserva la revisión pendiente del usuario.
+  en dev_Process.md; Control F3 concluido. Fase 4 requiere aprobación separada.
 
 ## Estado actual
 F1 completada: entorno virtual Python 3.12, dependencias mínimas y configuración segura preparados y verificados.

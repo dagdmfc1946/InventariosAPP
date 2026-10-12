@@ -1,0 +1,4 @@
+<div class="field {% if full_width %}full-width{% endif %}">
+<label for="{{ field.id_for_label }}">{{ field.label }}{% if not field.field.required %}<span class="optional">Opcional</span>{% endif %}</label>
+{{ field }}<div class="help" id="{{ field.id_for_label }}_help">{{ field.help_text }}</div><div class="field-errors" id="{{ field.id_for_label }}_errors" {% if field.errors %}role="alert"{% endif %}>{{ field.errors }}</div>
+</div>

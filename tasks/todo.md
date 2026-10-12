@@ -89,7 +89,7 @@ Evidencia T1–T6 en dev_Process.md. El usuario autorizó concluir y publicar Fa
 - [x] T15. Dashboard y acabado de interfaz. Depende de T13 y T14.
   Aceptación: indicadores enlazan filtros, teclado/móvil utilizables y permisos coherentes.
   Verificar navegador y regresión. Archivos: dashboard/views.py, templates, CSS y tests (5).
-- [ ] Control F3: flujo completo y comparación documentados; revisión del usuario y autorización de publicación pendientes.
+- [x] Control F3: flujo completo verificado y documentado; ajustes de usabilidad solicitados completados y publicación autorizada por el usuario el 12/10/2026.
 
 ## Fase 4 — Estabilización y distribución
 

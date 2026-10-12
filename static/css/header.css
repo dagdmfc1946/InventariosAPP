@@ -1,0 +1,16 @@
+.header-inner { max-width:1100px; display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:1rem 1.5rem; padding:1rem 1.5rem; }
+.header-inner > .brand { grid-column:1; grid-row:1; }
+.header-inner > .session { grid-column:2; grid-row:1; margin:0; }
+.header-inner > nav { grid-column:1 / -1; grid-row:2; width:100%; border-top:1px solid #d6e0e4; padding-top:.75rem; gap:1.5rem; }
+#header { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:1rem 1.5rem; height:auto; }
+#header #branding { display:contents; }
+#header .inventory-brand { grid-column:1; grid-row:1; }
+#header #user-tools { grid-column:2; grid-row:1; margin:0; }
+#header .inventory-nav { grid-column:1 / -1; grid-row:2; width:100%; border-top:1px solid #d6e0e4; padding-top:.75rem; gap:1.5rem; }
+@media (max-width:700px) {
+ .header-inner, body #header { grid-template-columns:minmax(0,1fr); gap:.75rem; padding:1rem; }
+ .header-inner > .session, #header #user-tools { grid-column:1; grid-row:2; width:100%; }
+ .header-inner > nav, #header .inventory-nav { grid-row:3; gap:.75rem 1rem; }
+ .inventory-session .inventory-user { flex-basis:100%; }
+ .inventory-session .inventory-session-action, #header .inventory-session .inventory-session-action { padding:8px; font-size:12px; }
+}
