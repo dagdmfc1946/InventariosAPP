@@ -301,3 +301,9 @@ en `tasks/todo.md`; no marcar como implementado algo sólo propuesto. Mantener h
 - Migración aditiva inventory.0005 aplicada sólo a la copia de desarrollo, tras snapshot .local/checkpoints/fase2_before_fase3. Movimientos previos conservan identificador nulo.
 - 26 pruebas de flujo/integridad correctas; ajuste de validación de vista previa y repetición verificado con seis pruebas del flujo. Salidas insuficientes, límites, permisos, CSRF y rollback cubiertos.
 - Sin push ni cambios en base operativa original.
+
+## 12/10/2026 — Fase 3, T10: duplicación técnica
+
+- Copia categoría, valor, número de parte y especificaciones con referencia nueva. Stock cero, sin ubicación, historial, PDF ni ofertas.
+- Guardado atómico y permisos para alta/especificaciones. Tres pruebas correctas: copia selectiva, rollback y rechazo sin permisos.
+- Se corrigió la prueba del saldo original para consultar la base en vez de una relación cacheada; el saldo original se conserva.
