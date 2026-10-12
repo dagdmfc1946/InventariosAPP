@@ -182,3 +182,25 @@ en `tasks/todo.md`; no marcar como implementado algo sólo propuesto. Mantener h
   sus controles sin solapamiento; ancho de documento no supera viewport375px.
   Hash operativo comprobado de nuevo: B247D32672C3D77C9DF9F377C833061D79AAFF9A7010112AB9776096616F12E2.
   Servidor propio de prueba detenido; no se detuvo el servidor del usuario en 8001.
+
+## 12/10/2026 — Cierre y publicación autorizados de Fase 1
+
+- El usuario aprobó el resultado, pidió mejorar las acciones de sesión de su captura
+  y autorizó subir toda la Fase 1 al repositorio. Fase 2 requiere aprobación posterior.
+- Encabezado: avatar con inicial, identificación de sesión y dos botones separados,
+  sin barra separadora ni textos pegados. Salir conserva POST/CSRF; cambio de contraseña
+  conserva ruta nativa Django. Ningún cambio a cuentas ni contraseñas.
+- Revisión visual en base ficticia .local/ui_review: escritorio y viewport375px sin
+  desbordamiento; botones de 40px de altura. Captura .local/evidence/fase1_sesion.jpg.
+  Consola sin advertencias/errores. Servidor de pruebas propio detenido al terminar.
+- Regresión completa: 61 pruebas correctas; check sin incidencias;
+  makemigrations --check --dry-run sin cambios; diff --check correcto.
+- Documentación y control F1 actualizados. Fuente única de versión sigue
+  2.0.0-dev.1: entrega de desarrollo de Fase 1, sin tag ni release final.
+- Se actualizó la referencia remota mediante fetch: origin/dev_v2 no tiene commits
+  exclusivos y permite publicación normal de los commits locales. Publicación
+  autorizada exclusivamente a origin/dev_v2, sin force ni integración a dev/main.
+- Al completar el push se comprueba igualdad de HEAD y origin/dev_v2 y ausencia de
+  cambios pendientes en archivos versionados. Código/documentación de Fase 1 quedan
+  juntos en esa rama. Datos, secretos, entornos y archivos personales preexistentes
+  permanecen locales: .venv_backup/ e info_project.txt no forman parte de Fase 1.

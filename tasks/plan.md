@@ -9,7 +9,8 @@ Por solicitud del usuario, el plan se amplía a cuatro fases:
 3. Operación diaria dinámica, filtros, movimientos y proveedores.
 4. Estabilización, recuperación y distribución local con Waitress/PyInstaller.
 
-Fase 1 implementada localmente, pendiente de revisión. Fases 2–4 no iniciadas.
-La documentación inicial está publicada; desarrollo y documentación nueva siguen
-locales en dev_v2. Push, merge y publicación requieren aprobación explícita.
+Fase 1 concluida; el usuario autorizó subir todo su código y documentación a dev_v2.
+La rama local se mantiene sincronizada con origin/dev_v2 tras esa publicación.
+Fases 2–4 no iniciadas: Fase 2 requiere nueva revisión y aprobación.
+Esta autorización no incluye merge a dev/main ni una release final.
 Destino: PC Windows local; el proyecto Linux mencionado sólo recibió orientación.

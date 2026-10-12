@@ -11,9 +11,16 @@
     <a href="{% url 'admin:index' %}" aria-current="page">Administración</a>
 </nav>
 {% endblock %}
-{% block welcome-msg %}<strong>{{ user.get_username }}</strong>{% endblock %}
-{% block userlinks %}
-    {% if user.has_usable_password %}<a href="{% url 'admin:password_change' %}">Cambiar contraseña</a> /{% endif %}
-    <form id="logout-form" method="post" action="{% url 'admin:logout' %}">{% csrf_token %}<button type="submit">Salir</button></form>
+{% block usertools %}
+{% if has_permission %}
+<div id="user-tools" aria-label="Opciones de sesión">
+    <div class="inventory-user">
+        <span class="inventory-avatar" aria-hidden="true">{{ user.get_username|slice:':1'|upper }}</span>
+        <span><span class="inventory-user-label">Sesión activa</span><strong>{{ user.get_username }}</strong></span>
+    </div>
+    {% if user.has_usable_password %}<a class="inventory-session-action" href="{% url 'admin:password_change' %}">Cambiar contraseña</a>{% endif %}
+    <form id="logout-form" method="post" action="{% url 'admin:logout' %}">{% csrf_token %}<button class="inventory-session-action inventory-signout" type="submit">Salir</button></form>
+</div>
+{% endif %}
 {% endblock %}
 {% block footer %}<span>Inventario de componentes electrónicos</span><span>Versión {{ software_version }} · {{ software_date }}</span>{% endblock %}

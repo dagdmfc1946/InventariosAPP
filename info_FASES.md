@@ -1,6 +1,7 @@
 # InventariosAPP — Plan de nueva versión
 
-Fecha de análisis: 12/10/2026. Estado: **Fase 1 implementada localmente; pendiente de revisión del usuario**.
+Fecha de análisis: 12/10/2026. Estado: **Fase 1 concluida; publicación en dev_v2 autorizada por el usuario**.
+La Fase 2 queda pendiente de nueva revisión y aprobación explícita.
 Versión de desarrollo: `2.0.0-dev.1`, fecha `12/10/2026`. Fases 2, 3 y 4 no iniciadas.
 Plan ampliado a **cuatro fases** por solicitud del usuario: los pendientes de usuarios,
 PDF y ubicaciones se incorporan antes de ampliar la operación diaria y distribuir.

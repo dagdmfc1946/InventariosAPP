@@ -1,9 +1,9 @@
-# Tareas v2 — Fase 1 implementada; revisión pendiente
+# Tareas v2 — Fase 1 concluida; Fase 2 pendiente de aprobación
 
 Plan: ../info_FASES.md. Evidencia de ejecución: ../dev_Process.md.
 Cada unidad se mantiene pequeña; si supera cinco archivos de implementación se divide
 antes de ejecutarse. Documentación de avance acompaña cada unidad.
-Evidencia T1–T6 en dev_Process.md. El control de F1 espera revisión del usuario.
+Evidencia T1–T6 en dev_Process.md. El usuario autorizó concluir y publicar Fase 1.
 
 ## Fase 1
 
@@ -41,7 +41,9 @@ Evidencia T1–T6 en dev_Process.md. El control de F1 espera revisión del usuar
   Verificar login propio, rechazo de cuentas inactivas y administración de cuentas restringida.
 - [x] T6c. Guardar PDF y continuar, volver a guardar sin archivo nuevo y recuperar PDF faltante.
   Error intermitente original sin causa confirmada; caso de archivo faltante reproducido/corregido.
-- [ ] Control F1: suite y check pasan; alta visible en búsqueda/Admin; revisión del usuario.
+- [x] Control F1: suite y check pasan; alta visible en búsqueda/Admin; revisión del usuario.
+  Ajuste final del encabezado de sesión completado. Publicación en dev_v2 autorizada;
+  Fase 2 espera revisión nueva. No integrar a dev/main.
 
 ## Fase 2 — Ubicaciones, permisos y ficha
 

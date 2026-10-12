@@ -21,7 +21,7 @@ No se atribuye una versión retrospectiva a la aplicación actual.
 - 18 pruebas correctas y comprobación Django sin incidencias.
 - Ningún cambio funcional, de dependencias, de esquema ni de datos operativos.
 
-## [2.0.0-dev.1] — 12/10/2026 — Desarrollo local, pendiente de revisión
+## [2.0.0-dev.1] — 12/10/2026 — Fase 1 concluida en dev_v2
 
 ### Añadido
 
@@ -77,6 +77,15 @@ No se atribuye una versión retrospectiva a la aplicación actual.
 - Suite ampliada: 61 pruebas correctas, check sin incidencias y migraciones coherentes.
   Revisión visual de administrador/listados/formulario de usuario, cabecera a 375 px;
   consola sin advertencias/errores y hash del SQLite operativo sin cambios.
+
+### Cierre autorizado — 12/10/2026
+
+- Encabezado de sesión con avatar, nombre de usuario y acciones separadas en botones:
+  Cambiar contraseña y Salir. Adaptación móvil y cierre mediante POST/CSRF conservados.
+- El usuario aprobó concluir Fase 1 y subir todo su desarrollo/documentación a dev_v2.
+  La Fase 2 no se inicia hasta nueva revisión y aprobación; dev/main no se integran.
+- 61 pruebas correctas; check y coherencia de migraciones correctos. Encabezado
+  revisado en escritorio y a 375px, sin desbordamiento ni errores de consola.
 
 ## Referencia anterior sin etiqueta SemVer comprobada
 

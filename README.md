@@ -2,7 +2,8 @@
 
 ## Desarrollo v2 — rama dev_v2
 
-Fase 1 implementada, pendiente de revisión. Versión de desarrollo `2.0.0-dev.1`.
+Fase 1 concluida en `dev_v2`. Versión de desarrollo `2.0.0-dev.1`.
+La Fase 2 espera nueva revisión y aprobación del usuario.
 Esta sección prevalece para la rama v2; la documentación inferior conserva la referencia
 de instalación y comportamiento de la primera versión.
 
@@ -35,6 +36,9 @@ Abrir `/components/new/` o `/search/`; usar las credenciales habituales de la co
 El nuevo login está en `/accounts/login/`. Se requieren los permisos de agregar componente,
 stock y movimiento; el superusuario los tiene. El logout se realiza con botón POST.
 No copiar los nuevos archivos sobre dev/main para probar: cambiar de rama de manera controlada.
+El código y la documentación de Fase 1 se mantienen juntos en `dev_v2`, tanto localmente
+como en GitHub. La base, los PDF, secretos y entornos virtuales permanecen locales y
+fuera de Git. La copia `.local/dev_v2` permite revisar v2 sin alterar los datos de `dev`.
 
 ### Verificación y documentos
 
