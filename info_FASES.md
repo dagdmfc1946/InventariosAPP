@@ -1,4 +1,195 @@
-# InventariosAPP
+# InventariosAPP — Plan de nueva versión
+
+Fecha de análisis: 12/10/2026. Estado: **propuesta pendiente de aprobación**.
+Actualización del 12/10/2026: el usuario autorizó crear y subir `dev_v2` con esta
+documentación antes de iniciar Fase 1. Destino confirmado: su PC Windows, uso local,
+con empaquetado PyInstaller al finalizar. Desarrollo funcional pendiente de inicio.
+Este archivo corresponde a `info_Fases.md` solicitado: en Windows ambas grafías
+resuelven al mismo archivo. Se conserva el nombre registrado en Git y el historial
+original al final para no perder trazabilidad.
+
+## Objetivo y límites
+
+Reducir el trabajo necesario para registrar componentes y mantener su inventario,
+partiendo del aplicativo funcional existente. No se reconstruirá desde cero.
+La aprobación de este plan autorizará crear `dev_v2` desde el estado actual e iniciar
+únicamente Fase 1. Fases 2 y 3 quedan propuestas para revisión posterior.
+Ningún push, integración en `dev`/`main` ni publicación se hará sin aprobación explícita.
+
+Supuestos: uso principal local en Windows, un administrador, Django con plantillas,
+SQLite y una ubicación por componente. Se propone mantener herramientas gratuitas,
+sin SPA ni servicios externos obligatorios. Uso en red o varios usuarios simultáneos
+requiere revisar despliegue, permisos y concurrencia antes de habilitarlo.
+
+## Diagnóstico basado en el código
+
+- Base: rama `dev`, commit `842afd1`; Django 5.2.6 y python-decouple 3.8.
+- Hay categorías, componentes, especificaciones, ofertas, ubicaciones, stock,
+  movimientos y PDF. Django Admin permite mantenerlos; buscador y dashboard son propios.
+- `ComponentAdmin` integra especificaciones, pero stock, ubicación y PDF se gestionan
+  por separado. No existe todavía una pantalla propia para crear componentes.
+- Las plantillas de búsqueda y dashboard son HTML básico, sin una navegación común.
+- La búsqueda consulta referencia, nombre, valor, part number y categoría; no tiene
+  paginación real aunque README la menciona.
+- `StockMovement.save()` aplica el movimiento cada vez que se guarda, también si ya
+  existía. La creación y actualización del saldo no están en una transacción explícita.
+  Editar/eliminar movimientos o editar directamente el saldo puede desalinear historial.
+  La suite no cubre esas operaciones ni concurrencia.
+- Buscador y dashboard no exigen autenticación en sus vistas. Los PDF se sirven por
+  rutas de desarrollo cuando DEBUG está activo. Esto debe revisarse para uso en red.
+- La validación de datasheets comprueba extensión y tamaño, pero no su contenido.
+- El respaldo copia archivos: falta verificar consistencia con la base en uso y una
+  restauración que no deje archivos antiguos mezclados con los restaurados.
+- Configuración actual: Europe/Madrid, DEBUG por defecto activo y sin STATIC_ROOT.
+- No se encontró fuente de versión `__version__` ni `FECHA_VERSION` en apps/config.
+- Verificación del 12/10/2026: 18 pruebas pasan; `manage.py check` sin incidencias.
+  No se inspeccionaron los datos personales de la base ni se validó visualmente el navegador.
+
+## Uso de las skills compartidas
+
+El enlace corresponde a una colección. Se consultó y aplicó
+[planning-and-task-breakdown](https://github.com/addyosmani/agent-skills/blob/main/skills/planning-and-task-breakdown/SKILL.md)
+para ordenar tareas con aceptación y verificación. La
+[guía de adopción](https://github.com/addyosmani/agent-skills/blob/main/docs/adoption-guide.md)
+orienta la incorporación gradual en proyectos existentes. Sus documentos son guía
+técnica; tus instrucciones sobre rama, archivos y aprobación tienen prioridad.
+Se consultó también spec-driven-development como referencia; sus convenciones de
+archivos y etapas no sustituyen el plan de tres fases solicitado.
+
+No se instaló globalmente el paquete ni se ejecutaron sus scripts. Durante el desarrollo
+se leerán las skills aplicables de implementación incremental, pruebas, UI, seguridad,
+revisión y versionado antes de usarlas. Se registrará la revisión consultada para
+reproducir el proceso. Índice técnico: `tasks/plan.md`; tareas: `tasks/todo.md`.
+
+## Fase 1 — Integridad y primer flujo de alta rápida
+
+**Resultado:** crear un componente y su stock desde una pantalla propia, con un único guardado.
+
+1. Crear `dev_v2` después de aprobación, partiendo del estado actual de `dev`;
+   registrar commit de origen y conservar archivos locales preexistentes.
+   Preparar una copia de trabajo de SQLite y media: una rama Git no aísla esos datos.
+   Las pruebas y migraciones se harán sobre esa copia, preservando la base operativa.
+2. Incorporar una fuente única en `config/version.py`, mostrar versión en la interfaz
+   y asociar cambios y fecha a CHANGELOG. Ajustar zona horaria a America/Bogota.
+3. Cubrir con pruebas y corregir movimientos: guardado atómico, saldo no negativo,
+   límites coherentes y protección contra doble aplicación. Movimientos históricos
+   serán inmutables; errores se compensarán con otro movimiento motivado. Bloquear
+   edición directa de cantidad en Admin una vez registrado el saldo.
+   Diseñar la actualización condicional compatible con SQLite; no asumir que
+   select_for_update proporciona bloqueo de filas en SQLite.
+4. Implementar alta mínima autenticada: categoría existente, referencia, nombre,
+   valor/part number opcionales, cantidad inicial y límites de stock.
+   Crear componente y stock en una transacción, con entrada inicial cuando sea > 0.
+   Stock cero no genera movimiento de cantidad cero. Mantener protección de duplicados
+   por categoría/referencia y mostrar errores junto a los campos.
+5. Añadir plantilla compartida, navegación, mensajes en español, botón Nuevo componente
+   y opciones Guardar / Guardar y agregar otro. Conservar Django Admin como herramienta
+   de mantenimiento. Definir autorización con permisos Django en las nuevas vistas.
+
+**Aceptación:** alta con un solo envío; stock disponible inmediatamente; datos inválidos
+no dejan registros parciales; re-guardar un movimiento no duplica saldo; salidas
+insuficientes se rechazan; los flujos antiguos siguen funcionando. Actualizar manual
+y registro de proceso con evidencia real. Revisión contigo al cerrar Fase 1.
+
+## Fase 2 — Ficha completa y operación diaria dinámica
+
+**Dependencia:** Fase 1 validada.
+
+**Resultado:** completar y consultar un componente sin recorrer varios modelos de Admin.
+
+1. Ficha con edición de datos y ubicación opcional; especificaciones en filas
+   agregables/eliminables, con validación de atributo duplicado.
+2. Alta contextual de categoría sin perder lo escrito, y duplicación de datos técnicos
+   de un componente. Duplicar nunca copia stock, movimientos ni adjuntos automáticamente.
+3. Adjuntar PDF desde la ficha con límite de 20 MB, validación adicional de contenido
+   y manejo de archivos fallidos sin huérfanos. Integrar ofertas de proveedores como
+   sección opcional reutilizando modelos actuales.
+4. Acciones Entrada, Salida y Ajuste desde la ficha; ajuste se presenta como diferencia
+   con signo, con vista previa del saldo y motivo obligatorio. Mostrar historial.
+5. Catálogo con filtros separados por categoría, disponibilidad y bajo stock, paginación
+   de 25 registros y enlaces a ficha. Dashboard con indicadores que llevan al filtro
+   correspondiente. Interfaz adaptable a móvil y teclado, con estados vacíos claros.
+
+**Aceptación:** completar ficha, cargar PDF y registrar movimiento desde el flujo propio;
+mantener filtros al paginar; conservar saldos de componentes existentes; validar campos
+y permisos en servidor aunque falle JavaScript. Medir pasos del flujo anterior y nuevo
+con el mismo caso; documentar resultados sin inventar tiempos. Prueba manual contigo.
+
+## Fase 3 — Estabilización y distribución
+
+**Dependencia:** Fase 2 validada. Destino elegido: PC Windows local.
+
+1. Ejecutar regresión funcional y revisión de permisos, CSRF, PDF y configuración.
+   Revisar actualizaciones de seguridad de dependencias con fuentes oficiales y probar
+   cualquier actualización. Medir consultas antes de optimizar.
+2. Respaldos consistentes de SQLite y media, restauración verificable sobre carpeta
+   aislada, documentación de recuperación y política de actualización sin perder datos.
+3. Ruta propuesta para Windows: Waitress, arranque local sencillo, datos persistentes
+   fuera del programa y servicio de estáticos/PDF diseñado para DEBUG=False. Preparar
+   paquete con PyInstaller al finalizar; validar en Windows sin Python instalado.
+4. Limitar la escucha a 127.0.0.1, permitir operación sin Internet y probar arranque,
+   cierre y actualización local. El despliegue Linux/Gunicorn queda fuera del alcance:
+   el usuario confirmó que la consulta se refería a otro proyecto.
+5. Cerrar manual, CHANGELOG, dev_Process y notas de versión con resultados y limitaciones.
+   Entregar candidato para tu revisión antes de subir cualquier cambio.
+
+**Aceptación:** instalación/arranque reproducibles en el destino elegido, estáticos/PDF
+disponibles con DEBUG=False, restauración probada y actualización conserva información.
+La publicación requiere tu aprobación separada; no la implica aprobar una fase.
+
+## Versionado propuesto
+
+Se utilizará SemVer 2.0.0: MAYOR para incompatibilidad del contrato soportado, MENOR
+para funcionalidades compatibles y PARCHE para correcciones compatibles.
+Fuente de la regla: [SemVer](https://semver.org/lang/es/).
+
+El número 2.1.7 y la fecha 11/10/2026 se toman como ejemplo de formato, no como prueba
+de una versión publicada. Se propone iniciar desarrollo con `2.0.0-dev.1` y fechar
+cada versión el día real de emisión; `2.0.0` será la primera entrega de esta línea v2
+si apruebas la convención. Sin historia SemVer existente, esta numeración establece
+la línea base y no afirma una incompatibilidad anterior. Si deseas exactamente 2.1.7,
+se ajustará antes de implementar; no se inventarán versiones intermedias.
+
+Ejemplo para la futura fuente única (todavía no creado como código):
+
+```python
+"""Versión del software (SemVer 2.0.0: MAYOR.MENOR.PARCHE). Fuente única; ver CHANGELOG.md."""
+__version__ = "2.0.0-dev.1"
+FECHA_VERSION = "12/10/2026"  # Ejemplo: se actualizará a la fecha real de emisión.
+```
+
+CHANGELOG describe cada versión; la interfaz y otras partes del programa importarán
+las constantes sin mantener copias independientes. Cada fase no implica necesariamente
+un aumento de MAYOR/MENOR; el incremento depende de los cambios entregados.
+
+## Verificación y riesgos
+
+Comandos desde la raíz, usando la base de trabajo aislada cuando se configure:
+
+```powershell
+.\.venv\Scripts\python.exe manage.py test --noinput
+.\.venv\Scripts\python.exe manage.py check
+.\.venv\Scripts\python.exe manage.py makemigrations --check --dry-run
+```
+
+Las nuevas pruebas cubrirán transacciones, permisos, duplicados, límites, edición de
+movimientos, envío repetido y regresión de Admin. Pruebas de navegador para alta,
+errores, ficha y filtros. `check --deploy` se evaluará con configuración de distribución,
+distinguiendo requisitos de HTTPS para servidor de ejecución exclusiva en localhost.
+
+Riesgos: Git no conserva SQLite/media; usar backup y copia aislada. Transacciones de
+base no revierten archivos; diseñar limpieza de cargas fallidas. Concurrencia SQLite
+limitada; probar escrituras simultáneas antes de prometer uso multiusuario. No resetear
+base, no reescribir migraciones aplicadas ni recalcular saldos históricos sin análisis.
+Componentes previos sin stock necesitan diagnóstico antes de una migración de datos.
+Historial anterior no permite deducir todo saldo inicial: no fabricar movimientos.
+
+Fuera del alcance inicial: múltiples almacenes, lector de códigos, compras/contabilidad,
+importación masiva y sincronización cloud. Se pueden planear después de validar este flujo.
+
+---
+
+# Historial de la versión anterior (conservado)
 Acá se encontrará documentado el desarrollo por fases conforme se vaya avanzando con el proyecto, la idea es ir acutalizando la documentación cada vez que se haga un cambio en una fase en específico y/o se agreguen cambios.
 
 ## Estado actual
