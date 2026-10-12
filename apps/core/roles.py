@@ -10,6 +10,7 @@ def configure_inventory_roles():
         'components': ('add_component', 'change_component', 'add_category', 'add_specification', 'change_specification', 'delete_specification'),
         'inventory': ('add_location', 'change_location', 'add_stock', 'change_stock', 'add_stockmovement'),
         'documents': ('add_datasheet', 'change_datasheet'),
+        'suppliers': ('add_supplier', 'change_supplier', 'add_supplieroffer', 'change_supplieroffer'),
     }
     writable = []
     for app, codenames in changes.items():

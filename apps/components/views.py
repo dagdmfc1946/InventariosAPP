@@ -9,6 +9,7 @@ from .forms import CategoryContextForm, ComponentEditForm, ComponentQuickCreateF
 from .models import Category, Component
 from apps.core.access import inventory_read_required
 from .services import create_component_with_stock
+from .detail_context import component_detail_context
 
 
 @login_required
@@ -87,8 +88,7 @@ def handle_location_action(request, data):
 @require_http_methods(['GET'])
 def component_detail(request, pk):
     component = get_object_or_404(Component.objects.select_related('category', 'location', 'stock').prefetch_related('specifications', 'datasheets'), pk=pk)
-    from apps.documents.forms import DatasheetUploadForm
-    return render(request, 'components/component_detail.html', {'component': component, 'upload_form': DatasheetUploadForm(), 'movements': component.stock.movements.all()[:25] if hasattr(component, 'stock') and request.user.has_perm('inventory.view_stockmovement') else []})
+    return render(request, 'components/component_detail.html', component_detail_context(request, component))
 
 
 @login_required

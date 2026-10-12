@@ -27,6 +27,7 @@ class CatalogFilterTests(TestCase):
             self.assertEqual(response.status_code, 200)
         response = self.client.get(reverse('component_search'), {'availability': 'empty'})
         self.assertEqual([item.reference for item in response.context['components']], ['S0'])
+        self.assertEqual(self.client.get(reverse('component_search'), {'category': '9' * 100}).status_code, 200)
 
     def test_dashboard_links_to_matching_catalog_filters(self):
         response = self.client.get(reverse('dashboard'))

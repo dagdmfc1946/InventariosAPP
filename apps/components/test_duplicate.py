@@ -1,5 +1,6 @@
 from unittest.mock import patch
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Permission
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 from django.urls import reverse
@@ -44,3 +45,13 @@ class DuplicateComponentTests(TestCase):
     def test_reader_cannot_duplicate(self):
         self.client.force_login(get_user_model().objects.create_user('lector'))
         self.assertEqual(self.client.post(self.url, {'reference': 'S2', 'name': 'Sensor'}).status_code, 403)
+
+    def test_specification_permission_only_required_when_source_has_specs(self):
+        user = get_user_model().objects.create_user('alta_basica')
+        user.user_permissions.add(*Permission.objects.filter(codename__in=('add_component', 'view_component', 'add_stock')))
+        self.client.force_login(user)
+        self.assertNotContains(self.client.get(reverse('component_detail', args=[self.source.pk])), '>Duplicar</a>')
+        self.assertEqual(self.client.post(self.url, {'reference': 'S3', 'name': 'Sensor'}).status_code, 403)
+        plain = Component.objects.create(category=self.source.category, reference='S2', name='Básico')
+        self.assertContains(self.client.get(reverse('component_detail', args=[plain.pk])), '>Duplicar</a>')
+        self.assertEqual(self.client.post(reverse('component_duplicate', args=[plain.pk]), {'reference': 'S3', 'name': 'Otro'}).status_code, 302)

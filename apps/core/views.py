@@ -67,11 +67,11 @@ def component_search(request):
         )
 
     if ordering == '-stock':
-        components = components.order_by('-stock__quantity', 'name', 'reference')
+        components = components.order_by('-stock__quantity', 'name', 'reference', 'pk')
     elif ordering == 'stock':
-        components = components.order_by('stock__quantity', 'name', 'reference')
+        components = components.order_by('stock__quantity', 'name', 'reference', 'pk')
     else:
-        components = components.order_by('name', 'reference')
+        components = components.order_by('name', 'reference', 'pk')
 
     page = Paginator(components, 25).get_page(request.GET.get('page'))
     params = request.GET.copy()

@@ -17,6 +17,7 @@
                 <a href="{% url 'component_search' %}" {% if request.resolver_match.url_name == 'component_search' %}aria-current="page"{% endif %}>Componentes</a>
                 <a href="{% url 'dashboard' %}" {% if request.resolver_match.url_name == 'dashboard' %}aria-current="page"{% endif %}>Resumen</a>
                 {% if perms.inventory.view_location %}<a href="{% url 'location_list' %}">Ubicaciones</a>{% endif %}
+                {% if perms.suppliers.view_supplier %}<a href="{% url 'supplier_list' %}">Proveedores</a>{% endif %}
                 {% if user.is_staff %}<a href="{% url 'admin:index' %}">Administración</a>{% endif %}
             </nav>
             <div class="session">

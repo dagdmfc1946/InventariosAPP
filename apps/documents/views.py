@@ -11,6 +11,7 @@ from apps.core.access import inventory_read_required
 from .forms import DatasheetUploadForm
 from .models import Datasheet
 from .services import create_datasheet
+from apps.components.detail_context import component_detail_context
 
 
 @inventory_read_required
@@ -32,7 +33,7 @@ def datasheet_upload(request, pk):
         else:
             messages.success(request, 'Ficha técnica adjuntada.')
             return redirect('component_detail', pk=pk)
-    return render(request, 'components/component_detail.html', {'component': component, 'upload_form': form})
+    return render(request, 'components/component_detail.html', component_detail_context(request, component, form))
 
 
 def pdf_response(request, sheet):

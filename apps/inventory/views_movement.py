@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import permission_required
 from django.core.exceptions import ValidationError
 from django.db import DatabaseError
 from django.shortcuts import get_object_or_404, redirect, render
@@ -20,7 +20,7 @@ def component_movement(request, pk):
     if request.method == 'POST' and form.is_valid():
         if request.POST.get('action') == 'preview':
             preview = True
-        else:
+        elif request.POST.get('action') == 'register':
             try:
                 _, created = register_component_movement(component, request.user, form.cleaned_data, form.operation)
             except ValidationError as error:
@@ -30,4 +30,6 @@ def component_movement(request, pk):
             else:
                 messages.success(request, 'Movimiento registrado.' if created else 'Este movimiento ya estaba registrado; no se aplicó nuevamente.')
                 return redirect('component_detail', pk=component.pk)
+        else:
+            form.add_error(None, 'Selecciona Ver saldo previsto o Registrar movimiento.')
     return render(request, 'inventory/component_movement.html', {'component': component, 'form': form, 'preview': preview})

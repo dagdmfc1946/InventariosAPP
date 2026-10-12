@@ -8,6 +8,8 @@
 <nav class="inventory-nav" aria-label="Navegación principal">
     <a href="{% url 'component_search' %}">Componentes</a>
     <a href="{% url 'dashboard' %}">Resumen</a>
+    {% if perms.inventory.view_location %}<a href="{% url 'location_list' %}">Ubicaciones</a>{% endif %}
+    {% if perms.suppliers.view_supplier %}<a href="{% url 'supplier_list' %}">Proveedores</a>{% endif %}
     <a href="{% url 'admin:index' %}" aria-current="page">Administración</a>
 </nav>
 {% endblock %}

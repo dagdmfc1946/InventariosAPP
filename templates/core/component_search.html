@@ -17,7 +17,7 @@
         <div><label for="availability">Disponibilidad</label><select id="availability" name="availability"><option value="">Todas</option><option value="available" {% if availability == 'available' %}selected{% endif %}>Con existencias</option><option value="empty" {% if availability == 'empty' %}selected{% endif %}>Sin existencias</option></select></div>
         <div><label for="attention">Revisar</label><select id="attention" name="attention"><option value="">Todos</option><option value="low" {% if attention == 'low' %}selected{% endif %}>Existencias bajas</option><option value="no_pdf" {% if attention == 'no_pdf' %}selected{% endif %}>Sin ficha técnica</option><option value="no_offer" {% if attention == 'no_offer' %}selected{% endif %}>Sin oferta</option></select></div>
         <button class="button secondary" type="submit">Buscar</button>
-    </form><p class="muted">{{ page_obj.paginator.count }} componentes encontrados · <a href="{% url 'component_search' %}">Limpiar filtros</a></p>
+    </form><p class="muted">{{ page_obj.paginator.count }} {% if page_obj.paginator.count == 1 %}componente encontrado{% else %}componentes encontrados{% endif %} · <a href="{% url 'component_search' %}">Limpiar filtros</a></p>
 
     <div class="table-wrap"><table class="component-table"><caption class="help">Resultados de búsqueda de componentes</caption><thead><tr><th scope="col">Componente</th><th scope="col">Categoría</th><th scope="col">Valor</th><th scope="col" class="numeric">Existencias</th></tr></thead><tbody>
         {% for component in components %}

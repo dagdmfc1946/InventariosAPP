@@ -1,4 +1,6 @@
 from unittest.mock import patch
+import time
+import uuid
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.test import TestCase, Client
@@ -18,7 +20,7 @@ class MovementFlowTests(TestCase):
 
     def data(self, **kwargs):
         result = {'token': MovementForm(component=self.component, user=self.user).initial['token'],
-                  'movement_type': 'exit', 'quantity': '3', 'reason': 'Uso en proyecto'}
+                  'movement_type': 'exit', 'quantity': '3', 'reason': 'Uso en proyecto', 'action': 'register'}
         result.update(kwargs)
         return result
 
@@ -75,3 +77,41 @@ class MovementFlowTests(TestCase):
         other = Component.objects.create(category=self.component.category, reference='S2', name='Otro')
         self.assertContains(self.client.post(reverse('component_movement', args=[other.pk]), data), 'no corresponde')
         self.assertEqual(StockMovement.objects.count(), 1)
+
+    def test_repeated_large_exit_and_unknown_action(self):
+        data = self.data(quantity=7)
+        self.assertEqual(self.client.post(self.url, {**data, 'action': 'unknown'}).status_code, 200)
+        for _ in range(2):
+            self.assertEqual(self.client.post(self.url, data).status_code, 302)
+        self.assertEqual(Stock.objects.get(pk=self.stock.pk).quantity, 3)
+        self.assertEqual(StockMovement.objects.count(), 1)
+
+    def test_complete_history_is_paginated_on_component(self):
+        for _ in range(26):
+            StockMovement.objects.create(stock=self.stock, movement_type='adjustment', quantity=-1 if _ % 2 else 1)
+        response = self.client.get(reverse('component_detail', args=[self.component.pk]), {'movements_page': 2})
+        self.assertEqual(response.context['movements'].paginator.count, 26)
+        self.assertEqual(len(response.context['movements']), 1)
+
+    def test_missing_stock_created_at_zero_before_entry(self):
+        other = Component.objects.create(category=self.component.category, reference='S2', name='Sin existencias')
+        data = self.data(movement_type='entry', quantity=4)
+        data['token'] = MovementForm(component=other, user=self.user).initial['token']
+        self.assertEqual(self.client.post(reverse('component_movement', args=[other.pk]), data).status_code, 302)
+        self.assertEqual(Stock.objects.get(component=other).quantity, 4)
+
+    def test_expired_token_and_other_session_cannot_write(self):
+        data = self.data()
+        with patch('django.core.signing.time.time', return_value=time.time() + 3601):
+            self.assertContains(self.client.post(self.url, data), 'formulario venció')
+        other = get_user_model().objects.create_superuser('otra_sesion', password='Test-7394!')
+        self.client.force_login(other)
+        self.assertContains(self.client.post(self.url, data), 'no corresponde')
+        self.assertFalse(StockMovement.objects.exists())
+
+    def test_operation_identifier_is_immutable(self):
+        self.client.post(self.url, self.data())
+        movement = StockMovement.objects.get()
+        movement.request_id = uuid.uuid4()
+        with self.assertRaises(ValidationError):
+            movement.save()

@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}Proveedor{% endblock %}
+{% block content %}
+<a class="back-link" href="{% url 'supplier_list' %}">← Volver a proveedores</a>
+<div class="page-heading"><h1>{% if supplier.pk %}Editar proveedor{% else %}Nuevo proveedor{% endif %}</h1></div>
+<form class="panel create-form" method="post">{% csrf_token %}<div class="form-grid">{% include 'includes/form_fields.html' %}</div><div class="form-actions"><button class="button" type="submit">Guardar proveedor</button><a href="{% url 'supplier_list' %}">Cancelar</a></div></form>
+{% endblock %}
