@@ -1,9 +1,10 @@
 # InventariosAPP — Plan de nueva versión
 
-Fecha de análisis: 12/10/2026. Estado: **propuesta pendiente de aprobación**.
+Fecha de análisis: 12/10/2026. Estado: **Fase 1 implementada localmente; pendiente de revisión del usuario**.
+Versión de desarrollo: `2.0.0-dev.1`, fecha `12/10/2026`. Fases 2 y 3 no iniciadas.
 Actualización del 12/10/2026: el usuario autorizó crear y subir `dev_v2` con esta
 documentación antes de iniciar Fase 1. Destino confirmado: su PC Windows, uso local,
-con empaquetado PyInstaller al finalizar. Desarrollo funcional pendiente de inicio.
+con empaquetado PyInstaller al finalizar. Posteriormente autorizó iniciar Fase 1.
 Este archivo corresponde a `info_Fases.md` solicitado: en Windows ambas grafías
 resuelven al mismo archivo. Se conserva el nombre registrado en Git y el historial
 original al final para no perder trazabilidad.
@@ -150,12 +151,12 @@ si apruebas la convención. Sin historia SemVer existente, esta numeración esta
 la línea base y no afirma una incompatibilidad anterior. Si deseas exactamente 2.1.7,
 se ajustará antes de implementar; no se inventarán versiones intermedias.
 
-Ejemplo para la futura fuente única (todavía no creado como código):
+Fuente única implementada en `config/version.py` para la Fase 1:
 
 ```python
 """Versión del software (SemVer 2.0.0: MAYOR.MENOR.PARCHE). Fuente única; ver CHANGELOG.md."""
 __version__ = "2.0.0-dev.1"
-FECHA_VERSION = "12/10/2026"  # Ejemplo: se actualizará a la fecha real de emisión.
+FECHA_VERSION = "12/10/2026"
 ```
 
 CHANGELOG describe cada versión; la interfaz y otras partes del programa importarán
@@ -186,6 +187,26 @@ Historial anterior no permite deducir todo saldo inicial: no fabricar movimiento
 
 Fuera del alcance inicial: múltiples almacenes, lector de códigos, compras/contabilidad,
 importación masiva y sincronización cloud. Se pueden planear después de validar este flujo.
+
+## Evidencia de Fase 1 — 12/10/2026
+
+- Rama `dev_v2`; documentación de servidores publicada en commit `a1a1ba0`.
+- Datos de trabajo aislados en `.local/dev_v2` mediante snapshot SQLite y copia de media.
+  Configuración predeterminada v2 apunta a esta copia, no a los datos originales.
+- Alta en `/components/new/`, inicio de sesión propio y navegación común con versión.
+  Categoría, referencia, nombre y stock en un único guardado; cantidades cero admitidas.
+- Movimiento inicial positivo registrado en historial; guardado transaccional de alta.
+- Movimientos atómicos y con actualización condicional; historial inmutable; saldo
+  existente protegido en Admin. FK PROTECT preserva componentes con historial.
+- Migración `inventory.0002_alter_stockmovement_stock` aplicada sólo a copias de trabajo.
+- Regresión completa: 50 pruebas correctas, check sin incidencias, sin migraciones pendientes
+  por generar. Prueba concurrente comprueba que dos salidas no consumen el mismo saldo;
+  no supone ausencia de bloqueos de SQLite ni habilita uso multiusuario.
+- Navegador con datos ficticios: login, error de máximo, guardar/agregar otro y catálogo
+  con saldo correcto. Formulario a 320 píxeles sin desbordamiento horizontal y foco de teclado.
+- No se agregaron dependencias ni se sustituyó runserver. Waitress/PyInstaller quedan para Fase 3.
+- Pendiente: tu revisión funcional de Fase 1; push de estos cambios requiere autorización.
+  Fase 2 mantiene ubicación/especificaciones/PDF en flujo propio como tareas futuras.
 
 ---
 

@@ -1,7 +1,18 @@
 # Manual de usuario — InventariosAPP
 
-Actualizado: 12/10/2026. Describe la versión actual revisada en `842afd1`.
-La nueva interfaz de v2 está propuesta y todavía no está disponible.
+Actualizado: 12/10/2026. Versión `2.0.0-dev.1`, Fase 1 implementada localmente
+en `dev_v2` y pendiente de revisión. La versión anterior sigue en `dev`.
+
+## Datos separados para revisar v2
+
+Esta rama usa por defecto `.local/dev_v2/db.sqlite3` y `.local/dev_v2/media`.
+La copia de desarrollo ya fue preparada en este equipo. Conserva las cuentas que
+tenías en la base original: usa tus credenciales habituales. No usar la cuenta de
+prueba visual: sólo existe en otra base ficticia independiente.
+
+INVENTARIOS_DATA_DIR permite elegir otra carpeta. Cambiar de rama no separa datos
+automáticamente; no apuntar la versión en desarrollo a los datos operativos.
+Si ya hay copia, no ejecutar de nuevo prepare_dev: rechaza sobrescribirla.
 
 ## Iniciar y cerrar
 
@@ -15,11 +26,34 @@ Abrir [administración](http://127.0.0.1:8000/admin/),
 [buscador](http://127.0.0.1:8000/search/) o
 [dashboard](http://127.0.0.1:8000/dashboard/).
 El administrador requiere las credenciales de superusuario. Para instalar desde cero
-seguir README; no reiniciar ni borrar la base existente para actualizar el programa.
+seguir la sección v2 del README; no reiniciar ni borrar la base existente para actualizar.
 Para detener: Ctrl+C en la consola y esperar a que termine. No cerrar durante guardados
 o carga de archivos. `runserver` se documenta aquí para desarrollo/prueba local.
 
-## Registrar un componente actualmente
+## Alta rápida de componente y stock
+
+1. Abrir `/search/` y pulsar **Nuevo componente**, o visitar `/components/new/`.
+2. Iniciar sesión si se solicita. El superusuario existente puede usar la nueva pantalla.
+3. Elegir categoría existente y completar referencia y nombre; valor y número de parte
+   son opcionales. Una referencia no se puede repetir dentro de la categoría.
+4. Indicar cantidad inicial, mínimo y máximo. No se admiten negativos; el mínimo y
+   la cantidad inicial no pueden superar el máximo si éste es distinto de cero.
+5. Pulsar **Guardar componente** para volver al catálogo, o **Guardar y agregar otro**
+   para continuar con un formulario limpio. El componente y su stock se guardan juntos.
+6. Si falla la validación, revisar los mensajes; no se crean registros parciales.
+   Si hay cantidad inicial positiva, aparece una entrada en el historial. Con cero,
+   se crea stock sin movimiento de cantidad cero.
+
+Si no hay categorías, la pantalla explica cómo crear una desde Administración.
+Los usuarios no administradores necesitan permisos para agregar componente, stock y
+movimiento. Un usuario autenticado sin esos permisos recibe 403. No se conceden permisos
+automáticamente. El alta, login y logout usan CSRF; no requieren JavaScript.
+
+## Completar información mediante Administración
+
+La ficha ampliada llegará en Fase 2. Mientras tanto se puede usar el flujo administrativo:
+Para un alta alternativa desde Admin, seguir los pasos de abajo. Si usaste el alta
+rápida, el componente y su stock ya existen: sólo completa sus datos opcionales.
 
 1. Entrar al administrador y crear o elegir una categoría.
 2. Abrir Componentes y Agregar. Completar categoría, referencia y nombre;
@@ -34,25 +68,27 @@ o carga de archivos. `runserver` se documenta aquí para desarrollo/prueba local
    de compra y fecha de consulta. El valor predeterminado de moneda actual es EUR.
 9. Buscar el componente y comprobar su saldo en el buscador y alertas del dashboard.
 
-## Stock y movimientos actuales
+## Stock y movimientos
 
 - Entrada: cantidad positiva que se suma al saldo.
 - Salida: cantidad positiva que se resta; no puede superar el saldo disponible.
 - Ajuste: diferencia positiva o negativa que cambia el saldo, sin dejarlo negativo.
 - Cantidad cero no está permitida como movimiento.
 
-Para el uso actual, registrar cada movimiento una sola vez. El código revisado reaplica
-la cantidad al volver a guardar un movimiento existente y permite edición directa del
-saldo en Admin; corregir esto está previsto en Fase 1. No editar/eliminar movimientos
-históricos para corregir errores: registrar un ajuste motivado y verificar el resultado.
-El stock inicial introducido directamente no genera historial automáticamente.
+Registrar entradas, salidas y ajustes desde Administración. Los movimientos ya guardados
+son de consulta: no se pueden editar/eliminar, y guardar el mismo objeto otra vez no
+cambia el saldo. Para corregir un error, registrar un movimiento compensatorio y motivo.
+La cantidad y el componente de un stock existente son de sólo lectura en Admin;
+sí se pueden editar sus límites siempre que sean válidos. Un componente con historial
+no se elimina; se puede marcar inactivo. El stock inicial introducido directamente por
+el flujo antiguo de Admin no genera historial automáticamente; el alta rápida sí lo registra.
 
 ## Consulta
 
 Buscar por referencia, nombre, valor, número de parte o texto de categoría y ordenar
 por nombre o cantidad. Sólo aparecen componentes activos. La búsqueda actual no
 tiene paginación. El dashboard muestra bajo stock, ausencia de datasheet, ausencia de
-oferta y diez movimientos recientes; no es todavía un panel interactivo.
+oferta y diez movimientos recientes. Las pantallas comparten navegación y pie de versión.
 
 ## Respaldo
 
@@ -60,7 +96,7 @@ Antes de respaldar o restaurar, detener el servidor y conservar una copia indepe
 Actualmente el respaldo se opera mediante funciones de Python, sin botón en interfaz:
 
 ```powershell
-.\.venv\Scripts\python.exe -c 'from backups.backup_local import backup_project; print(backup_project("."))'
+.\.venv\Scripts\python.exe manage.py shell -c 'from django.conf import settings; from backups.backup_local import backup_project; print(backup_project(settings.DATA_DIR))'
 ```
 
 Conservar la carpeta resultante que contiene SQLite y media, fuera de Git y preferiblemente
@@ -110,9 +146,9 @@ para el escenario local; varias escrituras simultáneas pueden requerir PostgreS
 La configuración actual todavía no implementa estos destinos. Referencia de preparación:
 [checklist de Django](https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/).
 
-## Funcionalidad v2 pendiente
+## Funcionalidad pendiente
 
-Fase 1: alta única de componente/stock e integridad de movimientos.
+Fase 1 está implementada y requiere tu revisión.
 Fase 2: ficha completa, PDF, ubicación, ofertas, filtros y acciones de inventario.
 Fase 3: recuperación y distribución verificada. Este manual se actualizará con rutas
 y capturas reales al implementar; no se presentan acciones futuras como disponibles.

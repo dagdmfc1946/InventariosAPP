@@ -1,5 +1,58 @@
 # InventariosAPP
 
+## Desarrollo v2 — rama dev_v2
+
+Fase 1 implementada, pendiente de revisión. Versión de desarrollo `2.0.0-dev.1`.
+Esta sección prevalece para la rama v2; la documentación inferior conserva la referencia
+de instalación y comportamiento de la primera versión.
+
+El nuevo flujo permite crear componente y stock en una sola pantalla; los movimientos
+son atómicos e inmutables. Admin sigue disponible para datos opcionales.
+
+### Datos de trabajo y arranque
+
+En este equipo ya se creó la copia `.local/dev_v2`, con las cuentas y datos originales.
+Los originales `db.sqlite3` y `media/` no se migraron ni se borraron. La ruta de trabajo
+se configura con `INVENTARIOS_DATA_DIR` (por defecto `.local/dev_v2`).
+
+Para preparar una copia **sólo si aún no existe**, detener escrituras/subidas en la
+versión original mientras se obtiene el snapshot y media:
+
+```powershell
+.\.venv\Scripts\python.exe backups/prepare_dev.py
+```
+
+El script rechaza un destino existente: no reemplaza datos previos. En un clon sin base
+original, preparar una instalación vacía con `New-Item -ItemType Directory -Path .local/dev_v2 -Force`
+y luego migrate/createsuperuser. Con la copia existente no crear otro superusuario.
+
+```powershell
+.\.venv\Scripts\python.exe manage.py migrate
+.\.venv\Scripts\python.exe manage.py runserver 127.0.0.1:8000
+```
+
+Abrir `/components/new/` o `/search/`; usar las credenciales habituales de la copia.
+El nuevo login está en `/accounts/login/`. Se requieren los permisos de agregar componente,
+stock y movimiento; el superusuario los tiene. El logout se realiza con botón POST.
+No copiar los nuevos archivos sobre dev/main para probar: cambiar de rama de manera controlada.
+
+### Verificación y documentos
+
+```powershell
+.\.venv\Scripts\python.exe manage.py test --noinput
+.\.venv\Scripts\python.exe manage.py check
+.\.venv\Scripts\python.exe manage.py makemigrations --check --dry-run
+```
+
+Consulta [manual de usuario](MANUAL_USUARIO.md), [CHANGELOG](CHANGELOG.md),
+[registro del desarrollo](dev_Process.md) y [servidores y distribución](docs/SERVIDORES_Y_DISTRIBUCION.md).
+Se mantiene runserver mientras desarrollamos. Tras aprobación final se usará Waitress
+y después PyInstaller para distribución Windows local. No se añadió aún ninguna de esas dependencias.
+
+---
+
+## Referencia de la primera versión
+
 Aplicacion local para Windows destinada a administrar inventario personal o profesional de componentes electronicos. Permitira registrar, consultar y mantener componentes, sus especificaciones tecnicas, proveedores, precios, stock, ubicaciones fisicas y datasheets.
 
 ## Estado actual

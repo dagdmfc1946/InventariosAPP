@@ -1,37 +1,40 @@
-# Tareas v2 — pendientes de aprobación
+# Tareas v2 — Fase 1 implementada; revisión pendiente
 
 Plan: ../info_FASES.md. Evidencia de ejecución: ../dev_Process.md.
 Cada unidad se mantiene pequeña; si supera cinco archivos de implementación se divide
-antes de ejecutarse. Documentación de avance acompaña cada unidad. No hay tareas terminadas.
+antes de ejecutarse. Documentación de avance acompaña cada unidad.
+Evidencia T1–T6 en dev_Process.md. El control de F1 espera revisión del usuario.
 
 ## Fase 1
 
-- [ ] T1. Aislar desarrollo. Depende de aprobación.
+- [x] T1. Aislar desarrollo. Autorización recibida el 12/10/2026.
   Aceptación: dev_v2 parte del estado vigente; SQLite/media operativos preservados;
   copia independiente configurada para desarrollo. Verificar rama, commit de origen,
   restauración en copia y rutas efectivas. Archivos previstos: configuración de rutas
   de datos, prueba de rutas, plantilla de entorno (hasta 3).
-- [ ] T2. Fuente de versión. Depende de T1.
+- [x] T2. Fuente de versión. Depende de T1.
   Aceptación: constantes importables con SemVer/fecha real y zona America/Bogota.
   Verificar importación, visualización posterior y check. Archivos: config/version.py,
   settings.py, context processor y prueba (hasta 4).
-- [ ] T3. Evitar doble aplicación de movimientos. Depende de T1.
+- [x] T3. Evitar doble aplicación de movimientos. Depende de T1.
   Aceptación: movimiento/saldo atómicos; re-guardar no altera saldo; límites y actualizaciones
   condicionales evitan saldo negativo. Verificar pruebas de re-guardado, rollback,
   límites y concurrencia compatible con SQLite. Archivos: inventory/models.py,
   servicio de stock si procede, inventory/tests.py (hasta 3).
-- [ ] T4. Proteger historial en Admin. Depende de T3.
+- [x] T4. Proteger historial en Admin. Depende de T3.
   Aceptación: no modificar/borrar movimientos aplicados ni editar cantidad directamente;
   correcciones por movimiento compensatorio. Verificar permisos y regresión Admin.
   Archivos: inventory/admin.py, inventory/tests.py (2).
-- [ ] T5. Crear componente con stock. Depende de T3.
+- [x] T5. Crear componente con stock. Depende de T3.
   Aceptación: servicio valida duplicados/cantidades, crea saldo y entrada inicial coherente;
   error no deja registros parciales. Verificar tests de alta cero/positiva e inválida.
   Archivos: components/forms.py, servicio y tests (hasta 3).
-- [ ] T6. Exponer alta autenticada. Depende de T2, T4 y T5.
+- [x] T6. Exponer alta autenticada. Depende de T2, T4 y T5.
   Aceptación: pantalla con errores por campo, navegación y Guardar/agregar otro;
   permisos Django comprobados. Verificar POST/CSRF/permisos y navegador.
   Archivos: components/views.py, urls raíz, plantilla base, plantilla alta y tests (5).
+  Se ejecutó en unidades: servicio/formulario; vista y rutas; plantillas compartidas/CSS;
+  integración visual de búsqueda/resumen. Sin dependencia JavaScript ni frameworks adicionales.
 - [ ] Control F1: suite y check pasan; alta visible en búsqueda/Admin; revisión del usuario.
 
 ## Fase 2

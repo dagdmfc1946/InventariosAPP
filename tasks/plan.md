@@ -11,4 +11,6 @@ Actualización: dev_v2 creada por autorización expresa para subir sólo documen
 Fase 1 no iniciada; destino confirmado Windows local con PyInstaller al finalizar.
 
 Dependencias: integridad de stock → alta mínima → ficha/acciones → distribución.
-No hay implementación iniciada; no se desplegará en servidor.
+Fase 1 implementada localmente, pendiente de revisión; Fases 2/3 no iniciadas.
+El documento de servidores está publicado; el desarrollo funcional no se subirá
+sin autorización adicional. No se desplegará en servidor.
