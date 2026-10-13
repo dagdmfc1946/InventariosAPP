@@ -121,7 +121,8 @@ Evidencia T1–T6 en dev_Process.md. El usuario autorizó concluir y publicar Fa
   Aceptación: manual refleja lo implementado, CHANGELOG/version coinciden y limitaciones
   constan; dependencias revisadas. Verificar regresión y checklist de distribución.
   Archivos: MANUAL_USUARIO.md, CHANGELOG.md, README.md, dev_Process.md, info_FASES.md (5).
-- [ ] Control F4: candidato revisable, aprobación explícita antes de push/merge/publicación.
+- [x] Control F4: aprobación explícita de publicación y merge a main recibida;
+  v2.3.1 estable. Cierre y pruebas de uso por el usuario documentados en CIERRE_Y_PRUEBAS.md.
 
 
 ### Verificación de Fase 4 — candidato v2.3.0

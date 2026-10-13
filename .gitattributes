@@ -1,0 +1,5 @@
+# Archify vincula recibos y capturas a bytes exactos. Conservar sus finales de linea.
+arquitectura/*.html -text whitespace=-blank-at-eol
+arquitectura/*.json -text
+arquitectura/**/*.html -text whitespace=-blank-at-eol
+arquitectura/**/*.json -text

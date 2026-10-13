@@ -35,6 +35,10 @@ por Smart App Control impide su validación final. Guía de terminal/reconstrucc
 recuperación publicada localmente; revisión y push de Fase 4 pendientes.
 
 
-Estado vigente v2.3.1: UI UX Pro Max aplicada a todo el aplicativo; artefactos anteriores
+Estado histórico previo al cierre v2.3.1: UI UX Pro Max aplicada a todo el aplicativo; artefactos anteriores
 retirados y onedir corregido verificado desde exe en el PC objetivo. T16–T20 completadas
 localmente. Candidato para revisión del usuario y autorización de push; sin integración.
+
+Estado vigente al cierre, 12/10/2026: usuario aprueba v2.3.1 estable y merge a main.
+Publicación completada, scripts Windows documentados y arquitectura Archify incorporada
+en ambas ramas. Nuevos hallazgos de las pruebas del .exe se atenderán en dev_v2.

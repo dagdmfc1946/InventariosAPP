@@ -1,6 +1,9 @@
 # InventariosAPP — Plan de nueva versión
 
-Fecha de análisis: 12/10/2026. Estado: **Fases 1–3 publicadas; Fase 4 y UI verificadas localmente; revisión/publicación pendientes**.
+Fecha de análisis: 12/10/2026. Estado vigente: **cuatro fases cerradas; v2.3.1 estable
+publicada en main y dev_v2; comienzan pruebas de uso con el ejecutable**.
+El usuario aprueba la estabilidad y cierre del desarrollo. Las anotaciones siguientes
+conservan la evolución histórica y no representan autorizaciones pendientes vigentes.
 El usuario autorizó Fase 4 y pidió instalación vacía, terminal y guía de reconstrucción.
 Versión visible: `v2.3.1`, fecha `12/10/2026`.
 Plan ampliado a **cuatro fases** por solicitud del usuario: los pendientes de usuarios,

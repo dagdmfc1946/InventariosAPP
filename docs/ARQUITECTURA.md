@@ -1,5 +1,9 @@
 # Arquitectura tecnica
 
+> Referencia histórica de planificación inicial. La arquitectura implementada de
+> v2.3.1 y sus diagramas están en [arquitectura/README.md](../arquitectura/README.md).
+> Esa documentación prevalece sobre los módulos y decisiones previstos abajo.
+
 ## Enfoque
 
 Monolito modular Django para ejecucion local en Windows:
