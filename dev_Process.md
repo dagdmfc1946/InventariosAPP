@@ -526,3 +526,13 @@ en `tasks/todo.md`; no marcar como implementado algo sólo propuesto. Mantener h
 - Datos originales intactos. Destino es este PC; no se declara prueba en otro Windows limpio.
   Documentación refleja hechos, límite de confianza por archivo y proceso de reconstrucción.
   T16–T20 verificados localmente; candidato para revisión, sin push.
+
+### Publicación autorizada de v2.3.1 — 12/10/2026
+
+- El usuario confirma que el ejecutable abre en su PC y autoriza subir todos los
+  cambios pendientes a dev_v2, incluyendo únicamente el ZIP de la distribución.
+- Se incluye dist/v2.3.1/InventariosAPP-v2.3.1-Windows-x64.zip mediante una excepción
+  específica de .gitignore. La carpeta expandida, entornos, datos y artefactos de
+  prueba permanecen fuera del control de versiones.
+- SHA256 del ZIP: A740F96B023E23AF44DBF9FD455DE877702CA80F3AC9B207C9B1E907449F5171.
+- Se conserva el historial de desarrollo de Fase 4 y la documentación de v2.3.1.
