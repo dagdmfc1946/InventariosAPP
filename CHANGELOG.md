@@ -1,0 +1,259 @@
+# CHANGELOG
+
+Se registran cambios reales; las funcionalidades previstas se describen en info_FASES.md.
+Convención vigente: [SemVer 2.0.0](https://semver.org/lang/es/).
+Fuente única ejecutable: `config/version.py`.
+No se atribuye una versión retrospectiva a la aplicación actual.
+
+## Herramientas para desarrollo — 12/10/2026
+
+- preparar_proyecto.bat: prepara Python 3.12, dependencias, carpeta de datos,
+  migraciones, perfiles y administrador desde doble clic o terminal en Windows.
+- iniciar_desarrollo.bat: inicia runserver desde la carpeta del proyecto e indica
+  /admin/ como entrada; autenticación requerida salvo sesión válida existente.
+- Documentadas la preparación en otro PC, la ejecución con doble clic/terminal,
+  --sin-pausa, conservación de datos y distinción del ZIP del ejecutable.
+- No cambia la versión del aplicativo ni el ZIP publicado v2.3.1.
+
+## [v2.3.1] — 12/10/2026 — Ajuste visual y distribución onedir candidata
+
+- UI UX Pro Max aplicada para definir un sistema visual compartido entre vistas y Admin:
+  identidad verde, tipografía local, iconos SVG, espaciado, paneles, tablas y controles.
+- Navegación con sección activa y orden coherente para teclado; cabecera y sesión alineadas.
+  Catálogo con exportación agrupada, resumen con tarjetas enlazadas/tabla y ubicaciones en tarjetas.
+- Mostrar/ocultar contraseñas por acción del usuario, ayudas asociadas a campos,
+  foco en resumen de errores y enlaces a los campos inválidos; sin cambiar validación/guardado.
+- Tablas recorribles con teclado, controles legibles, reduced-motion y estados 403/404/500/PDF
+  coherentes. Contrastes de texto medidos superiores a 4.5:1 en la paleta principal.
+- Corregidos desbordamiento del inicio Admin y contraste de los selectores de grupos/permisos.
+  Widgets, cuentas, permisos y flujos de Django se conservan. PDF adopta la misma paleta.
+- 125 pruebas correctas (98.047 s); tres pruebas PDF repetidas (0.747 s), 23 vistas,
+  permisos Lector/Operador y revisión visual a 375/768/1024/1440 px.
+- Limpieza autorizada del onefile v2.3.0, sus temporales y estáticos generados; datos intactos.
+  Nueva construcción onedir con consola, _internal, licencias, metadatos/sumas y ZIP completo.
+  Validación del artefacto separada; no se garantiza aceptación de Smart App Control por formato.
+- Paquete onedir verificado desde exe fuera del proyecto, sin Python en PATH: 23 vistas,
+  siete recursos, PDF, permisos, contraseñas comunes, movimientos y recuperación.
+- Hook incorpora common-passwords.txt.gz; conserva el validador de Django. Lanzador
+  intacto de código idéntico retenido tras bloqueo de una recompilación; comparación
+  estricta y sumas documentadas. --reuse-launcher rechaza código/versiones diferentes.
+- Sin nuevas migraciones ni push. Candidato para revisión del usuario.
+
+## [v2.3.0] — 12/10/2026 — Candidato local de Fase 4
+
+- Lanzador de terminal para iniciar Waitress en 127.0.0.1, preparar base, ejecutar
+  comandos Django, respaldar y restaurar. Datos persistentes y clave por instalación
+  fuera del ejecutable; base nueva sin cuentas ni inventario en la primera instalación.
+- Bloqueo de la carpeta mientras se ejecuta el lanzador: evita mantenimiento simultáneo.
+  Las actualizaciones conservan registros y respaldan antes de migrar una base existente.
+- Respaldos SQLite consistentes con integridad y manifiesto SHA256; restauración por
+  reemplazo completo de base/media, conserva el estado previo y revierte si falla la instalación.
+- Configuración local DEBUG=False, estáticos WhiteNoise y PDFs autenticados; runserver
+  se mantiene para desarrollo. Django actualizado de 5.2.6 a 5.2.18 dentro de la serie LTS.
+- PyInstaller 6.22.0: .exe de consola Windows x64, recursos explícitos y controles que
+  impiden incluir SQLite, media, .env o claves personales. Script de reconstrucción,
+  dependencias de build separadas, licencias y metadatos del artefacto.
+- 125 pruebas correctas (121.355 s), diez casos nuevos de recuperación y ejecución local;
+  comprobaciones reales del lanzador/Waitress, restauración y actualización en datos ficticios.
+- Ejecutable final generado; Smart App Control bloquea su ejecución por requisitos
+  de firma. Validación final del .exe y prueba en otro PC pendientes. Sin push ni release.
+- Documentación de instalación vacía, terminal, desarrollo, reconstrucción y actualización.
+  Datos originales conservados. Sin nuevas migraciones del modelo.
+
+## [v2.2.0] — 12/10/2026 — Publicación aprobada
+
+- Mi perfil permite cambiar el nombre de acceso con normalización y validación de
+  duplicados, conservando sesión, contraseña e identidad de la cuenta; sin ampliar permisos.
+- Administración muestra estado de contraseña y acción de cambio sin algoritmo,
+  iteraciones, sal ni fragmentos del hash; el campo continúa deshabilitado para edición.
+- Descarga del catálogo en tabla PDF: filtros/orden compartidos con la pantalla,
+  todas las páginas, encabezados repetidos, fecha/total y respuesta privada sin caché.
+  Exportación requiere los mismos permisos del catálogo y funciona sin servicios externos.
+- Nueva dependencia ReportLab 4.5.1; fuentes integradas soportan acentos, µ y Ω.
+- 115 pruebas pasan; check, dependencias y migraciones coherentes. PDF ficticio de
+  90 filas/8 páginas renderizado y verificado; descarga desde navegador comprobada.
+- Sin migraciones nuevas. Datos originales intactos. Usuario autoriza publicar en dev_v2;
+  Fase 4 sin iniciar. Informe ejecutivo de las 115 pruebas incorporado al repositorio.
+
+## [v2.1.1] — 12/10/2026 — Cierre autorizado de Fase 3
+
+- Alta simplificada: identificación y cantidad visibles; datos técnicos y límites
+  opcionales desplegables, con apertura cuando hay valores o errores.
+- «Valor técnico» con ejemplos y aclaración de que no es precio; referencia interna
+  diferenciada del número de parte del fabricante. Se conservan campos y datos existentes.
+- Cabecera con marca/sesión alineadas en una fila y navegación en otra, compartida
+  por vistas propias y Administración; adaptación para pantallas pequeñas.
+- Migración components.0004 cambia únicamente nombres de campos; aplicada a copias
+  de desarrollo/pruebas. Base original intacta.
+- 108 pruebas correctas, check sin incidencias y sin migraciones pendientes; alta
+  con datos ficticios y revisión visual en escritorio/móvil verificadas.
+- Usuario autoriza subir toda Fase 3 a dev_v2. Fase 4 no iniciada.
+
+## [v2.1.0] — 12/10/2026 — Fase 3 local, pendiente de revisión
+
+- Entrada/salida/ajuste desde ficha con motivo obligatorio y vista previa sin escritura.
+  Token firmado por usuario/componente, identificador único y rechazo de saldo obsoleto.
+  Reenviar una operación no aplica nuevamente el movimiento. Historial completo paginado.
+- Duplicación técnica con referencia nueva, stock cero y especificaciones; sin copiar
+  ubicación, saldo, movimientos, PDF ni ofertas. Guardado transaccional.
+- Proveedores y ofertas con edición, validación de precio/cantidad/duplicados y proveedor
+  contextual que conserva datos. Permisos Operador ampliados sin acceso administrativo.
+- Catálogo con categoría, disponibilidad, pendientes y páginas de 25 que conservan
+  filtros; orden estable con desempate por ID. Resumen enlaza indicadores y fichas.
+- Migración aditiva inventory.0005 para request_id nullable/único. Aplicada a la copia
+  de desarrollo tras respaldo; no cambia saldos ni movimientos anteriores.
+- No hay dependencias nuevas. Mantiene runserver; Waitress/PyInstaller pendientes en Fase 4.
+- 108 pruebas correctas; check y migraciones coherentes. Navegador verifica sesión,
+  tabla centrada, movimientos, oferta contextual, duplicación y adaptación móvil.
+- Implementación local en dev_v2; push y cierre de fase pendientes de aprobación.
+
+## [v2.0.1] — 12/10/2026 — Ajuste local de interfaz
+
+- Bloque compartido de sesión según imagen en todas las vistas: avatar, usuario,
+  Mi perfil, Cambiar contraseña y Salir con POST/CSRF. Nueva pantalla de cambio de
+  contraseña para usuarios normales; conserva sesión y validaciones Django.
+- Encabezados de la tabla de Componentes centrados en catálogo y Administración.
+- Diez pruebas de sesión/Admin correctas y check sin incidencias.
+
+## [v2.0.0] — 12/10/2026 — Cierre aprobado de Fase 2
+
+- El usuario autorizó publicar todo el desarrollo de Fase 2 en `dev_v2`.
+- Versión simplificada a `v2.x.x`: fuente SemVer `2.0.0`, interfaz `v2.0.0`.
+  Se eliminan los sufijos de desarrollo de la versión actual; las entradas anteriores
+  conservan los identificadores usados durante su implementación.
+- Incluye los cambios de Fases 1 y 2 documentados abajo. Fase 3 pendiente de aprobación;
+  la distribución final con Waitress/PyInstaller sigue prevista en Fase 4.
+
+## [Sin publicar] — Referencia histórica de la planificación inicial
+
+### Documentación — 12/10/2026
+
+- Análisis del aplicativo actual y propuesta de tres fases para la línea v2.
+- Registro de proceso, manual inicial y tareas verificables.
+- Conservación del historial anterior en info_FASES.md.
+- Explicación de distribución Windows y despliegue con Gunicorn.
+- Confirmación de destino Windows local con PyInstaller al finalizar; despliegue
+  en servidor fuera del alcance. Creación de dev_v2 autorizada para subir documentación.
+
+### Validación de la base anterior, antes de implementar Fase 1
+
+- 18 pruebas correctas y comprobación Django sin incidencias.
+- Ningún cambio funcional, de dependencias, de esquema ni de datos operativos.
+
+## [2.0.0-dev.2] — 12/10/2026 — Fase 2 local, pendiente de revisión
+
+### Añadido
+
+- Mi perfil en /accounts/profile/: edita nombre, apellidos y correo de la cuenta
+  autenticada, conserva sesión y excluye usuario/contraseña/permisos del formulario.
+- Ficha de componente desde catálogo; edición conjunta de datos/especificaciones con
+  validación de duplicados y saldo intacto. Filas dinámicas con alternativa sin JavaScript.
+- Categorías y ubicaciones creadas/seleccionadas desde alta o edición, conservando campos.
+- Ubicaciones compartidas y pantalla para asignar varios componentes a una ya guardada.
+  Administración permite también asignación múltiple; ubicación ocupada protegida de borrado.
+- Perfiles Lector/Operador y selector en altas de usuarios. Comando configure_inventory_roles
+  prepara esos grupos sin asignar usuarios existentes ni conceder acceso administrativo.
+- Adjuntar/abrir PDF desde ficha; validación adicional de cabecera y limpieza de carga
+  si falla la inserción. No analiza el documento completo ni modifica archivos antiguos.
+
+### Seguridad y compatibilidad
+
+- Catálogo/resumen exigen sesión y permiso de consulta (se conserva acceso de operadores
+  con permiso individual de alta de Fase 1). PDF exige permiso de documento, incluida
+  la ruta directa media; archivos no registrados y faltantes devuelven 404.
+- Logout redirige a login, pues catálogo requiere sesión. Pantalla 403 en español.
+- Migraciones components.0003/inventory.0004 trasladan asignaciones al FK de componente.
+  Se conservan IDs, ubicaciones vacías y saldos. No fusiona por texto. Si ya existen
+  ubicaciones compartidas, revertir el esquema antiguo exige recuperar el respaldo.
+- Datos operativos originales intactos; respaldo previo de la copia de desarrollo.
+  Sin dependencias nuevas. Sigue runserver; distribución permanece en Fase 4.
+
+### Verificación
+
+- 83 pruebas correctas, check y coherencia de migraciones correctos. Incluye migración
+  de datos, perfil propio/CSRF, roles, IDs de especificaciones ajenas, transacciones,
+  PDF protegido, contenido falso y limpieza tras fallo de base.
+- Navegador con datos ficticios: perfil guardado, ficha con especificaciones, ubicación
+  contextual y asignación de dos componentes a ubicación existente; perfil móvil375px.
+- Pendiente revisión y aprobación antes de push. Fase 3 no iniciada.
+
+## [2.0.0-dev.1] — 12/10/2026 — Fase 1 concluida en dev_v2
+
+### Añadido
+
+- Alta rápida autenticada de componente y stock en `/components/new/`.
+- Entrada inicial con trazabilidad para cantidades positivas; stock cero sin movimiento.
+- Inicio/cierre de sesión, navegación común y versión visible; diseño adaptable.
+- Datos de desarrollo aislados mediante INVENTARIOS_DATA_DIR y preparación de copia.
+- Documento de servidores y distribución Windows/Raspberry publicado separadamente.
+
+### Corregido
+
+- Re-guardar un movimiento no lo aplica otra vez. Edición/borrado de historial bloqueados.
+- Movimiento y saldo atómicos; actualización condicional evita pérdida de cantidades
+  y sobregiro por instancias desactualizadas. Límites mínimo/máximo coherentes.
+- Cantidad de stock existente protegida de edición directa y componentes con historial
+  protegidos por relación PROTECT. Para correcciones, registrar movimientos compensatorios.
+
+### Configuración y compatibilidad
+
+- Zona horaria America/Bogota; fuente de versión config/version.py.
+- Migración aditiva `inventory.0002_alter_stockmovement_stock`; no recalcula cantidades
+  ni fabrica historial inicial para registros antiguos. Aplicada sólo en copias locales.
+- Ruta predeterminada de datos en esta rama: `.local/dev_v2`; no usa el SQLite original.
+  Ver README para copia inicial o instalación vacía. La fecha visible usa Bogotá;
+  timestamps almacenados no se reescriben.
+- No cambia dependencias. Sigue runserver durante desarrollo; Waitress/PyInstaller futuros.
+
+### Validación
+
+- 50 pruebas pasan; check sin incidencias y makemigrations --check --dry-run sin cambios.
+- Navegador: login, validación de cantidad, guardar/agregar otro y saldo en catálogo;
+  formulario móvil de 320 px y navegación con teclado.
+- Pendiente aprobación funcional del usuario y autorización para subir desarrollo.
+  No representa una release final ni se creó tag.
+
+### Ampliación del cierre de Fase 1 — 12/10/2026
+
+- Administración con paleta, tipografía, navegación y pie de versión coherentes con
+  catálogo/resumen. Conserva formularios y widgets nativos Django.
+- Etiquetas españolas de aplicaciones, modelos, campos y permisos. Catálogo/resumen
+  usan «existencias» y «ficha técnica». Datos ingresados no se traducen.
+- Alta administrativa de usuarios normales con contraseña obligatoria; opciones de
+  promoción a staff/superusuario retiradas. Gestión de usuarios sólo para superusuario;
+  crear superusuarios se mantiene mediante createsuperuser desde terminal.
+- Acceso administrativo aclara el enlace de login para usuarios del aplicativo.
+- Validación de PDF faltante/inaccesible muestra error de campo y permite reemplazo.
+  Guardar/continuar y re-guardar sin nuevo archivo tienen pruebas de regresión.
+  La causa del error intermitente informado sigue sin confirmarse.
+- Migraciones de etiquetas en components/documents/inventory/suppliers, sin renombrar
+  campos técnicos ni traducir datos. Aplicadas exclusivamente a las copias de desarrollo.
+- Plan ampliado a cuatro fases: ubicaciones compartidas/permisos/ficha en Fase 2,
+  operación diaria en Fase 3 y distribución Windows en Fase 4.
+- Suite ampliada: 61 pruebas correctas, check sin incidencias y migraciones coherentes.
+  Revisión visual de administrador/listados/formulario de usuario, cabecera a 375 px;
+  consola sin advertencias/errores y hash del SQLite operativo sin cambios.
+
+### Cierre autorizado — 12/10/2026
+
+- Encabezado de sesión con avatar, nombre de usuario y acciones separadas en botones:
+  Cambiar contraseña y Salir. Adaptación móvil y cierre mediante POST/CSRF conservados.
+- El usuario aprobó concluir Fase 1 y subir todo su desarrollo/documentación a dev_v2.
+  La Fase 2 no se inicia hasta nueva revisión y aprobación; dev/main no se integran.
+- 61 pruebas correctas; check y coherencia de migraciones correctos. Encabezado
+  revisado en escritorio y a 375px, sin desbordamiento ni errores de consola.
+
+## Referencia anterior sin etiqueta SemVer comprobada
+
+Commit analizado: `842afd1`, rama `dev`. Incluye Admin, búsqueda, dashboard, modelos
+de stock/movimientos, datasheets y respaldo local. El historial detallado existente se
+conserva en info_FASES.md y Git. No se afirma que sea versión 2.1.7.
+
+## Política de registro
+
+Cada entrega incluirá número, fecha real y cambios añadidos/corregidos/modificados,
+compatibilidad de datos, instrucciones de actualización y validaciones relevantes.
+La versión visible sigue `v2.x.x`, sin sufijos; el número SemVer se importa desde
+config/version.py y el prefijo v se agrega en la presentación. Correcciones incrementan
+PARCHE y nuevas funciones compatibles incrementan MENOR. Los sufijos antiguos se
+conservan como historia. Publicar una fase no completa la distribución de Fase 4.

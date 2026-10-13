@@ -1,0 +1,20 @@
+{% extends 'base.html' %}{% load static %}
+{% block title %}Editar {{ component.reference }}{% endblock %}
+{% block content %}
+<a class="back-link" href="{% url 'component_detail' component.pk %}">← Volver a la ficha</a>
+<div class="page-heading"><div><p class="eyebrow">EDITAR COMPONENTE</p><h1>{{ component.reference }}</h1><p class="muted">Completa datos, ubicación y especificaciones. El saldo se conserva.</p></div></div>
+<form method="post" class="panel create-form" novalidate>{% csrf_token %}
+    {% if form.errors or formset.total_error_count %}<div class="notice error" role="alert">Revisa los campos y las especificaciones indicadas. {{ form.non_field_errors }}{{ formset.non_form_errors }}</div>{% endif %}
+    <fieldset><legend>Datos básicos</legend><div class="form-grid">{% for field in form %}<div class="field {% if field.name == 'name' %}full-width{% endif %}"><label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{% if field.help_text %}<p class="help">{{ field.help_text }}</p>{% endif %}<div class="field-errors">{{ field.errors }}</div></div>{% endfor %}</div>
+    {% include 'components/category_context.html' %}
+    {% include 'components/location_context.html' %}</fieldset>
+    <fieldset><legend>Especificaciones</legend><p class="help">Cada atributo debe ser único. Puedes agregar filas o marcar las que quieras eliminar. Máximo 50 filas.</p>
+        {{ formset.management_form }}
+        <div id="specification-rows">{% for row in formset %}<div class="spec-row"><div class="field-errors">{{ row.non_field_errors }}{% for hidden in row.hidden_fields %}{{ hidden }}{{ hidden.errors }}{% endfor %}</div><div class="spec-grid">{% for field in row.visible_fields %}<div class="field"><label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}<div class="field-errors">{{ field.errors }}</div></div>{% endfor %}</div></div>{% endfor %}</div>
+        <template id="specification-empty"><div class="spec-row"><div>{% for hidden in formset.empty_form.hidden_fields %}{{ hidden }}{% endfor %}</div><div class="spec-grid">{% for field in formset.empty_form.visible_fields %}<div class="field"><label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}</div>{% endfor %}</div></div></template>
+        <button id="add-spec-row" class="button secondary" type="submit" name="action" value="add_spec_row" formnovalidate>+ Agregar especificación</button>
+    </fieldset>
+    <div class="form-actions"><button class="button" type="submit">Guardar ficha</button><a href="{% url 'component_detail' component.pk %}">Cancelar</a></div>
+</form>
+{% endblock %}
+{% block scripts %}<script src="{% static 'js/specifications.js' %}" defer></script>{% endblock %}

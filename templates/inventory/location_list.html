@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}Ubicaciones{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">ORGANIZACIÓN</p><h1>Ubicaciones</h1><p class="muted">Una misma ubicación puede alojar varios componentes.</p></div>{% if perms.inventory.add_location %}<a class="button" href="{% url 'location_create' %}">{% include 'includes/icon.html' with icon='plus' %}Nueva ubicación</a>{% endif %}</div>
+<div class="record-grid">{% for location in locations %}<section class="panel detail-section"><div class="record-heading"><span class="metric-icon">{% include 'includes/icon.html' with icon='location' %}</span><div><h2>{{ location }}</h2><span class="badge">{{ location.components.all|length }} componentes</span></div></div>
+{% if location.description %}<p class="muted">{{ location.description }}</p>{% endif %}<ul class="record-list">{% for component in location.components.all %}<li><a href="{% url 'component_detail' component.pk %}"><strong>{{ component.reference }}</strong> · {{ component.name }}</a></li>{% empty %}<li class="muted">Sin componentes asignados.</li>{% endfor %}</ul>{% if perms.inventory.change_location %}<a class="button secondary" href="{% url 'location_edit' location.pk %}">Editar y asignar componentes</a>{% endif %}</section>{% empty %}<div class="panel empty-state full-width">{% include 'includes/icon.html' with icon='location' %}<h2>Todavía no hay ubicaciones</h2><p>Crea una ubicación para organizar tus componentes por estante, caja o cajón.</p></div>{% endfor %}</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Oferta · {{ component.reference }}{% endblock %}
+{% block content %}
+<a class="back-link" href="{% url 'component_detail' component.pk %}">← Volver a la ficha</a>
+<div class="page-heading"><div><h1>{% if offer.pk %}Editar oferta{% else %}Nueva oferta{% endif %}</h1><p class="muted">{{ component.reference }} · {{ component.name }}</p></div></div>
+<form class="panel create-form" method="post">{% csrf_token %}
+<p class="help">La oferta registra una cotización; no realiza una compra ni modifica existencias. Usa el código de moneda correspondiente, por ejemplo COP, USD o EUR.</p>
+<div class="form-grid">{% include 'includes/form_fields.html' %}</div>
+{% if perms.suppliers.add_supplier %}<details class="context-panel" {% if supplier_form.errors %}open{% endif %}><summary>+ Crear proveedor sin perder la oferta</summary><p class="help">El proveedor se guarda por separado; se conserva aunque canceles la oferta.</p><div class="form-grid">{% include 'includes/form_fields.html' with form=supplier_form %}</div><button class="button secondary" name="action" value="create_supplier" type="submit" formnovalidate>Crear y seleccionar proveedor</button></details>{% endif %}
+<div class="form-actions"><button class="button" type="submit">Guardar oferta</button><a href="{% url 'component_detail' component.pk %}">Cancelar</a></div>
+</form>
+{% endblock %}

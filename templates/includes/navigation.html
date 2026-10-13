@@ -1,0 +1,5 @@
+<a href="{% url 'component_search' %}" {% if request.resolver_match.url_name == 'component_search' or request.path|slice:':12' == '/components/' %}aria-current="page"{% endif %}>{% include 'includes/icon.html' with icon='package' %}Componentes</a>
+<a href="{% url 'dashboard' %}" {% if request.resolver_match.url_name == 'dashboard' %}aria-current="page"{% endif %}>{% include 'includes/icon.html' with icon='grid' %}Resumen</a>
+{% if perms.inventory.view_location %}<a href="{% url 'location_list' %}" {% if request.path|slice:':11' == '/locations/' %}aria-current="page"{% endif %}>{% include 'includes/icon.html' with icon='location' %}Ubicaciones</a>{% endif %}
+{% if perms.suppliers.view_supplier %}<a href="{% url 'supplier_list' %}" {% if request.path|slice:':11' == '/suppliers/' %}aria-current="page"{% endif %}>{% include 'includes/icon.html' with icon='truck' %}Proveedores</a>{% endif %}
+{% if user.is_staff or admin_navigation %}<a href="{% url 'admin:index' %}" {% if request.path|slice:':7' == '/admin/' %}aria-current="page"{% endif %}>{% include 'includes/icon.html' with icon='shield' %}Administración</a>{% endif %}

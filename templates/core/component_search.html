@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Componentes{% endblock %}
+{% block content %}
+    <div class="page-heading"><div><p class="eyebrow">CATÁLOGO</p><h1>Componentes</h1><p class="muted">Consulta tus referencias y las existencias disponibles.</p></div>
+        {% if perms.components.add_component and perms.inventory.add_stock and perms.inventory.add_stockmovement %}<a class="button" href="{% url 'component_create' %}">{% include 'includes/icon.html' with icon='plus' %}Nuevo componente</a>
+        {% elif not user.is_authenticated %}<a class="button secondary" href="{% url 'login' %}?next={% url 'component_create' %}">Ingresar para agregar</a>{% endif %}
+    </div>
+    <div class="panel">
+    <form class="search-form" method="get" action="{% url 'component_search' %}">
+        <div><label for="query">Buscar componente</label><input id="query" type="search" name="q" value="{{ q }}" placeholder="Referencia, nombre, valor o categoría"></div>
+        <div><label for="ordering">Ordenar por</label><select id="ordering" name="ordering">
+            <option value="name" {% if ordering == 'name' %}selected{% endif %}>Nombre</option>
+            <option value="-stock" {% if ordering == '-stock' %}selected{% endif %}>Existencias ↓</option>
+            <option value="stock" {% if ordering == 'stock' %}selected{% endif %}>Existencias ↑</option>
+        </select></div>
+        <div><label for="category-filter">Categoría</label><select id="category-filter" name="category"><option value="">Todas</option>{% for category in categories %}<option value="{{ category.pk }}" {% if selected_category == category.pk|stringformat:'s' %}selected{% endif %}>{{ category.name }}</option>{% endfor %}</select></div>
+        <div><label for="availability">Disponibilidad</label><select id="availability" name="availability"><option value="">Todas</option><option value="available" {% if availability == 'available' %}selected{% endif %}>Con existencias</option><option value="empty" {% if availability == 'empty' %}selected{% endif %}>Sin existencias</option></select></div>
+        <div><label for="attention">Revisar</label><select id="attention" name="attention"><option value="">Todos</option><option value="low" {% if attention == 'low' %}selected{% endif %}>Existencias bajas</option><option value="no_pdf" {% if attention == 'no_pdf' %}selected{% endif %}>Sin ficha técnica</option><option value="no_offer" {% if attention == 'no_offer' %}selected{% endif %}>Sin oferta</option></select></div>
+        <button class="button secondary" type="submit">{% include 'includes/icon.html' with icon='search' %}Buscar</button>
+    </form>
+    <div class="catalogue-toolbar"><p class="muted"><strong>{{ page_obj.paginator.count }}</strong> {% if page_obj.paginator.count == 1 %}componente encontrado{% else %}componentes encontrados{% endif %} · <a href="{% url 'component_search' %}">Limpiar filtros</a></p>
+    <div class="export-action"><a class="button secondary" href="{% url 'component_export_pdf' %}?{{ pagination_query }}">{% include 'includes/icon.html' with icon='download' %}Descargar tabla PDF</a><span class="help">Todos los resultados de los filtros aplicados.</span></div></div>
+    <div class="table-wrap"><table class="component-table"><caption class="sr-only">Resultados de búsqueda de componentes</caption><thead><tr><th scope="col">Componente</th><th scope="col">Categoría</th><th scope="col">Valor técnico</th><th scope="col">Existencias</th></tr></thead><tbody>
+        {% for component in components %}
+            <tr><td><a href="{% url 'component_detail' component.pk %}"><strong>{{ component.reference }}</strong>{{ component.name }}</a></td><td>{{ component.category.name }}</td><td>{{ component.value|default:'—' }}</td><td class="numeric">{% if component.stock %}{{ component.stock.quantity }} unidades{% else %}<span class="badge">Sin existencias registradas</span>{% endif %}</td></tr>
+        {% empty %}
+            <tr><td colspan="4" class="empty-state">{% include 'includes/icon.html' with icon='search' %}<h2>No se encontraron componentes</h2><p>Prueba otra búsqueda o limpia los filtros para consultar todo tu inventario.</p></td></tr>
+        {% endfor %}
+    </tbody></table></div></div>
+{% if page_obj.has_other_pages %}<nav class="pagination" aria-label="Páginas de componentes">
+{% if page_obj.has_previous %}<a class="button secondary" href="?{{ pagination_query }}&amp;page={{ page_obj.previous_page_number }}">Anterior</a>{% endif %}
+<span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+{% if page_obj.has_next %}<a class="button secondary" href="?{{ pagination_query }}&amp;page={{ page_obj.next_page_number }}">Siguiente</a>{% endif %}
+</nav>{% endif %}
+{% endblock %}

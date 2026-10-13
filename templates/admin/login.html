@@ -1,0 +1,5 @@
+{% extends "admin/login.html" %}
+{% block content %}
+<p class="inventory-login-help">Este acceso es para administración. Los usuarios del aplicativo deben <a href="{% url 'login' %}">iniciar sesión aquí</a>.</p>
+{{ block.super }}
+{% endblock %}

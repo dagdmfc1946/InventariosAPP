@@ -1,0 +1,3 @@
+{% extends 'base.html' %}
+{% block title %}Acceso restringido{% endblock %}
+{% block content %}<div class="panel empty-state">{% include 'includes/icon.html' with icon='shield' %}<p class="eyebrow">PERMISOS DE TU CUENTA</p><h1>Acceso restringido</h1><p>Tu cuenta no tiene permiso para realizar esta operación. Solicita al administrador el perfil o permiso correspondiente.</p><a class="button secondary" href="{% url 'profile_edit' %}">Ir a mi perfil</a></div>{% endblock %}

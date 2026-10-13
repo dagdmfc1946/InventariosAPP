@@ -1,0 +1,6 @@
+{% if perms.inventory.add_location %}<details class="context-panel" {% if location_form.errors %}open{% endif %}><summary>Crear una ubicación aquí</summary>
+    <p class="help">Indica estante, caja, cajón o descripción. Se crea sin perder los datos del componente; la asignación se confirma al guardar la ficha.</p>
+    <div class="field-errors">{{ location_form.non_field_errors }}</div>
+    {% for field in location_form %}<div class="field"><label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}<div class="field-errors">{{ field.errors }}</div></div>{% endfor %}
+    <button class="button secondary" type="submit" name="action" value="create_location" formnovalidate>Crear y seleccionar ubicación</button>
+</details>{% endif %}

@@ -1,0 +1,5 @@
+{% if perms.components.add_category %}<details class="context-panel" {% if category_form.errors %}open{% endif %}><summary>Crear una categoría aquí</summary>
+    <p class="help">Se crea y selecciona la categoría conservando los datos de este formulario.</p>
+    {% for field in category_form %}<div class="field"><label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}<div class="field-errors">{{ field.errors }}</div></div>{% endfor %}
+    <button class="button secondary" type="submit" name="action" value="create_category" formnovalidate>Crear y seleccionar categoría</button>
+</details>{% endif %}

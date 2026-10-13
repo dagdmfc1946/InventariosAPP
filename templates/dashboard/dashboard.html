@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Resumen{% endblock %}
+{% block content %}
+<div class="page-heading"><div><p class="eyebrow">INVENTARIO</p><h1>Resumen</h1><p class="muted">Un vistazo al estado de tus componentes.</p></div><a class="button secondary" href="{% url 'component_search' %}">{% include 'includes/icon.html' with icon='package' %}Ver componentes</a></div>
+<div class="metrics">
+  <a class="panel metric-card" href="{% url 'component_search' %}?attention=low"><div class="metric-top"><span class="metric-label">Existencias bajas</span><span class="metric-icon">{% include 'includes/icon.html' with icon='alert' %}</span></div><strong class="metric-value">{{ low_stock_count }}</strong><span class="metric-caption">Revisar componentes bajo el mínimo</span></a>
+  <a class="panel metric-card" href="{% url 'component_search' %}?attention=no_pdf"><div class="metric-top"><span class="metric-label">Sin ficha técnica</span><span class="metric-icon">{% include 'includes/icon.html' with icon='file' %}</span></div><strong class="metric-value">{{ missing_datasheets_count }}</strong><span class="metric-caption">Completar documentación PDF</span></a>
+  <a class="panel metric-card" href="{% url 'component_search' %}?attention=no_offer"><div class="metric-top"><span class="metric-label">Sin precio</span><span class="metric-icon">{% include 'includes/icon.html' with icon='coins' %}</span></div><strong class="metric-value">{{ missing_prices_count }}</strong><span class="metric-caption">Consultar componentes sin oferta</span></a>
+</div>
+<section class="panel"><h2>Movimientos recientes</h2><p class="muted section-help">Últimas entradas, salidas y ajustes registrados.</p><div class="table-wrap"><table><caption class="sr-only">Movimientos recientes del inventario</caption><thead><tr><th scope="col">Fecha</th><th scope="col">Componente</th><th scope="col">Movimiento</th><th scope="col">Cantidad</th></tr></thead><tbody>
+{% for movement in recent_movements %}<tr><td>{{ movement.created_at|date:'d/m/Y H:i' }}</td><td><a href="{% url 'component_detail' movement.stock.component.pk %}"><strong>{{ movement.stock.component.reference }}</strong>{{ movement.stock.component.name }}</a></td><td><span class="badge">{{ movement.get_movement_type_display }}</span></td><td class="numeric">{{ movement.quantity }}</td></tr>{% empty %}<tr><td colspan="4" class="empty-state">{% include 'includes/icon.html' with icon='package' %}<h2>No hay movimientos recientes</h2><p>Las entradas, salidas y ajustes aparecerán aquí al registrarlos.</p></td></tr>{% endfor %}
+</tbody></table></div></section>
+{% endblock %}

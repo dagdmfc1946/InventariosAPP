@@ -1,0 +1,38 @@
+# Python y entorno local
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+.local/
+venv/
+
+# Secretos y configuracion local
+.env
+!.env.example
+
+# Base de datos, archivos cargados y respaldos locales
+db.sqlite3
+media/datasheets/*
+!media/datasheets/.gitkeep
+backups/*
+!backups/.gitkeep
+!backups/*.py
+!backups/*.ps1
+
+# Herramientas y sistema operativo
+.vscode/
+.idea/
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+Thumbs.db
+Desktop.ini
+
+# Distribución y artefactos generados
+build/
+dist/*
+!dist/v2.3.1/
+dist/v2.3.1/*
+!dist/v2.3.1/InventariosAPP-v2.3.1-Windows-x64.zip
+collected_static/

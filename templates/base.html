@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}InventariosAPP{% endblock %} · InventariosAPP</title>
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    <link rel="stylesheet" href="{% static 'css/session.css' %}"><link rel="stylesheet" href="{% static 'css/header.css' %}">
+</head>
+<body>
+    <a class="skip-link" href="#content">Saltar al contenido</a>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" href="{% url 'component_search' %}"><span class="brand-mark" aria-hidden="true">{% include 'includes/icon.html' with icon='package' %}</span> InventariosAPP</a>
+            <div class="session">
+                {% include 'includes/session.html' %}
+            </div>
+            <nav aria-label="Navegación principal">
+                {% include 'includes/navigation.html' %}
+            </nav>
+        </div>
+    </header>
+    <main id="content" class="container" tabindex="-1">
+        {% for message in messages %}<div class="notice {{ message.tags }}" role="status">{{ message }}</div>{% endfor %}
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="container footer"><span>Inventario de componentes electrónicos</span>{% if software_version %}<span>Versión {{ software_version }} · {{ software_date }}</span>{% endif %}</footer>
+{% block scripts %}{% endblock %}
+<script src="{% static 'js/ui.js' %}" defer></script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+{% extends "admin/change_form.html" %}
+{% block form_top %}
+<p>Crear usuario del aplicativo. Elige Lector para consultar u Operador para registrar y editar. Ambos entran por <a href="{% url 'login' %}">el acceso de usuarios</a> y no tienen acceso administrativo. Los superusuarios se crean únicamente desde la terminal con <code>createsuperuser</code>.</p>
+{% endblock %}

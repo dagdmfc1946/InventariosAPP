@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Nuevo componente{% endblock %}
+{% block content %}
+<a class="back-link" href="{% url 'component_search' %}">← Volver a componentes</a>
+<div class="page-heading"><div><p class="eyebrow">REGISTRO RÁPIDO</p><h1>Nuevo componente</h1><p class="muted">Identifica el componente y registra cuántas unidades tienes. Completa los detalles cuando los necesites.</p></div></div>
+{% if not has_categories %}<div class="notice" role="status">Primero necesitas una categoría. {% if perms.components.add_category %}Puedes crearla en «Crear categoría aquí».{% else %}Solicita una categoría al administrador.{% endif %}</div>{% endif %}
+<form method="post" class="panel create-form" novalidate>
+{% csrf_token %}
+{% if form.errors %}<div class="notice error" role="alert"><strong>Revisa los campos indicados.</strong>{{ form.non_field_errors }}</div>{% endif %}
+<fieldset><legend><span class="step-number">1</span> Identificación y ubicación</legend><p class="muted section-help">Categoría, referencia interna y nombre son obligatorios.</p>
+<div class="form-grid">
+{% include 'components/create_field.html' with field=form.category %}
+{% include 'components/create_field.html' with field=form.reference %}
+{% include 'components/create_field.html' with field=form.name full_width=True %}
+{% include 'components/create_field.html' with field=form.location full_width=True %}
+</div>
+{% include 'components/category_context.html' %}
+{% include 'components/location_context.html' %}
+<details class="context-panel" {% if form.value.value or form.part_number.value or form.value.errors or form.part_number.errors %}open{% endif %}>
+<summary>Datos técnicos opcionales</summary><p class="help">Úsalos si conoces estos datos. Los precios se registran en las ofertas de proveedores desde la ficha.</p>
+<div class="form-grid">{% include 'components/create_field.html' with field=form.value %}{% include 'components/create_field.html' with field=form.part_number %}</div>
+</details></fieldset>
+<fieldset><legend><span class="step-number">2</span> Existencias iniciales</legend><p class="muted section-help">La cantidad inicial registra una entrada en el historial. Con 0, el componente queda sin unidades disponibles.</p>
+<div class="form-grid">{% include 'components/create_field.html' with field=form.initial_quantity %}</div>
+<details class="context-panel" {% if form.minimum_quantity.errors or form.maximum_quantity.errors or form.minimum_quantity.value != 0 and form.minimum_quantity.value != '0' or form.maximum_quantity.value != 0 and form.maximum_quantity.value != '0' %}open{% endif %}>
+<summary>Avisos y límite de existencias</summary><div class="form-grid">{% include 'components/create_field.html' with field=form.minimum_quantity %}{% include 'components/create_field.html' with field=form.maximum_quantity %}</div>
+</details></fieldset>
+<div class="form-actions"><button type="submit" class="button" {% if not has_categories %}disabled{% endif %}>Guardar componente</button><button type="submit" name="save_another" value="1" class="button secondary" {% if not has_categories %}disabled{% endif %}>Guardar y agregar otro</button><a href="{% url 'component_search' %}">Cancelar</a></div>
+<p class="help">Después de guardar, abre la ficha para completar especificaciones, documentos y ofertas de proveedores.</p>
+</form>
+{% endblock %}

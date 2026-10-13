@@ -1,0 +1,31 @@
+/* Sistema visual compartido: vistas propias y Administración. Sin recursos remotos. */
+:root {
+  color-scheme: light;
+  --ink: #1e3445;
+  --muted: #536677;
+  --accent: #17675a;
+  --accent-hover: #105246;
+  --accent-soft: #eaf4f0;
+  --paper: #ffffff;
+  --surface: #f3f6f8;
+  --line: #dce4e8;
+  --control-line: #81949e;
+  --danger: #a72d35;
+  --danger-soft: #fff1f2;
+  --warning: #79520c;
+  --warning-soft: #fff8e8;
+  --focus: #a95708;
+  --radius: 14px;
+  --radius-small: 8px;
+  --shadow: 0 3px 16px rgb(30 52 69 / 5%);
+  --font-ui: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+.ui-icon { width: 20px; height: 20px; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; vertical-align: middle; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+.password-control { display: flex; align-items: stretch; gap: .5rem; width: 100%; min-width: 0; }
+.password-control input { flex: 1; min-width: 0; }
+.password-toggle { min-height: 44px; padding: .5rem .75rem; border: 1px solid var(--control-line); border-radius: var(--radius-small); background: var(--paper); color: var(--accent); font: 600 .8125rem var(--font-ui); cursor: pointer; }
+.password-toggle:hover { background: var(--accent-soft); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
