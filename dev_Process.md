@@ -536,3 +536,22 @@ en `tasks/todo.md`; no marcar como implementado algo sólo propuesto. Mantener h
   prueba permanecen fuera del control de versiones.
 - SHA256 del ZIP: A740F96B023E23AF44DBF9FD455DE877702CA80F3AC9B207C9B1E907449F5171.
 - Se conserva el historial de desarrollo de Fase 4 y la documentación de v2.3.1.
+
+### Automatización de preparación y arranque del código — 12/10/2026
+
+- Se añaden preparar_proyecto.bat e iniciar_desarrollo.bat a petición del usuario.
+  Usan su propia carpeta como directorio de trabajo, admiten rutas con espacios y
+  mantienen los errores visibles con pausa. La preparación reutiliza el entorno
+  Python 3.12 y no solicita otra cuenta si ya existe un administrador activo.
+- Se crea la carpeta DATA_DIR configurada antes de migrate y se preparan los roles.
+  Se conservan las bases y cuentas existentes. Guía y README actualizados.
+- Cambio de herramientas de desarrollo; versión del aplicativo y ZIP sin cambios.
+- A petición del usuario, iniciar_desarrollo.bat indica /admin/ como página de
+  entrada, con autenticación administrativa. No invalida sesiones ya abiertas.
+- Verificación en copia aislada con ruta con espacios e invocación desde otra carpeta:
+  dependencias satisfechas, migraciones/perfiles y administrador existente conservado.
+  Arranque Django 5.2.18 sin errores de sistema en puerto de prueba 8017; proceso de
+  prueba detenido. No se modifica el inventario real. --sin-pausa disponible en terminal.
+- El usuario autoriza documentar y publicar estas herramientas en dev_v2.
+  Se actualizan guía, README, manual y CHANGELOG; se mantiene v2.3.1 y el ZIP
+  publicado, pues no cambia el código de ejecución del aplicativo empaquetado.

@@ -1,7 +1,7 @@
 # Distribución local y desarrollo — InventariosAPP v2.3.1
 
-Estado: UI y distribución onedir v2.3.1 verificadas localmente en este PC;
-revisión y publicación pendientes. No necesitas adquirir certificado para ejecutar el paquete probado.
+Estado: UI y distribución onedir v2.3.1 verificadas localmente en este PC y
+publicadas en dev_v2 con autorización del usuario. No necesitas adquirir certificado para ejecutar el paquete probado.
 El onefile anterior se retiró por solicitud del usuario.
 
 Destino: Windows x64, uso exclusivo en este PC mediante navegador. El ejecutable usa
@@ -100,6 +100,45 @@ Estos respaldos son del nuevo formato verificado. Las copias antiguas sin `manif
 no se restauran automáticamente: deben revisarse y convertirse en una carpeta aislada.
 
 ## Continuar el desarrollo desde el código fuente
+
+### Preparación automática en otro PC Windows
+
+Después de clonar la rama `dev_v2`, instala Python 3.12 con el lanzador `py`.
+Ejecuta **preparar_proyecto.bat** con doble clic o desde PowerShell:
+
+```powershell
+.\preparar_proyecto.bat
+```
+
+El archivo toma como ruta su propia carpeta, crea `.venv` si falta, comprueba Python
+3.12, instala requirements.txt, prepara la carpeta de datos configurada, aplica las
+migraciones y configura los perfiles Lector/Operador. Solicita crear el administrador
+si no existe uno activo; la contraseña no se muestra mientras se escribe. Repetir
+el archivo conserva datos y cuentas. La primera instalación requiere Internet para
+descargar las dependencias. Si falla un paso, se detiene y muestra el error.
+
+Luego ejecuta **iniciar_desarrollo.bat** con doble clic o desde PowerShell:
+
+```powershell
+.\iniciar_desarrollo.bat
+```
+
+Inicia `manage.py runserver` e indica como entrada `http://127.0.0.1:8000/admin/`,
+que requiere una cuenta autorizada para Administración. Una sesión válida guardada
+en el navegador puede permitir el acceso sin pedir nuevamente la contraseña.
+Mantén la consola
+abierta y usa Ctrl+C para detenerlo. Ambos archivos funcionan aunque abras la terminal
+desde otra carpeta, siempre que invoques la ruta del archivo correspondiente.
+Con doble clic, una pausa mantiene visibles el resultado de preparación o los errores.
+Desde terminal puedes omitirla con `preparar_proyecto.bat --sin-pausa` o
+`iniciar_desarrollo.bat --sin-pausa`.
+
+Estos archivos son para el código fuente; el ZIP del ejecutable ya incluye las
+dependencias y no necesita estos pasos. Los datos de desarrollo predeterminados son
+`.local/dev_v2`; los del ejecutable son independientes. Una `.env` o variables de
+entorno existentes pueden cambiar esa ruta: revisa la ruta indicada antes de migrar.
+
+### Comandos manuales
 
 El `.exe` es una distribución; conservar el repositorio fuente para modificar el programa.
 En PowerShell dentro del proyecto:

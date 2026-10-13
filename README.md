@@ -2,15 +2,15 @@
 
 ## Desarrollo v2 — rama dev_v2
 
-Fases 1, 2 y 3 publicadas en `dev_v2`. Fase 4 autorizada e implementada localmente
-como candidato `v2.3.1`: respaldo/restauración, Waitress y construcción con PyInstaller.
+Fases 1, 2, 3 y desarrollo de Fase 4 publicados en `dev_v2`.
+Versión `v2.3.1`: respaldo/restauración, Waitress y construcción con PyInstaller.
 [Guía de instalación, terminal y reconstrucción](DISTRIBUCION_Y_DESARROLLO.md).
 [Validación de Fase 4](INFORME_VALIDACION_FASE4.md): 125 pruebas correctas.
 Interfaz refinada con UI UX Pro Max en todas las vistas y Administración.
 Empaquetado anterior onefile retirado; paquete onedir verificado desde exe en este PC,
 fuera del proyecto y sin Python en PATH. Se conserva el lanzador intacto verificado y
 los recursos corregidos, con comparación de código y metadatos documentada.
-Falta la revisión del usuario antes de publicar Fase 4.
+Código, documentación y ZIP v2.3.1 publicados con autorización del usuario.
 
 Esta sección prevalece para la rama v2; la documentación inferior conserva la referencia
 de instalación y comportamiento de la primera versión.
@@ -22,6 +22,16 @@ combina filtros y páginas de 25; el resumen enlaza pendientes. La sesión muest
 mismas acciones en todas las vistas. Admin sigue disponible para mantenimiento.
 
 ### Datos de trabajo y arranque
+
+En un PC nuevo con Windows, instala Python 3.12 y ejecuta
+[`preparar_proyecto.bat`](preparar_proyecto.bat) para crear el entorno, instalar
+dependencias, aplicar migraciones y crear tu administrador. Luego ejecuta
+[`iniciar_desarrollo.bat`](iniciar_desarrollo.bat) para iniciar Django con runserver.
+El archivo indica `http://127.0.0.1:8000/admin/` como entrada administrativa;
+abre esa dirección en el navegador e inicia sesión. Una sesión válida existente
+no solicita otra vez la contraseña: pulsa **Salir** al terminar si deseas cerrarla.
+Ambos admiten doble clic o ejecución desde terminal. Consulta los detalles en la
+[guía de desarrollo](DISTRIBUCION_Y_DESARROLLO.md#preparación-automática-en-otro-pc-windows).
 
 En este equipo ya se creó la copia `.local/dev_v2`, con las cuentas y datos originales.
 Los originales `db.sqlite3` y `media/` no se migraron ni se borraron. La ruta de trabajo

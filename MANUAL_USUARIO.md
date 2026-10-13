@@ -1,6 +1,6 @@
 # Manual de usuario — InventariosAPP
 
-Actualizado: 12/10/2026. Versión `v2.3.1`, candidato local de Fase 4 en `dev_v2`; interfaz y distribución onedir verificadas localmente.
+Actualizado: 12/10/2026. Versión `v2.3.1` publicada en `dev_v2`; interfaz y distribución onedir verificadas localmente.
 Fases 1, 2 y 3 concluidas en `dev_v2`. La versión anterior sigue en `dev`.
 
 ## Datos separados para revisar v2
@@ -15,6 +15,24 @@ automáticamente; no apuntar la versión en desarrollo a los datos operativos.
 Si ya hay copia, no ejecutar de nuevo prepare_dev: rechaza sobrescribirla.
 
 ## Iniciar y cerrar
+
+Para preparar el código después de clonar en otro PC Windows, instala Python 3.12
+con el lanzador `py` y ejecuta **preparar_proyecto.bat** en la raíz del proyecto.
+Admite doble clic o PowerShell (`.\preparar_proyecto.bat`); necesita Internet para
+instalar dependencias y solicita crear el administrador si no existe uno activo.
+Conserva los datos y usuarios al repetirlo.
+
+Para iniciar, ejecuta **iniciar_desarrollo.bat** con doble clic o PowerShell
+(`.\iniciar_desarrollo.bat`). Abre la dirección indicada en la consola:
+`http://127.0.0.1:8000/admin/`. El archivo inicia el servidor; no abre el navegador
+automáticamente. Administración exige una cuenta autorizada. Si el navegador
+conserva una sesión válida, no pedirá la contraseña nuevamente; usa **Salir** al
+terminar para cerrar esa sesión. Los usuarios Lector/Operador acceden por
+`/accounts/login/`, como se explica en la siguiente sección.
+
+Estos archivos se usan para desarrollo desde código. El ZIP del ejecutable incluye
+sus dependencias y conserva sus datos en una carpeta independiente. Consulta la
+[guía de instalación y desarrollo](DISTRIBUCION_Y_DESARROLLO.md) para ambos casos.
 
 Desde PowerShell en la raíz del proyecto, con el entorno y base ya preparados:
 

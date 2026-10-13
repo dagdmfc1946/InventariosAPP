@@ -5,6 +5,16 @@ Convención vigente: [SemVer 2.0.0](https://semver.org/lang/es/).
 Fuente única ejecutable: `config/version.py`.
 No se atribuye una versión retrospectiva a la aplicación actual.
 
+## Herramientas para desarrollo — 12/10/2026
+
+- preparar_proyecto.bat: prepara Python 3.12, dependencias, carpeta de datos,
+  migraciones, perfiles y administrador desde doble clic o terminal en Windows.
+- iniciar_desarrollo.bat: inicia runserver desde la carpeta del proyecto e indica
+  /admin/ como entrada; autenticación requerida salvo sesión válida existente.
+- Documentadas la preparación en otro PC, la ejecución con doble clic/terminal,
+  --sin-pausa, conservación de datos y distinción del ZIP del ejecutable.
+- No cambia la versión del aplicativo ni el ZIP publicado v2.3.1.
+
 ## [v2.3.1] — 12/10/2026 — Ajuste visual y distribución onedir candidata
 
 - UI UX Pro Max aplicada para definir un sistema visual compartido entre vistas y Admin:
