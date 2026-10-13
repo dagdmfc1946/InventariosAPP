@@ -1,7 +1,8 @@
 # Distribución local y desarrollo — InventariosAPP v2.3.1
 
 Estado: UI y distribución onedir v2.3.1 verificadas localmente en este PC y
-publicadas en dev_v2 con autorización del usuario. No necesitas adquirir certificado para ejecutar el paquete probado.
+publicadas en dev_v2 y main con autorización del usuario. Desarrollo cerrado;
+comienzan las pruebas de uso del .exe. No necesitas adquirir certificado para ejecutar el paquete probado.
 El onefile anterior se retiró por solicitud del usuario.
 
 Destino: Windows x64, uso exclusivo en este PC mediante navegador. El ejecutable usa
@@ -42,6 +43,11 @@ Desde PowerShell, dentro de esa carpeta:
 para iniciar sesión. Crear categorías, ubicaciones y componentes desde cero.
 
 Datos predeterminados: `%LOCALAPPDATA%\InventariosAPP\data`.
+En la cuenta Diego: `C:\Users\Diego\AppData\Local\InventariosAPP\data`.
+Puedes pegar la ruta con `%LOCALAPPDATA%` en la barra del Explorador. La base es
+`db.sqlite3`; los documentos se guardan en `media\datasheets\AAAA\MM\DD`.
+La consola imprime la ruta real y --data-dir puede cambiarla; cada cuenta Windows
+usa su propia carpeta local. No se guardan estos datos dentro de dist ni _internal.
 Incluye `db.sqlite3`, `media` y `.runtime-key` (secreto aleatorio propio de esa instalación).
 Conservar la carpeta completa: el `.exe` se puede mover/reemplazar sin perder estos datos.
 No guardar el secreto ni los respaldos en el repositorio.

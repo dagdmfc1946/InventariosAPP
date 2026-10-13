@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "ccfaa1da-9113-4a98-9c20-03facab96eb0",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "D:\\PROYECTOS\\Repo_InventariosAPP\\InventariosAPP\\arquitectura\\candidate.json",
+  "output": "D:\\PROYECTOS\\Repo_InventariosAPP\\InventariosAPP\\arquitectura\\inventariosapp.html",
+  "specification": {
+    "sha256": "3fa24d324a023467546438a0b2296d1908876151930e5d4830160e9857d19299",
+    "bytes": 34722
+  },
+  "artifact": {
+    "sha256": "d7151f977ba61a81a5bb08089ccd430ea816f4827210d8449dc3c9a99a0f6745",
+    "bytes": 757191
+  }
+}

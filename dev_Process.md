@@ -555,3 +555,20 @@ en `tasks/todo.md`; no marcar como implementado algo sólo propuesto. Mantener h
 - El usuario autoriza documentar y publicar estas herramientas en dev_v2.
   Se actualizan guía, README, manual y CHANGELOG; se mantiene v2.3.1 y el ZIP
   publicado, pues no cambia el código de ejecución del aplicativo empaquetado.
+
+### Arquitectura y cierre aprobado — 12/10/2026
+
+- El usuario considera estable dev_v2 y autoriza merge a main: realizado sin
+  conflictos en 412a0bc; contenido idéntico a dev_v2 y Django check sin problemas.
+- Solicita skill tt-a1i/archify y publicación de arquitectura/ en ambas ramas.
+  Skill descargada en .local/tools/skills/archify; paquete 3.0.1, sin dependencias
+  nuevas de ejecución. Se inspeccionan fuentes fijadas a e55a3f3.
+- HTML español generado desde candidate.json: finalize pasa validate/deliver/check/
+  browser-check sin diagnósticos. visual-check pasa cuatro capturas; se inspeccionan
+  1440x900 claro y 2048x1320 oscuro. Se conservan recibos, capturas y licencias.
+- Documentados módulos, modelo relacional, transacciones, permisos, PDF, persistencia,
+  respaldo/restauración y límites. Se marca arquitectura previa como histórica.
+- Datos del .exe confirmados por runtime_local: %LOCALAPPDATA%/InventariosAPP/data;
+  db.sqlite3, media y .runtime-key fuera del programa. Manual y guía actualizados.
+- El usuario inicia ejecución/pruebas con el .exe; futuro desarrollo en dev_v2.
+  Cierre documentado en CIERRE_Y_PRUEBAS.md. Se mantiene versión y ZIP v2.3.1.

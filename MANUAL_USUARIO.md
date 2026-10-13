@@ -5,6 +5,15 @@ Fases 1, 2 y 3 concluidas en `dev_v2`. La versión anterior sigue en `dev`.
 
 ## Datos separados para revisar v2
 
+**Si utilizas el .exe**, los datos se guardan por defecto en
+`%LOCALAPPDATA%\InventariosAPP\data`, no en la carpeta del código. En la cuenta Diego:
+`C:\Users\Diego\AppData\Local\InventariosAPP\data\db.sqlite3`.
+Los PDF están en `data\media\datasheets`; conserva también `data\.runtime-key`.
+La consola muestra la ruta efectiva si se utilizó --data-dir. Puedes abrirla pegando
+`%LOCALAPPDATA%\InventariosAPP\data` en la barra de dirección del Explorador.
+Detén el aplicativo antes de respaldar; usa los comandos de la guía de distribución.
+Las rutas de desarrollo descritas a continuación son independientes del .exe.
+
 Esta rama usa por defecto `.local/dev_v2/db.sqlite3` y `.local/dev_v2/media`.
 La copia de desarrollo ya fue preparada en este equipo. Conserva las cuentas que
 tenías en la base original: usa tus credenciales habituales. No usar la cuenta de

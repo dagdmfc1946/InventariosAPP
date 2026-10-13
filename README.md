@@ -12,6 +12,13 @@ fuera del proyecto y sin Python en PATH. Se conserva el lanzador intacto verific
 los recursos corregidos, con comparación de código y metadatos documentada.
 Código, documentación y ZIP v2.3.1 publicados con autorización del usuario.
 
+**Cierre del desarrollo aprobado el 12/10/2026:** v2.3.1 estable en `main`;
+`dev_v2` se conserva para futuros cambios. El usuario inicia pruebas de uso desde
+el .exe. Consulta la [arquitectura interactiva y técnica](arquitectura/README.md)
+y la [guía de cierre y pruebas](CIERRE_Y_PRUEBAS.md).
+Datos del .exe: `%LOCALAPPDATA%\InventariosAPP\data\db.sqlite3`; los PDF y la clave
+de instalación están junto a esa base, fuera de la carpeta del programa.
+
 Esta sección prevalece para la rama v2; la documentación inferior conserva la referencia
 de instalación y comportamiento de la primera versión.
 

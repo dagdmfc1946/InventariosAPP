@@ -7,6 +7,11 @@ No se atribuye una versión retrospectiva a la aplicación actual.
 
 ## Herramientas para desarrollo — 12/10/2026
 
+- Cierre aprobado de v2.3.1 estable en main; dev_v2 permanece para futuros cambios.
+- Arquitectura documentada en arquitectura/ mediante Archify: HTML interactivo,
+  fuentes, modelo de datos, flujos, recibos de validación y evidencia visual.
+- Ruta persistente del .exe y procedimiento de pruebas de uso documentados.
+
 - preparar_proyecto.bat: prepara Python 3.12, dependencias, carpeta de datos,
   migraciones, perfiles y administrador desde doble clic o terminal en Windows.
 - iniciar_desarrollo.bat: inicia runserver desde la carpeta del proyecto e indica
