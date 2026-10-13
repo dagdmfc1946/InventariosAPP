@@ -1,7 +1,8 @@
-# Distribución local y desarrollo — InventariosAPP v2.3.0
+# Distribución local y desarrollo — InventariosAPP v2.3.1
 
-Estado: candidato local para revisión. El binario final está generado, pero Smart App
-Control bloquea su ejecución en este PC; la validación final del .exe queda pendiente.
+Estado: UI y distribución onedir v2.3.1 verificadas localmente en este PC;
+revisión y publicación pendientes. No necesitas adquirir certificado para ejecutar el paquete probado.
+El onefile anterior se retiró por solicitud del usuario.
 
 Destino: Windows x64, uso exclusivo en este PC mediante navegador. El ejecutable usa
 Waitress y contiene Python, Django y dependencias; el destinatario no debe instalar Python.
@@ -13,7 +14,23 @@ El paquete no contiene ninguna base, cuenta, componente, oferta, PDF personal ni
 En una carpeta de datos nueva, el primer arranque aplica las migraciones y crea únicamente
 las tablas, permisos y perfiles Lector/Operador. No existe una contraseña predeterminada.
 
-Desde PowerShell, dentro de la carpeta donde está el ejecutable:
+Extraer el ZIP y conservar toda la carpeta InventariosAPP, incluido `_internal`.
+No mover solamente el `.exe`: necesita las bibliotecas y recursos que lo acompañan.
+
+```text
+InventariosAPP/
+├── InventariosAPP.exe
+├── _internal/
+├── DISTRIBUCION_Y_DESARROLLO.md
+├── MANUAL_USUARIO.md
+├── CHANGELOG.md
+├── INFORME_VALIDACION_FASE4.md
+├── BUILD_INFO.json
+├── SHA256SUMS.txt
+└── licenses/
+```
+
+Desde PowerShell, dentro de esa carpeta:
 
 ```powershell
 .\InventariosAPP.exe init
@@ -119,8 +136,10 @@ $env:TMP = $env:TEMP
 ```
 
 El script ejecuta collectstatic y usa `InventariosAPP.spec`. Resultado:
-`dist/v<versión>/InventariosAPP.exe`, documentación, avisos en `licenses/` y
-`BUILD_INFO.json` con SHA256/versiones de dependencias. Distribuir la carpeta completa.
+`dist/v<versión>/InventariosAPP/InventariosAPP.exe`, documentación, avisos en `licenses/` y
+`BUILD_INFO.json` con SHA256/versiones de dependencias y SHA256SUMS.txt.
+ZIP completo: `dist/v<versión>/InventariosAPP-v<versión>-Windows-x64.zip`.
+Distribuir y extraer la carpeta completa. Las sumas verifican integridad, no son una firma.
 Los recursos se incluyen explícitamente y se comprueba que no haya bases ni secretos.
 Las dependencias de empaquetado están en requirements-build.txt; las de ejecución en
 requirements.txt. Construir Windows desde Windows, sin copiar el entorno virtual al destino.
@@ -129,7 +148,8 @@ requirements.txt. Construir Windows desde Windows, sin copiar el entorno virtual
    del proyecto, con Python y el entorno virtual fuera del PATH. Comprobar init, creación
    de usuario, acceso, estilos, altas/movimientos, PDF, respaldo/restauración y cierre.
 4. Para actualizar una instalación utilizada: detener, respaldar y verificar el respaldo;
-   reemplazar solo el ejecutable. Mantener la carpeta de datos. Al iniciar se aplican
+   reemplazar la carpeta del programa completa (.exe y _internal). Mantener la carpeta
+   de datos externa; no copiar encima mezclando bibliotecas de versiones distintas. Al iniciar se aplican
    migraciones pendientes, con un respaldo previo automático si la base ya existe.
    No basta con recuperar solo el `.exe` anterior si cambió el esquema: usar su respaldo
    completo con el programa compatible para volver atrás.
@@ -157,7 +177,7 @@ Fuentes: [Waitress](https://docs.pylonsproject.org/projects/waitress/en/latest/a
 
 ## Firma de Windows y estado de validación
 
-El ejecutable v2.3.0 final no tiene firma Authenticode. En este equipo, Windows bloqueó
+El ejecutable previo v2.3.0 onefile no tenía firma Authenticode. En este equipo, Windows bloqueó
 su arranque con Smart App Control. Eventos CodeIntegrity 3033/3077/3118 confirman
 el incumplimiento de los requisitos de firma; no es una excepción de Django.
 Se conservaron las protecciones del equipo. No se considera una distribución final aprobada.
@@ -174,7 +194,8 @@ inicialización vacía y creación de administrador ficticio fuera del proyecto 
 fuera de PATH. Ese resultado no valida el artefacto final con Django 5.2.18.
 Con el código final se verificaron 125 pruebas y los flujos mediante el lanzador Python:
 Waitress, sesión, estáticos, PDF, movimientos, respaldo/restauración y actualización.
-Falta validar el binario final y repetir en otro Windows x64 limpio sin Python instalado.
+La nueva construcción onedir se valida por separado; cambiar el formato no garantiza
+la aceptación de Windows. Falta repetir en otro Windows x64 limpio sin Python instalado.
 
 Mientras se resuelve la firma, se puede ejecutar la misma configuración local desde fuente:
 
@@ -185,3 +206,38 @@ Mientras se resuelve la firma, se puede ejecutar la misma configuración local d
 ```
 
 Para desarrollar, seguir usando `manage.py runserver` con los pasos anteriores.
+
+
+## Cambios visuales antes del nuevo empaquetado — v2.3.1
+
+UI UX Pro Max aplicada en vistas propias y Administración. Iconos SVG, estilos y
+fuentes locales, navegación activa, formularios y estados coherentes, tablas centradas,
+resumen más claro y ayuda accesible. Controles Mostrar/Ocultar en contraseñas.
+La construcción onedir conserva consola para los comandos Django y Ctrl+C.
+No se oculta la consola ni se cambian políticas Windows. PyInstaller 6.22.0 se mantiene
+para comprobar primero el cambio de formato sin actualizar también la herramienta.
+
+
+## Actualización de recursos con lanzador intacto
+
+La construcción vigente incluye el recurso oficial common-passwords.txt.gz de Django.
+La recompilación de esa reparación produjo un exe que Windows bloqueó. Se verificó
+que el código era exactamente el mismo y se conservó el lanzador previamente permitido,
+sin editar ningún byte, junto a los recursos correctos. El paquete completo fue probado.
+La comparación y ambas sumas constan en BUILD_INFO.json e INFORME_VALIDACION_FASE4.md.
+
+Solo si se actualizan recursos y el código permanece exactamente igual:
+
+```powershell
+.\.venv\Scripts\python.exe build_exe.py --reuse-launcher 'D:\CopiaProgramaVerificado\InventariosAPP.exe'
+```
+
+El script guarda la copia en memoria antes de construir; compara el binario completo,
+permitiendo únicamente diferencias de fechas/checksum del formato PE. Rechaza cambios
+en código, bootloader, archivo embebido o versión. No modifica el exe anterior ni las
+protecciones Windows. Si cambias Python o config/version.py, usar el build normal y
+validar el nuevo archivo. Conserva siempre el ZIP anterior antes de reconstruir.
+
+El paquete actual funcionó sin certificado en este PC. No se promete que Windows
+admita cualquier archivo recién compilado. Esta nota prevalece sobre el diagnóstico
+histórico del onefile v2.3.0 descrito anteriormente.

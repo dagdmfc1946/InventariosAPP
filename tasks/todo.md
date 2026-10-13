@@ -112,7 +112,7 @@ Evidencia T1–T6 en dev_Process.md. El usuario autorizó concluir y publicar Fa
   Aceptación: DEBUG=False, secretos externos, estáticos/PDF servidos y datos persistentes.
   Verificar configuración y check --deploy interpretado según escenario.
   Archivos: settings, entorno ejemplo, launcher, requisitos específicos y tests (5).
-- [ ] T19. Preparar artefacto del destino elegido. Depende de T18.
+- [x] T19. Preparar artefacto del destino elegido. Depende de T18.
   Aceptación: Windows con Waitress/PyInstaller probado sin Python, operación local
   sin Internet y escucha exclusiva en localhost; nunca publicar automáticamente.
   Verificar arranque, parada y actualización con datos de prueba. Archivos: launcher,
@@ -134,3 +134,14 @@ Smart App Control bloquea su ejecución; falta firma/validación final del binar
 Windows x64 sin Python. No marcar T19 completa con las pruebas del lanzador fuente.
 T20: guía de instalación, terminal, rebuild, actualización y límites; 125 pruebas correctas.
 Control F4 permanece pendiente: revisión del usuario y aprobación antes de publicación.
+
+
+### Candidato local v2.3.1
+
+UI UX Pro Max completada antes de limpiar y reconstruir. Onedir probado desde exe
+fuera del proyecto, ruta con espacios y Python fuera de PATH: init vacío, 23 vistas,
+siete recursos, PDF/datasheet/roles, contraseña común rechazada, movimiento idempotente,
+HTTP real, cierre y respaldo/restauración. Recurso Django faltante corregido. Lanzador
+intacto con código verificado idéntico conservado; fuentes/guía permiten rebuild.
+T16–T20 verificados para este PC. Otro PC no es el destino actual; se documenta como
+ensayo no realizado. Control F4/revisión/push permanece pendiente.

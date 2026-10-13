@@ -3,11 +3,14 @@
 ## Desarrollo v2 — rama dev_v2
 
 Fases 1, 2 y 3 publicadas en `dev_v2`. Fase 4 autorizada e implementada localmente
-como candidato `v2.3.0`: respaldo/restauración, Waitress y construcción con PyInstaller.
+como candidato `v2.3.1`: respaldo/restauración, Waitress y construcción con PyInstaller.
 [Guía de instalación, terminal y reconstrucción](DISTRIBUCION_Y_DESARROLLO.md).
 [Validación de Fase 4](INFORME_VALIDACION_FASE4.md): 125 pruebas correctas.
-El .exe está generado; Windows Smart App Control bloquea su arranque por firma.
-Falta completar esa validación y revisión del usuario antes de publicar Fase 4.
+Interfaz refinada con UI UX Pro Max en todas las vistas y Administración.
+Empaquetado anterior onefile retirado; paquete onedir verificado desde exe en este PC,
+fuera del proyecto y sin Python en PATH. Se conserva el lanzador intacto verificado y
+los recursos corregidos, con comparación de código y metadatos documentada.
+Falta la revisión del usuario antes de publicar Fase 4.
 
 Esta sección prevalece para la rama v2; la documentación inferior conserva la referencia
 de instalación y comportamiento de la primera versión.

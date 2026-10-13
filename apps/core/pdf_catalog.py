@@ -24,7 +24,7 @@ def build_catalog_pdf(components, filters):
     doc = SimpleDocTemplate(output, pagesize=landscape(A4), leftMargin=32, rightMargin=32,
                             topMargin=32, bottomMargin=40, title='InventariosAPP — Componentes',
                             author='InventariosAPP')
-    body = ParagraphStyle('body', fontName='InventorySans', fontSize=8, leading=11, splitLongWords=True)
+    body = ParagraphStyle('body', fontName='InventorySans', fontSize=8, leading=11, splitLongWords=True, textColor=colors.HexColor('#1e3445'))
     heading = ParagraphStyle('heading', parent=body, fontName='InventoryBold', fontSize=18, leading=22)
     header = ParagraphStyle('header', parent=body, fontName='InventoryBold', textColor=colors.white, alignment=1)
 
@@ -62,10 +62,10 @@ def build_catalog_pdf(components, filters):
         table = LongTable(rows, colWidths=[doc.width * fraction for fraction in (.13, .22, .12, .12, .16, .15, .10)],
                           repeatRows=1, splitByRow=1, splitInRow=1, hAlign='LEFT')
         table.setStyle(TableStyle([
-            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#16685c')),
-            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#edf4f2')]),
+            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#17675a')),
+            ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#eaf4f0')]),
             ('VALIGN', (0, 0), (-1, -1), 'TOP'),
-            ('GRID', (0, 0), (-1, -1), .4, colors.HexColor('#d6e0e4')),
+            ('GRID', (0, 0), (-1, -1), .4, colors.HexColor('#dce4e8')),
             ('LEFTPADDING', (0, 0), (-1, -1), 7), ('RIGHTPADDING', (0, 0), (-1, -1), 7),
             ('TOPPADDING', (0, 0), (-1, -1), 7), ('BOTTOMPADDING', (0, 0), (-1, -1), 7),
         ]))
@@ -75,7 +75,7 @@ def build_catalog_pdf(components, filters):
 
     def footer(canvas, document):
         canvas.setFont('InventorySans', 8)
-        canvas.setFillColor(colors.HexColor('#516578'))
+        canvas.setFillColor(colors.HexColor('#536677'))
         canvas.drawString(32, 20, f'InventariosAPP v{__version__} · {timestamp}')
         canvas.drawRightString(document.pagesize[0] - 32, 20, f'Página {document.page}')
 

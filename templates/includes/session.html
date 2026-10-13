@@ -4,8 +4,8 @@
         <span class="inventory-avatar" aria-hidden="true">{{ user.get_username|slice:':1'|upper }}</span>
         <span><span class="inventory-user-label">Sesión activa</span><strong>{{ user.get_username }}</strong></span>
     </div>
-    <a class="inventory-session-action" href="{% url 'profile_edit' %}">Mi perfil</a>
-    {% if user.has_usable_password %}<a class="inventory-session-action" href="{% url 'password_change' %}">Cambiar contraseña</a>{% endif %}
-    <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="inventory-session-action inventory-signout" type="submit">Salir</button></form>
+    <a class="inventory-session-action" href="{% url 'profile_edit' %}">{% include 'includes/icon.html' with icon='user' %}Mi perfil</a>
+    {% if user.has_usable_password %}<a class="inventory-session-action" href="{% url 'password_change' %}">{% include 'includes/icon.html' with icon='key' %}Cambiar contraseña</a>{% endif %}
+    <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="inventory-session-action inventory-signout" type="submit">{% include 'includes/icon.html' with icon='logout' %}Salir</button></form>
 </div>
 {% else %}<a href="{% url 'login' %}">Iniciar sesión</a>{% endif %}

@@ -141,3 +141,14 @@ para desarrollar. Base nueva vacía y datos persistentes fuera del binario.
 [Guía de instalación y reconstrucción](../DISTRIBUCION_Y_DESARROLLO.md).
 El artefacto final queda pendiente de validación por bloqueo de firma de Smart App Control;
 no se publica una versión final hasta resolverlo y revisar. El proyecto Linux no se modifica.
+
+
+## Distribución vigente — v2.3.1
+
+Paquete en carpeta (onedir) con InventariosAPP.exe y _internal; consola disponible,
+Waitress en loopback y datos externos. UI refinada con UI UX Pro Max antes de construir.
+El paquete corregido funcionó en este PC sin firma/cambio de políticas; un lanzamiento
+recompilado fue bloqueado pese a código idéntico. Se conserva lanzador intacto verificado
+con sus recursos correctos. La guía y BUILD_INFO registran esa comparación; la ejecución
+de una nueva compilación no se garantiza por formato. No es necesario adquirir un
+certificado para el paquete que se probó. Otra distribución/PC requeriría validación.

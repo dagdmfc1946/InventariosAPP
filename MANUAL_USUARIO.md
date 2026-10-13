@@ -1,6 +1,6 @@
 # Manual de usuario — InventariosAPP
 
-Actualizado: 12/10/2026. Versión `v2.3.0`, candidato local de Fase 4 en `dev_v2`; binario pendiente de validación por bloqueo de Windows.
+Actualizado: 12/10/2026. Versión `v2.3.1`, candidato local de Fase 4 en `dev_v2`; interfaz y distribución onedir verificadas localmente.
 Fases 1, 2 y 3 concluidas en `dev_v2`. La versión anterior sigue en `dev`.
 
 ## Datos separados para revisar v2
@@ -284,7 +284,7 @@ Detalles y recuperación del estado anterior: [guía de distribución](DISTRIBUC
 
 ## Primera instalación y uso local
 
-El paquete v2.3.0 no incluye la base ni documentos del proyecto. Una instalación nueva
+El paquete v2.3.1 no incluye la base ni documentos del proyecto. Una instalación nueva
 empieza sin cuentas, categorías ni componentes. Las tablas y los perfiles se preparan
 al iniciar; crear el administrador desde terminal:
 
@@ -296,6 +296,7 @@ al iniciar; crear el administrador desde terminal:
 
 Datos en `%LOCALAPPDATA%\InventariosAPP\data`. Conservar toda esa carpeta al actualizar;
 reconstruir o sustituir el ejecutable no vacía registros existentes.
+Extraer y conservar toda la carpeta del paquete, incluido `_internal`: no mover el .exe solo.
 El .exe abre el navegador e inicia Waitress localmente; mantener su consola abierta.
 Detener con Ctrl+C antes de cerrar, respaldar o cambiar de versión.
 Para abrir tú mismo el navegador: `InventariosAPP.exe serve --no-browser`.
@@ -312,10 +313,23 @@ el entorno, probar, actualizar `config/version.py`/CHANGELOG, generar migracione
 corresponda y ejecutar `build_exe.py`. El resultado se deja en `dist/v<versión>/` con
 manuales, licencias y BUILD_INFO.json. No incorporar bases de desarrollo al paquete.
 
+## Mejoras visuales v2.3.1
+
+El mismo diseño se aplica a catálogo, resumen, ficha, formularios, ubicaciones,
+proveedores, perfil/contraseña y Administración. La navegación destaca la sección
+actual. Los encabezados de las tablas están centrados y las tablas anchas se pueden
+recorrer dentro de su propio contenedor en móvil, también con teclado.
+
+Al guardar un formulario con errores, el resumen enlaza los campos que debes corregir
+sin eliminar sus mensajes ni los datos escritos. Mostrar/Ocultar permite comprobar
+lo escrito en una contraseña: al abrir la vista sigue oculta. No revela claves guardadas.
+Los estados vacíos y páginas de error conservan el diseño y una forma de volver.
+
 ## Estado de revisión
 
-125 pruebas correctas y flujos locales con Waitress verificados en datos ficticios.
-El binario final se generó, pero Smart App Control de Windows impide ejecutarlo por
-sus requisitos de firma. Falta resolver la firma y validar ese binario, incluida una
-prueba en otro PC Windows x64 sin Python. La guía incluye el diagnóstico y alternativa
-por terminal desde fuente. Publicación de Fase 4 pendiente de revisión/aprobación.
+125 pruebas correctas, tres pruebas PDF repetidas después del ajuste de paleta,
+23 vistas renderizadas y revisión visual en escritorio/móvil con datos ficticios.
+El onefile previo se retiró. El paquete onedir funciona en este PC desde su exe,
+fuera del proyecto y sin Python en PATH; se comprobaron vistas, PDF, permisos y respaldos. El resultado
+actual del ejecutable consta en INFORME_VALIDACION_FASE4.md. Otro Windows x64 limpio
+sin Python y la revisión/publicación del usuario siguen siendo comprobaciones separadas.

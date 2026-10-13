@@ -5,6 +5,30 @@ Convención vigente: [SemVer 2.0.0](https://semver.org/lang/es/).
 Fuente única ejecutable: `config/version.py`.
 No se atribuye una versión retrospectiva a la aplicación actual.
 
+## [v2.3.1] — 12/10/2026 — Ajuste visual y distribución onedir candidata
+
+- UI UX Pro Max aplicada para definir un sistema visual compartido entre vistas y Admin:
+  identidad verde, tipografía local, iconos SVG, espaciado, paneles, tablas y controles.
+- Navegación con sección activa y orden coherente para teclado; cabecera y sesión alineadas.
+  Catálogo con exportación agrupada, resumen con tarjetas enlazadas/tabla y ubicaciones en tarjetas.
+- Mostrar/ocultar contraseñas por acción del usuario, ayudas asociadas a campos,
+  foco en resumen de errores y enlaces a los campos inválidos; sin cambiar validación/guardado.
+- Tablas recorribles con teclado, controles legibles, reduced-motion y estados 403/404/500/PDF
+  coherentes. Contrastes de texto medidos superiores a 4.5:1 en la paleta principal.
+- Corregidos desbordamiento del inicio Admin y contraste de los selectores de grupos/permisos.
+  Widgets, cuentas, permisos y flujos de Django se conservan. PDF adopta la misma paleta.
+- 125 pruebas correctas (98.047 s); tres pruebas PDF repetidas (0.747 s), 23 vistas,
+  permisos Lector/Operador y revisión visual a 375/768/1024/1440 px.
+- Limpieza autorizada del onefile v2.3.0, sus temporales y estáticos generados; datos intactos.
+  Nueva construcción onedir con consola, _internal, licencias, metadatos/sumas y ZIP completo.
+  Validación del artefacto separada; no se garantiza aceptación de Smart App Control por formato.
+- Paquete onedir verificado desde exe fuera del proyecto, sin Python en PATH: 23 vistas,
+  siete recursos, PDF, permisos, contraseñas comunes, movimientos y recuperación.
+- Hook incorpora common-passwords.txt.gz; conserva el validador de Django. Lanzador
+  intacto de código idéntico retenido tras bloqueo de una recompilación; comparación
+  estricta y sumas documentadas. --reuse-launcher rechaza código/versiones diferentes.
+- Sin nuevas migraciones ni push. Candidato para revisión del usuario.
+
 ## [v2.3.0] — 12/10/2026 — Candidato local de Fase 4
 
 - Lanzador de terminal para iniciar Waitress en 127.0.0.1, preparar base, ejecutar

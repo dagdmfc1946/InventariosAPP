@@ -466,3 +466,63 @@ en `tasks/todo.md`; no marcar como implementado algo sólo propuesto. Mantener h
   responde que no dispone de certificado. No se adquiere ni se cambia Smart App Control.
   Se entrega candidato con guía y alternativa de ejecución desde fuente; firma y QA
   final del binario continúan pendientes. No se publica una release final.
+
+
+## 12/10/2026 — UI UX Pro Max antes de reconstruir onedir (v2.3.1)
+
+- Usuario autoriza limpiar artefactos PyInstaller anteriores y pide primero mejorar
+  absolutamente toda la UI con nextlevelbuilder/ui-ux-pro-max-skill.
+- Skill descargada por skill-installer en .local/tools/skills, aislada del sistema global.
+  Leídos SKILL.md y referencias quick-reference/pro-rules; ejecutado generador por ruta
+  absoluta y búsquedas de error-summary/foco. El stack real es Django/HTML/CSS propio;
+  no se fuerzan React/Tailwind ni recomendaciones de marketing/tipografía fuera de contexto.
+- Sistema verificado/adaptado documentado en design-system/inventariosapp/MASTER.md.
+  Paleta verde/gris, fuente Segoe UI local y SVG propios; nada requiere Internet en la app.
+- Theme común más CSS de aplicación/header/session/admin; navegación compartida y activa,
+  orden DOM alineado con orden visual, tarjetas de resumen, tabla de movimientos,
+  ubicaciones, catálogo/exportación, formularios y estados 403/404/500/PDF coherentes.
+- ui.js añade descripción accesible, estado inválido, resumen de errores enfocable con
+  enlaces, regiones de tabla para teclado y controles de mostrar/ocultar contraseña.
+  No intercepta ni desactiva botones de guardado: mantiene submitters y datos de formularios.
+- QA con datos ficticios en .local/ui_review_fase4. Suite: 125 correctas en 98.047 s.
+  PDF: tres casos repetidos tras paleta, correctos en 0.747 s. Renderizado de 23 vistas,
+  404/500, PDF y roles Lector/Operador verificados. Formularios inválidos: tres enlaces,
+  tres campos inválidos y foco en resumen. Toggle probado sin cambiar credenciales.
+- Navegador: catálogo/resumen/ubicaciones/proveedores/alta/ficha/edición/duplicación/
+  movimientos/ofertas/perfil/contraseña/Admin, incluidos usuarios y selectores nativos.
+  Pantallas 375/768/1024/1440 px: sin scroll horizontal del documento; tablas tienen
+  scroll propio. Corregido overflow inicial Admin y selector elegido de bajo contraste.
+  Texto principal/secundario/acción/error: 12.87/5.94/6.72/6.23; borde de control 3.15.
+- Limpieza acotada, con rutas absolutas comprobadas y sin enlaces: dist/v2.3.0, ZIP
+  previo, .local/pyinstaller_build, copia .exe de fase4_execution, collected_static y
+  build_profile. No se elimina db.sqlite3/media/dev_v2 ni los respaldos/evidencias QA.
+- Spec y builder pasan a onedir: EXE + COLLECT, verificación del contenido de toda la
+  carpeta, collectstatic limpio, licencias, SHA256SUMS.txt y ZIP. PyInstaller 6.22.0 se
+  mantiene; cambio de formato no constituye garantía ni excepción de Smart App Control.
+- SHA256 original conserva B247D32672C3D77C9DF9F377C833061D79AAFF9A7010112AB9776096616F12E2.
+  Candidato local en dev_v2; sin push ni cambio de protecciones.
+
+- Primer onedir: Windows permite --version e init vacío/restauración sin firma, con
+  PATH sin Python. Copia extraída fuera del proyecto y con espacios. Smoke detecta
+  recurso common-passwords.txt.gz omitido por el hook explícito de Django al consultar
+  cambio de contraseña. Se incluye el recurso oficial y se reconstruye; no se desactiva
+  CommonPasswordValidator. Se añade esa comprobación al smoke del paquete final.
+
+- La recompilación del recurso fue bloqueada por Windows. Comparación estricta con el
+  lanzador aceptado: mismo archivo Python embebido y mismos scripts; seis bytes de fechas
+  PE/debug y checksum distintos. Base_library.zip contiene módulos idénticos, distinto
+  contenedor. El resto de recursos coincide; falta solo la lista pública Django.
+- Se conserva copia exacta del lanzador aceptado (SHA 7d0e9b3c4e9ce64328d05065ba9636f4daf3b7da11b8f4c589db7c6b457848a4)
+  con recursos corregidos. No se editan bytes de exe ni políticas/certificados Windows.
+  Helper --reuse-launcher exige binario idéntico salvo metadatos PE y rechaza otro byte
+  de diferencia (comprobado en memoria), impidiendo reutilizar otra versión/código.
+- Smoke final congelado: 23 vistas, siete estáticos hash, PDF/datasheet/permisos/roles,
+  estado de contraseña y rechazo de contraseña común. Movimiento 120→117; preview sin
+  escritura y reenvío idempotente. Cuenta ficticia creada por terminal; sin datos del usuario.
+- Ejecución en carpeta externa al proyecto con espacios y PATH sin Python. HTTP real
+  desde exe con Waitress/DEBUG=False muestra nuevo catálogo y resumen; capturas onedir_v231.
+  Backup mientras está abierto rechazado, cierre Ctrl+C y copia/restore/init correctos,
+  conserva 117 en otro destino. Instalación vacía conserva cero registros en diez tablas.
+- Datos originales intactos. Destino es este PC; no se declara prueba en otro Windows limpio.
+  Documentación refleja hechos, límite de confianza por archivo y proceso de reconstrucción.
+  T16–T20 verificados localmente; candidato para revisión, sin push.

@@ -33,3 +33,8 @@ Actualización vigente: Fase 4 autorizada por el usuario el 12/10/2026. v2.3.0 c
 implementada localmente; 125 pruebas correctas y artefacto construido. La firma exigida
 por Smart App Control impide su validación final. Guía de terminal/reconstrucción y
 recuperación publicada localmente; revisión y push de Fase 4 pendientes.
+
+
+Estado vigente v2.3.1: UI UX Pro Max aplicada a todo el aplicativo; artefactos anteriores
+retirados y onedir corregido verificado desde exe en el PC objetivo. T16–T20 completadas
+localmente. Candidato para revisión del usuario y autorización de push; sin integración.

@@ -1,8 +1,8 @@
 # InventariosAPP — Plan de nueva versión
 
-Fecha de análisis: 12/10/2026. Estado: **Fases 1–3 publicadas; Fase 4 implementada localmente con validación final del .exe pendiente**.
+Fecha de análisis: 12/10/2026. Estado: **Fases 1–3 publicadas; Fase 4 y UI verificadas localmente; revisión/publicación pendientes**.
 El usuario autorizó Fase 4 y pidió instalación vacía, terminal y guía de reconstrucción.
-Versión visible: `v2.3.0`, fecha `12/10/2026`.
+Versión visible: `v2.3.1`, fecha `12/10/2026`.
 Plan ampliado a **cuatro fases** por solicitud del usuario: los pendientes de usuarios,
 PDF y ubicaciones se incorporan antes de ampliar la operación diaria y distribuir.
 Actualización del 12/10/2026: el usuario autorizó crear y subir `dev_v2` con esta
@@ -449,3 +449,21 @@ de firma. No se declara cierre final de distribución hasta validar el .exe y re
 Se conserva el inventario real; instalación nueva vacía y actualización sin borrado.
 Guía: DISTRIBUCION_Y_DESARROLLO.md. Evidencia: INFORME_VALIDACION_FASE4.md.
 Cambios locales de dev_v2 sin push/merge ni publicación final autorizada.
+
+
+## Refinamiento UI y reconstrucción limpia — 12/10/2026
+
+El usuario solicita UI UX Pro Max en todo el aplicativo antes de construir de nuevo,
+y retirar el empaquetado previo. v2.3.1 incorpora sistema visual compartido, mejoras
+accesibles y estados de error. Ver design-system/inventariosapp/MASTER.md.
+23 vistas, roles, PDF, teclado y pantallas responsivas comprobados; 125 pruebas correctas.
+Limpieza de artefactos generados autorizada; datos y código de trabajo preservados.
+Siguiente artefacto: onedir, sin cambiar protecciones Windows. Validación del binario
+se registra por separado; la aprobación de push sigue pendiente.
+
+
+Cierre de verificación v2.3.1: onedir corregido funciona sin firma en el PC objetivo.
+Init vacío, 23 vistas/recursos/PDF/permisos/movimientos/contraseñas, HTTP y recuperación
+probados desde exe fuera del proyecto. Se conserva lanzador intacto de código idéntico
+para actualización de recursos; guía y metadatos registran el procedimiento. Control F4
+queda para revisión del usuario y autorización de push; no hay publicación automática.

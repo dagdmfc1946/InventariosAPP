@@ -1,0 +1,3 @@
+{% extends 'base.html' %}
+{% block title %}No se pudo completar la operación{% endblock %}
+{% block content %}<section class="panel empty-state"><div>{% include 'includes/icon.html' with icon='alert' %}</div><p class="eyebrow">OPERACIÓN NO COMPLETADA</p><h1>No pudimos completar esta operación</h1><p>Vuelve al catálogo y comprueba si el cambio quedó registrado antes de intentarlo nuevamente.</p><a class="button secondary" href="{% url 'component_search' %}">Volver a componentes</a></section>{% endblock %}

@@ -1,3 +1,3 @@
 {% extends 'base.html' %}
 {% block title %}PDF no disponible{% endblock %}
-{% block content %}<div class="panel"><h1>PDF no disponible</h1><p>El archivo registrado no se puede abrir. Vuelve a adjuntar una copia del PDF o solicita al responsable que lo revise.</p><a class="button secondary" href="{% url 'component_detail' component.pk %}">Volver a la ficha</a></div>{% endblock %}
+{% block content %}<div class="panel empty-state">{% include 'includes/icon.html' with icon='file' %}<p class="eyebrow">DOCUMENTACIÓN</p><h1>PDF no disponible</h1><p>El archivo registrado no se puede abrir. Vuelve a adjuntar una copia del PDF o solicita al responsable que lo revise.</p><a class="button secondary" href="{% url 'component_detail' component.pk %}">Volver a la ficha</a></div>{% endblock %}

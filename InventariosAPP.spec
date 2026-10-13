@@ -1,4 +1,4 @@
-# PyInstaller onefile; código/recursos explícitos, sin datos de instalaciones.
+# PyInstaller onedir; código/recursos explícitos, sin datos de instalaciones.
 from pathlib import Path
 from PyInstaller.utils.hooks import collect_data_files, collect_submodules
 
@@ -23,6 +23,7 @@ for destination, source, kind in analysis.datas:
     if target.suffix.lower() in ('.sqlite3', '.db') or target.name in ('.env', '.runtime-key') or 'media' in target.parts or '.local' in target.parts:
         raise RuntimeError(f'Recurso privado prohibido en el paquete: {destination}')
 pyz = PYZ(analysis.pure)
-exe = EXE(pyz, analysis.scripts, analysis.binaries, analysis.datas, [('u', None, 'OPTION')],
+exe = EXE(pyz, analysis.scripts, [], [('u', None, 'OPTION')], exclude_binaries=True,
           name='InventariosAPP', debug=False, strip=False, upx=False, console=True,
           disable_windowed_traceback=False)
+collection = COLLECT(exe, analysis.binaries, analysis.datas, strip=False, upx=False, name='InventariosAPP')
