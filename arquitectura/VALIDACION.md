@@ -29,6 +29,9 @@ No se añadió la herramienta a requirements.txt: solo se necesita para regenera
 diagramas, no para ejecutar el aplicativo. La copia usada aquí reside en
 .local/tools/skills/archify y queda fuera del repositorio.
 
+.gitattributes conserva los bytes de HTML/JSON generados, para que la conversión
+automática de finales de línea en Windows no invalide sus sumas y recibos.
+
 Desde la raíz del proyecto, con Node.js disponible y esa copia de la skill:
 
 ```powershell
